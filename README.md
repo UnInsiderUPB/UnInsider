@@ -7,7 +7,6 @@ UnInsider is a web platform designed to allow students to submit reviews for the
 * Java with Spring Boot for the backend
 * TS/JS with Angular for the frontend
 * MySQL for the database
-* Firebase for authentication
 
 ## Features
 
