@@ -8,7 +8,11 @@ import java.util.Set;
 public interface UserService {
 
     //create user
-    public User createUser(User user, Set<UserRole> userRoleSet) throws Exception;
+     User createUser(User user, Set<UserRole> userRoleSet) throws Exception;
 
+     //get user by username
+    User getUserByUserName(String username);
 
+    //delete user by id
+    void deleteUser(Long userId);
 }

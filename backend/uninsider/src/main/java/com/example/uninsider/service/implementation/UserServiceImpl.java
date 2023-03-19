@@ -39,4 +39,14 @@ public class UserServiceImpl implements UserService {
 
         return userOptional;
     }
+
+    @Override
+    public User getUserByUserName(String username) {
+         return userRepository.getUserByUserName(username);
+    }
+
+    @Override
+    public void deleteUser(Long userId) {
+        this.userRepository.deleteById(userId);
+    }
 }

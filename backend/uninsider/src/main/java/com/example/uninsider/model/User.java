@@ -26,6 +26,8 @@ public class User {
     private String lastName;
     private String email;
 
+    private String phone;
+    
     private boolean enabled = true;
 
     private String profile;
