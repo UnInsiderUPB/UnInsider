@@ -27,7 +27,7 @@ If you'd like to contribute to this project, please fork the repository and crea
 
 ## Credits
 
-This project was created by [@sabidea23](https://github.com/sabidea23), [@cioabnu](https://github.com/cioabnu), Tăiatu Iulian-Marius, and Samoilă Andrei-Albert. We would also like to extend our thanks to all the contributors who helped make this project possible.
+This project was created by [@sabidea23](https://github.com/sabidea23), [@cioabnu](https://github.com/cioabnu), [@Iulian277](https://github.com/Iulian277), and [@albertsamoila](https://github.com/albertsamoila). We would also like to extend our thanks to all the contributors who helped make this project possible.
 
 ## License
 
