@@ -1,5 +1,6 @@
 package com.example.uninsider.service.implementation;
 
+import com.example.uninsider.exeptions.UserAlreadyExists;
 import com.example.uninsider.model.User;
 import com.example.uninsider.model.UserRole;
 import com.example.uninsider.repo.RoleRepository;
@@ -8,6 +9,9 @@ import com.example.uninsider.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.beans.Transient;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -22,27 +26,36 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user, Set<UserRole> userRoleSet) throws Exception {
-        User userOptional = this.userRepository.findByUserName(user.getUserName());
 
-        if (userOptional != null) {
-            System.out.println("User is already here!");
-            throw new Exception("user already here");
-        } else {
+        //check if there is another user created this the same email
+        if (this.userRepository.existsByEmail(user.getEmail())) {
+            throw new UserAlreadyExists("user with email " + user.getEmail() + " already here");
+
+            //check if there is another user created this the same username
+        } else if (this.userRepository.existsByUserName(user.getUserName())) {
+            throw new UserAlreadyExists("user with username " + user.getUserName() + " already here");
+
             //create user
-            for (UserRole role:userRoleSet) {
+        } else {
+            for (UserRole role : userRoleSet) {
                 roleRepository.save(role.getRole());
             }
 
             user.getUserRoleSet().addAll(userRoleSet);
-            userOptional = this.userRepository.save(user);
+            this.userRepository.save(user);
         }
 
-        return userOptional;
+        return user;
     }
 
     @Override
     public User getUserByUserName(String username) {
-         return userRepository.getUserByUserName(username);
+        return userRepository.getUserByUserName(username);
+    }
+
+    @Override
+    public List<User> getUsers() {
+        return this.userRepository.findAll();
     }
 
     @Override
