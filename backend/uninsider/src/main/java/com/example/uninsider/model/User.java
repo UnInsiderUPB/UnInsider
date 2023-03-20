@@ -1,7 +1,9 @@
 package com.example.uninsider.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,6 +14,8 @@ import java.util.Set;
 @Table(name = "users")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     
     @Id
@@ -35,19 +39,4 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
     @JsonIgnore
     private Set<UserRole> userRoleSet = new HashSet<>();
-
-    public User() {
-    }
-
-    public User(Long id, String userName, String password, String firstName,
-                String lastName, String email, boolean enabled, String profile) {
-        this.id = id;
-        this.userName = userName;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.enabled = enabled;
-        this.profile = profile;
-    }
 }

@@ -1,6 +1,8 @@
 package com.example.uninsider.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -9,6 +11,8 @@ import javax.persistence.*;
 @Table(name = "user_role")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserRole {
 
     @Id
@@ -20,12 +24,4 @@ public class UserRole {
 
     @ManyToOne
     private Role role;
-
-    public UserRole() {
-    }
-
-    public UserRole(Long userRoleId, User user) {
-        this.userRoleId = userRoleId;
-        this.user = user;
-    }
 }
