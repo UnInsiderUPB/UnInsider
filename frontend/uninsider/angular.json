@@ -27,7 +27,7 @@
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css",
-              "../node_modules/bootstrap-grid-only-css/dist/css/bootstrap-grid.min.css"
+              "bootstrap-grid-only-css/dist/css/bootstrap-grid.min.css"
             ],
             "scripts": []
           },
