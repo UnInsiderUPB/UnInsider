@@ -1,3 +1,4 @@
-idea/*
-backend/.idea/*
-frontend/.idea/*
+**/.idea/
+**/node_modules/
+**/package-lock.json
+**/.vscode/
