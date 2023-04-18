@@ -25,25 +25,24 @@ public class UserServiceImpl implements UserService {
     private RoleRepository roleRepository;
 
     @Override
-    public User createUser(User user, Set<UserRole> userRoleSet) throws Exception {
-
-        //check if there is another user created this the same email
-        if (this.userRepository.existsByEmail(user.getEmail())) {
-            throw new UserAlreadyExists("user with email " + user.getEmail() + " already here");
-
-            //check if there is another user created this the same username
-        } else if (this.userRepository.existsByUserName(user.getUserName())) {
-            throw new UserAlreadyExists("user with username " + user.getUserName() + " already here");
-
-            //create user
-        } else {
-            for (UserRole role : userRoleSet) {
-                roleRepository.save(role.getRole());
-            }
-
-            user.getUserRoleSet().addAll(userRoleSet);
-            this.userRepository.save(user);
+    public User createUser(User user, Set<UserRole> userRoleSet) throws UserAlreadyExists {
+        // User with the same `username` already exists
+        if (this.userRepository.existsByUserName(user.getUserName())) {
+            System.out.println("User with username `" + user.getUserName() + "` already exists");
+            throw new UserAlreadyExists("User with username `" + user.getUserName() + "` already exists");
         }
+
+        // User with the same `email` already exists
+        if (this.userRepository.existsByEmail(user.getEmail())) {
+            System.out.println("User with email `" + user.getEmail() + "` already exists");
+            throw new UserAlreadyExists("User with email `" + user.getEmail() + "` already exists");
+        }
+
+        // Create user
+        for (UserRole role: userRoleSet)
+            roleRepository.save(role.getRole());
+        user.getUserRoleSet().addAll(userRoleSet);
+        this.userRepository.save(user);
 
         return user;
     }
