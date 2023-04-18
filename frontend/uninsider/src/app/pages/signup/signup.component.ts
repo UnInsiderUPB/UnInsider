@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import {UserService} from "../../services/user.service";
+import { UserService } from "../../services/user.service";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
@@ -7,7 +9,7 @@ import {UserService} from "../../services/user.service";
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private snack: MatSnackBar) {}
 
   public user = {
     userName: '',
@@ -25,34 +27,28 @@ export class SignupComponent {
 
     // Username sanity check
     if (this.user.userName == '' || this.user.userName == null) {
-      alert("Username cannot be empty");
+      this.snack.open("Username cannot be empty!", "OK", {
+        duration: 3000,
+      });
       return;
     }
 
-    // [TODO]: Other sanity checks
+    // [TODO]: Sanity checks for other fields
+
+    // [TODO]: Validate
 
     // Add user service
-    // this.userService.addUser(this.user).subscribe({
-    //   next: (data) => {
-    //     console.log(data);
-    //     alert("Success");
-    //   },
-    //   error: (error) => {
-    //     console.log(error);
-    //     alert("Error");
-    //   }
-    // });
-
-    this.userService.addUser(this.user).subscribe(
-      (data) => {
+    this.userService.addUser(this.user).subscribe({
+      next: (data) => {
         console.log(data);
-        alert("Success");
+        Swal.fire('Success!', 'User created successfully', 'success').then(r => {});
       },
-      (error) => {
+      error: (error) => {
         console.log(error);
-        alert("Error");
-      }
-    );
-
+        this.snack.open(error.error.message, "OK", {
+          duration: 3000,
+        });
+        }
+    });
   }
 }
