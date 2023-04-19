@@ -1,0 +1,19 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.example-icon {
+  font-size: 18px;
+  margin-right: 20px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.example-icon.register {
+  margin-right: 40px;
+}
+
+.title {
+  font-size: 25px;
+  margin-left: 10px;
+}
