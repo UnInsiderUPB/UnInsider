@@ -24,9 +24,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User createUser(User user, Set<UserRole> userRoleSet) throws UserAlreadyExists {
         // User with the same `username` already exists
-        if (this.userRepository.existsByUserName(user.getUserName())) {
-            System.out.println("User with username `" + user.getUserName() + "` already exists");
-            throw new UserAlreadyExists("User with username `" + user.getUserName() + "` already exists");
+        if (this.userRepository.existsByUsername(user.getUsername())) {
+            System.out.println("User with username `" + user.getUsername() + "` already exists");
+            throw new UserAlreadyExists("User with username `" + user.getUsername() + "` already exists");
         }
 
         // User with the same `email` already exists
@@ -46,13 +46,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(String username) {
-        return this.userRepository.findByUserName(username);
+        return this.userRepository.findByUsername(username);
     }
 
 
     @Override
-    public User getUserByUserName(String username) {
-        return userRepository.getUserByUserName(username);
+    public User getUserByUsername(String username) {
+        return userRepository.getUserByUsername(username);
     }
 
     @Override

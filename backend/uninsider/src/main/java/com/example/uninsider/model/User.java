@@ -26,7 +26,7 @@ public class User implements UserDetails {
     //@Column(name = "iduser")
     private Long id;
     
-    private String userName;
+    private String username;
     private String password;
 
     private String firstName;
@@ -43,9 +43,9 @@ public class User implements UserDetails {
     @JsonIgnore
     private Set<UserRole> userRoles = new HashSet<>();
 
-    public User(String userName, String password, String firstName, String lastName,
+    public User(String username, String password, String firstName, String lastName,
                 String email, String phone, boolean enabled, String profile, Set<UserRole> userRoles) {
-        this.userName = userName;
+        this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -67,7 +67,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return getUserName();
+        return username;
     }
 
     @Override
@@ -93,12 +93,8 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public boolean isEnabled() {

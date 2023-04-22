@@ -18,7 +18,7 @@ public interface UserService {
     List<User> getUsers();
 
     //get user by username
-    User getUserByUserName(String username);
+    User getUserByUsername(String username);
 
     //delete user by id
     void deleteUser(Long userId);
