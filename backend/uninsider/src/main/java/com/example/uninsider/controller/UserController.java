@@ -5,7 +5,6 @@ import com.example.uninsider.model.Role;
 import com.example.uninsider.model.User;
 import com.example.uninsider.model.UserRole;
 import com.example.uninsider.service.UserService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
