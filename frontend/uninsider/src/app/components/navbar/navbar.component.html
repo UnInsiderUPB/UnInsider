@@ -1,19 +1,18 @@
 <mat-toolbar color="accent">
-  <a routerLink="/" mat-icon-button class="example-icon">
-    <mat-icon>menu</mat-icon>
-
-    <span class="title">UnInsider</span>
+  <a routerLink="/" mat-icon-button class="navbar-home">
+    <mat-icon>home</mat-icon>
   </a>
-  <span class="example-spacer"></span>
+  <span class="title">UnInsider</span>
+  <span class="navbar-spacer"></span>
 
   <a routerLink="/login"
-     mat-icon-button
-     class="example-icon login">Login
+     mat-flat-button
+     class="navbar-button login">Login
   </a>
 
   <a routerLink="/signup"
-     mat-icon-button
-     class="example-icon register ">
+     mat-flat-button
+     class="navbar-button register ">
     Register
   </a>
 </mat-toolbar>
