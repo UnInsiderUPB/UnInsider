@@ -3,6 +3,7 @@ package com.example.uninsider.controller;
 import com.example.uninsider.config.JwtUtils;
 import com.example.uninsider.model.JwtRequest;
 import com.example.uninsider.model.JwtResponse;
+import com.example.uninsider.model.User;
 import com.example.uninsider.service.implementation.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +13,12 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @RestController
+@CrossOrigin("*")
 public class AuthenticateController {
 
     @Autowired
@@ -52,5 +54,10 @@ public class AuthenticateController {
         } catch (BadCredentialsException e) {
             throw new RuntimeException("Invalid credentials " + e.getMessage());
         }
+    }
+
+    @GetMapping("/current-user")
+    public User getCurrentUser(Principal principal) {
+        return (User) this.userDetailsService.loadUserByUsername(principal.getName());
     }
 }

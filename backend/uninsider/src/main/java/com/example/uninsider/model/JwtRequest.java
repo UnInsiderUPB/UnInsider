@@ -1,5 +1,10 @@
 package com.example.uninsider.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
 public class JwtRequest {
     String username;
     String password;
@@ -22,5 +27,9 @@ public class JwtRequest {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
