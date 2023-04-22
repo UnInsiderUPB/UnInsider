@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
@@ -9,7 +10,11 @@ import Swal from 'sweetalert2';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
-  constructor(private userService: UserService, private snack: MatSnackBar) {}
+  constructor(
+    private userService: UserService,
+    private snack: MatSnackBar,
+    private router: Router
+  ) {}
 
   public user = {
     username: '',
@@ -42,7 +47,9 @@ export class SignupComponent {
       next: (data) => {
         console.log(data);
         Swal.fire('Success!', 'User created successfully', 'success').then(
-          (_) => {}
+          (_) => {
+            this.router.navigate(['/login']);
+          }
         );
       },
       error: (error) => {
