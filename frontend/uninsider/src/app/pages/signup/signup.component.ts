@@ -37,7 +37,7 @@ export class SignupComponent {
 
     // [TODO]: Validate
 
-    // Add user service
+    // Add user
     this.userService.addUser(this.user).subscribe({
       next: (data) => {
         console.log(data);

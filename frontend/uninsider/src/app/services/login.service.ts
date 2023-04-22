@@ -8,6 +8,11 @@ import baseUrl from './helper';
 export class LoginService {
   constructor(private http: HttpClient) { }
 
+  // Get current user which is logged in
+  public getCurrentUser() {
+    return this.http.get(`${baseUrl}/current-user`);
+  }
+
   // Generate JWT token
   public generateToken(loginData: any) {
     return this.http.post(`${baseUrl}/generate-token`, loginData);

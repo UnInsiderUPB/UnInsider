@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
     password: '',
   };
 
-  constructor(private snack: MatSnackBar, private login: LoginService) { }
+  constructor(private snack: MatSnackBar, private login: LoginService, private router: Router) { }
 
   ngOnInit(): void {}
 
@@ -34,15 +35,35 @@ export class LoginComponent implements OnInit {
     }
 
     // Request to server to generate a JWT token
-    this.login.generateToken(this.loginData).subscribe(
-      (data: any) => {
+    this.login.generateToken(this.loginData).subscribe({
+      next: (data: any) => {
         console.log("Succes!");
         console.log(data);
+
+        // Login
+        this.login.loginUser(data.token);
+        this.login.getCurrentUser().subscribe({
+          next: (user: any) => {
+            this.login.setUser(user);
+            console.log(user);
+            if (this.login.getUserRole() == 'ADMIN') {
+              // window.location.href = "/admin";
+              this.router.navigate(['admin']);
+            }
+            else if (this.login.getUserRole() == 'NORMAL') {
+              // window.location.href = "/user-dashboard";
+              this.router.navigate(['user-dashboard']);
+            }
+            else
+              this.login.logout();
+          }
+        });
       },
-      (error) => {
-        console.log("Error!");
+      error: (error) => {
+        console.log('Error!');
         console.log(error);
+        this.snack.open("Invalid credentials!", "", {duration: 3000});
       }
-    );
+    });
   }
 }
