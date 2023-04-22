@@ -9,7 +9,6 @@
 
           <h1 class="text-center">Login Here</h1>
 
-          <!-- {{loginData | json}} -->
           <form (ngSubmit)="formSubmit()">
             <!-- Username -->
             <mat-form-field class="full-width" appearance="outline">
@@ -29,7 +28,7 @@
               <input
               [(ngModel)]="loginData.password"
               name="password"
-              required 
+              required
               type="password"
               matInput
               placeholder="Enter here"/>

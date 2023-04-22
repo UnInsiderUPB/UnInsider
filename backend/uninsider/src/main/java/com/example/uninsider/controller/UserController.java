@@ -8,6 +8,7 @@ import com.example.uninsider.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
@@ -22,10 +23,17 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @PostMapping("/")
     @ResponseStatus(code = HttpStatus.CREATED)
     public User createUser(@RequestBody User user) throws Exception {
         user.setProfile("default.png");
+
+        // Encode password with BCrypt
+        user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
+
         Set<UserRole> userRoleSet = new HashSet<>();
         Role role = new Role();
         role.setRoleId(45L);

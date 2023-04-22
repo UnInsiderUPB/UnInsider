@@ -1,16 +1,13 @@
 package com.example.uninsider.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 public class JwtRequest {
     String username;
     String password;
 
-    public JwtRequest() {
-    }
+    public JwtRequest() {}
 
     public JwtRequest(String username, String password) {
         this.username = username;
