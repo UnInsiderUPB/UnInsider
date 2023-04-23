@@ -30,10 +30,9 @@ export class NavbarComponent implements OnInit {
 
   public toDashboard() {
     let user_role = this.login.getUserRole();
-    console.log(user_role);
     if (user_role == "ADMIN")
-      this.router.navigate(['/admin']);
+      this.router.navigate(['/admin']).then(_ => {});
     else if (user_role == "NORMAL")
-      this.router.navigate(['/user-dashboard']);
+      this.router.navigate(['/user-dashboard']).then(_ => {});
   }
 }

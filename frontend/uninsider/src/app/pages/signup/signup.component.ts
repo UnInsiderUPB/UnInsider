@@ -48,7 +48,7 @@ export class SignupComponent {
         console.log(data);
         Swal.fire('Success!', 'User created successfully', 'success').then(
           (_) => {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/login']).then(_ => {});
           }
         );
       },
