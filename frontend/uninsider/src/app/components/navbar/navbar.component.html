@@ -1,17 +1,16 @@
 <mat-toolbar color="accent">
-  <a routerLink="/" mat-button class="example-icon">
+  <a routerLink="/" mat-fab extended class="navbar-home">
     <mat-icon>home</mat-icon>
-
     <span class="title">UnInsider</span>
   </a>
-  <span class="example-spacer"></span>
+
+  <span class="navbar-spacer"></span>
 
   <a
     *ngIf="!isLoggedIn"
     [routerLink]="'/login'"
     mat-button
-    class="example-icon login favorite-icon"
-    aria-label="Example icon-button with a heart icon"
+    class="navbar-button login"
   >
     Login
   </a>
@@ -20,8 +19,7 @@
     *ngIf="!isLoggedIn"
     [routerLink]="'/signup'"
     mat-button
-    class="example-icon favorite-icon register"
-    aria-label="Example icon-button with a heart icon"
+    class="navbar-button register"
   >
     Register
   </a>
@@ -30,8 +28,7 @@
     (click)="logout()"
     *ngIf="isLoggedIn"
     mat-button
-    class="example-icon register"
-    aria-label="Example icon-button with a heart icon"
+    class="navbar-button register"
   >
     Logout
   </a>
@@ -40,8 +37,7 @@
     *ngIf="isLoggedIn && user"
     (click)="toDashboard()"
     mat-button
-    class="example-icon favorite-icon"
-    aria-label="Example icon-button with a heart icon"
+    class="navbar-button"
   >
     {{ user.username }}
   </button>
