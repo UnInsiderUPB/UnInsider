@@ -38,7 +38,7 @@
 
   <button
     *ngIf="isLoggedIn && user"
-    [routerLink]="'/user-dashboard'"
+    (click)="toDashboard()"
     mat-button
     class="example-icon favorite-icon"
     aria-label="Example icon-button with a heart icon"

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +12,7 @@ export class NavbarComponent implements OnInit {
   isLoggedIn = false;
   user:any = null;
 
-  constructor(public login: LoginService) {}
+  constructor(public login: LoginService, public router: Router) {}
 
   ngOnInit(): void {
     this.isLoggedIn = this.login.isLoggedIn();
@@ -27,4 +28,12 @@ export class NavbarComponent implements OnInit {
     window.location.reload();
   }
 
+  public toDashboard() {
+    let user_role = this.login.getUserRole();
+    console.log(user_role);
+    if (user_role == "ADMIN")
+      this.router.navigate(['/admin']);
+    else if (user_role == "NORMAL")
+      this.router.navigate(['/user-dashboard']);
+  }
 }
