@@ -9,18 +9,29 @@
 
           <h1 class="text-center">Login Here</h1>
 
-          <form action="">
+          <form (ngSubmit)="formSubmit()">
             <!-- Username -->
             <mat-form-field class="full-width" appearance="outline">
               <mat-label>User Name</mat-label>
-              <input required matInput placeholder="Enter here"/>
+              <input
+              [(ngModel)]="loginData.username"
+              name="username"
+              required
+              matInput
+              placeholder="Enter here"/>
               <mat-hint>Valid User Name</mat-hint>
             </mat-form-field>
 
             <!-- Password -->
             <mat-form-field class="full-width" appearance="outline">
               <mat-label>Password</mat-label>
-              <input required type="password" matInput placeholder="Enter here"/>
+              <input
+              [(ngModel)]="loginData.password"
+              name="password"
+              required
+              type="password"
+              matInput
+              placeholder="Enter here"/>
             </mat-form-field>
 
             <div class="text-center">

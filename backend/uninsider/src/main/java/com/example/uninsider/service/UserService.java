@@ -11,11 +11,14 @@ public interface UserService {
     //create user
      User createUser(User user, Set<UserRole> userRoleSet) throws Exception;
 
+     //get user
+    User getUser(String username);
+
     //get all users
     List<User> getUsers();
 
     //get user by username
-    User getUserByUserName(String username);
+    User getUserByUsername(String username);
 
     //delete user by id
     void deleteUser(Long userId);
