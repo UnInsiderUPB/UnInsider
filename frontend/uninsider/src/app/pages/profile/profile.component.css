@@ -20,3 +20,8 @@
   justify-content: center;
   align-items: center;
 }
+
+td {
+  font-size: 15px;
+}
+

@@ -11,27 +11,32 @@
           <div class="col-md-10 offset-md-1">
             <table class="details-table text-center">
               <tr>
-                <td> Username</td>
+                <td class="label"> Username</td>
                 <td> {{user.username }}</td>
               </tr>
 
               <tr>
-                <td> UserId</td>
+                <td class="label"> UserId</td>
                 <td> {{user.id}}</td>
               </tr>
 
               <tr>
-                <td> Phone</td>
+                <td class="label"> Email</td>
+                <td> {{user.email}}</td>
+              </tr>
+
+              <tr>
+                <td class="label"> Phone</td>
                 <td> {{user.phone}}</td>
               </tr>
 
               <tr>
-                <td> Role</td>
+                <td class="label"> Role</td>
                 <td> {{user.authorities[0].authority}}</td>
               </tr>
 
               <tr>
-                <td> Status</td>
+                <td class="label"> Status</td>
                 <td> {{user.enabled ? "ACTIVE" : "NONACTIVE"}}</td>
               </tr>
 
