@@ -14,11 +14,15 @@
             <mat-form-field class="full-width" appearance="outline">
               <mat-label>User Name</mat-label>
               <input
-              [(ngModel)]="loginData.username"
-              name="username"
-              required
-              matInput
-              placeholder="Enter here"/>
+                [(ngModel)]="loginData.username"
+                name="username"
+                required
+                matInput
+                placeholder="Enter here"/>
+              <button *ngIf="loginData.username" matSuffix mat-icon-button aria-label="Clear"
+                      (click)="loginData.username=''">
+                <mat-icon>close</mat-icon>
+              </button>
               <mat-hint>Valid User Name</mat-hint>
             </mat-form-field>
 
@@ -26,12 +30,16 @@
             <mat-form-field class="full-width" appearance="outline">
               <mat-label>Password</mat-label>
               <input
-              [(ngModel)]="loginData.password"
-              name="password"
-              required
-              type="password"
-              matInput
-              placeholder="Enter here"/>
+                [(ngModel)]="loginData.password"
+                name="password"
+                required
+                type="password"
+                matInput
+                placeholder="Enter here"/>
+              <button *ngIf="loginData.password" matSuffix mat-icon-button aria-label="Clear"
+                      (click)="loginData.password=''">
+                <mat-icon>close</mat-icon>
+              </button>
             </mat-form-field>
 
             <div class="text-center">
