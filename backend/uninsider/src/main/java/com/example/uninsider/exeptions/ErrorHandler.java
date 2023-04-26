@@ -1,6 +1,7 @@
 package com.example.uninsider.exeptions;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -14,5 +15,12 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
     @ResponseBody
     public ErrorResponse getUserAlreadyExistsException(HttpServletRequest request, UserAlreadyExists exception) {
         return ErrorResponse.of(exception.getMessage());
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public ResponseEntity<?> exceptionHandler(Exception ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 }
