@@ -20,8 +20,11 @@
        <mat-icon> rate_review </mat-icon>Reviews
      </button>
 
-     <button mat-list-item routerLink="/login" >
-       <mat-icon>logout</mat-icon>Logout
+     <button
+      (click)="logout()"
+      *ngIf="isLoggedIn"
+      mat-list-item routerLink="/login">
+      <mat-icon>logout</mat-icon>Logout
      </button>
    </mat-action-list>
 </mat-card>
