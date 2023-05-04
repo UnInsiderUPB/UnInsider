@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 const MIN_WORDS = 30;
 const MAX_WORDS = 300;
 const MAX_UPPERCASE_PERCENTAGE = 20;
-const MAX_NONALPHANUMERIC_PERCENTAGE = 40;
+const MAX_NONALPHA_PERCENTAGE = 20;
 
 @Component({
   selector: 'app-guidelines',
@@ -14,15 +14,16 @@ const MAX_NONALPHANUMERIC_PERCENTAGE = 40;
 export class GuidelinesComponent {
 
   inputText: string = '';
-  verificationResult: string = '';
   mapping: Map<string, Function>;
+  passed: [string];
 
   constructor() {    
     this.mapping = new Map<string, Function>();
-    this.mapping.set('minWords', this.minWords);
-    this.mapping.set('maxWords', this.maxWords);
-    this.mapping.set('maxUppercase', this.maxUppercase);
-    this.mapping.set('maxNonAlphanumeric', this.maxNonAlpha);
+    this.mapping.set(`Minimum ${MIN_WORDS} words`, this.minWords);
+    this.mapping.set(`Maximum ${MAX_WORDS} words`, this.maxWords);
+    this.mapping.set(`Maximum ${MAX_UPPERCASE_PERCENTAGE}% uppercase letters`, this.maxUppercase);
+    this.mapping.set(`Maximum ${MAX_NONALPHA_PERCENTAGE}% non-alpha characters`, this.maxNonAlpha);
+    this.passed = [''];
   }
 
   // Minimum words
@@ -47,15 +48,16 @@ export class GuidelinesComponent {
     return uppercaseCount / this.inputText.length * 100 <= MAX_UPPERCASE_PERCENTAGE;
   }
 
-  // Non-alpha
+  // Non-alpha excluding spaces
   maxNonAlpha(): boolean {
     let nonAlphanumericCount = 0;
     for (let i = 0; i < this.inputText.length; i++) {
-      if (!this.inputText[i].match(/^[a-zA-Z]+$/))
+      const char = this.inputText[i];
+      if (!char.match(/^[a-zA-Z]+$/) && char !== ' ')
         nonAlphanumericCount++;
     }
 
-    return nonAlphanumericCount / this.inputText.length * 100 <= MAX_NONALPHANUMERIC_PERCENTAGE;
+    return nonAlphanumericCount / this.inputText.length * 100 <= MAX_NONALPHA_PERCENTAGE;
   }
 
   // [TODO]: Profanity (`google-profanity-words`)
@@ -64,13 +66,13 @@ export class GuidelinesComponent {
   // [TODO-ONLY-IF-ROMANIAN]: Spelling and grammar errors (in Romanian)
 
   verifyText() {
-    this.verificationResult = '';
+    this.passed = [''];
     // Iterate over all keys from the map
     for (let key of this.mapping.keys()) {
       // If the function returns true, add the key to the result
       let fn = this.mapping.get(key);
       if (fn && fn.call(this)) {
-        this.verificationResult += key + ', ';
+        this.passed.push(key);
       }
     }
   }
