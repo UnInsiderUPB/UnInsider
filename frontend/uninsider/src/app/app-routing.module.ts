@@ -9,6 +9,7 @@ import { AdminGuard } from './services/admin.guard';
 import { NormalGuard } from './services/normal.guard';
 import {ProfileComponent} from "./pages/profile/profile.component";
 import {WelcomeComponent} from "./pages/admin/welcome/welcome.component";
+import {GuidelinesComponent} from "./pages/guidelines/guidelines.component";
 
 const routes: Routes = [
   {
@@ -47,7 +48,11 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [NormalGuard],
   },
-
+  {
+    path: 'guidelines',
+    component: GuidelinesComponent,
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({

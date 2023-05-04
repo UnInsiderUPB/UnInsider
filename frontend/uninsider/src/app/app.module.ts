@@ -29,6 +29,7 @@ import {MatListModule} from "@angular/material/list";
 import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
 import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
 import {MatTableModule} from "@angular/material/table";
+import { GuidelinesComponent } from './pages/guidelines/guidelines.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import {MatTableModule} from "@angular/material/table";
     ProfileComponent,
     SidebarComponent,
     WelcomeComponent,
+    GuidelinesComponent,
   ],
   imports: [
     BrowserModule,

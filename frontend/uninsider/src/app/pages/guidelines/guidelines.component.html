@@ -1,0 +1,12 @@
+<div>
+    <h2>Guidelines Verification</h2>
+  
+    <label for="input-text">Input Text:</label>
+    <br>
+
+    <textarea id="input-text" [(ngModel)]="inputText" (ngModelChange)="verifyText()"></textarea>
+  
+    <p *ngIf="verificationResult">{{verificationResult}}</p>
+  
+  </div>
+  
