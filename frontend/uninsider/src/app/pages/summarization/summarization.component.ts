@@ -13,6 +13,7 @@ export class SummarizationComponent {
   inputText: string = '';
   summarizedText: string = '';
   isSummarizationReady: boolean = false;
+  summarizationLoading: boolean = false;
 
   constructor() {}
 
@@ -23,11 +24,13 @@ export class SummarizationComponent {
 
     let result = null;
     try {
+      this.summarizationLoading = true;
       result = await hf.summarization({
         model: 'facebook/bart-large-cnn',
         inputs: this.inputText,
       });
     } catch (e) {
+      this.summarizationLoading = false;
       console.log(e);
       alert('Error occurred while summarizing the text.');
       return;
