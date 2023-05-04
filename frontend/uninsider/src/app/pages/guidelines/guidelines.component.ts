@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 const MIN_WORDS = 30;
 const MAX_WORDS = 300;
-const MAX_UPPERCASE_PERCENTAGE = 20;
-const MAX_NONALPHA_PERCENTAGE = 20;
+const MAX_UPPERCASE_PERCENTAGE = 10;
+const MAX_NONALPHA_PERCENTAGE = 10;
 
 @Component({
   selector: 'app-guidelines',
@@ -63,6 +63,7 @@ export class GuidelinesComponent {
   // [TODO]: Profanity (`google-profanity-words`)
 
   // [TODO-ONLY-IF-ROMANIAN]: Check for language (Romanian)
+  
   // [TODO-ONLY-IF-ROMANIAN]: Spelling and grammar errors (in Romanian)
 
   verifyText() {
