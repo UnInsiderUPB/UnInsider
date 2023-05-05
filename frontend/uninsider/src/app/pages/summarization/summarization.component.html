@@ -7,7 +7,7 @@
     <textarea id="input-text" [(ngModel)]="inputText"></textarea>
     <br>
 
-    <button (click)="summarize()">Summarize</button>
+    <button *ngIf="!summarizationLoading" (click)="summarize()">Summarize</button>
 
     <div *ngIf="isSummarizationReady">
         <label for="summarized-text">Summarized Text:</label>

@@ -1,6 +1,17 @@
 import { Component } from '@angular/core';
 
 const endpoint = 'https://us-central1-bart-proj.cloudfunctions.net/uninsider-bart-cnn-cors-all'
+const MIN_CHARS = 50;
+
+// [TODO]
+//
+// In this current version, the first request takes a long time to respond.
+// This is because the server must download the `model` and the `tokenizer`.
+//
+// After the first request, the server will cache the `model` and the `tokenizer` in the `/tmp/` folder.
+//
+// To solve this problem, we can use `prefetch` function to download the model and the tokenizer
+// when our app starts. This will give time for the server to download the required files.
 
 @Component({
   selector: 'app-summarization',
@@ -22,21 +33,33 @@ export class SummarizationComponent {
     this.summarizationLoading = true;
     this.summarizedText = '';
 
+    // [TODO]: Ensure that the summarization ends with a period (.)
+    //         -> This can be done as a post-processing step in this script
+    // [TODO]: ...
+
     let response = null;
     try {
-      this.summarizationLoading = true;
-      let content = JSON.stringify({article: this.inputText});
-      // console.log(content);
-      response = await fetch(endpoint, {
-        method: 'POST',
-        body: content,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': '*',
-          'Access-Control-Allow-Headers': '*',
+        // If the input text is too short, then return
+        if (this.inputText.length < MIN_CHARS) {
+          alert('Please enter a longer text to summarize.');
+          this.summarizationLoading = false;
+          return;
         }
-      });
+
+        // Send the request to the server
+        this.summarizationLoading = true;
+        let content = JSON.stringify({article: this.inputText});
+        // console.log(content);
+        response = await fetch(endpoint, {
+          method: 'POST',
+          body: content,
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': '*',
+            'Access-Control-Allow-Headers': '*',
+          }
+        });
     } catch (e) {
       this.summarizationLoading = false;
       // console.log(e);
