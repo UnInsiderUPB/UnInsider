@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { HfInference } from '@huggingface/inference';
 
-const hf = new HfInference('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');
+const endpoint = 'https://us-central1-bart-proj.cloudfunctions.net/uninsider-bart-cnn-cors-all'
 
 @Component({
   selector: 'app-summarization',
@@ -20,25 +19,49 @@ export class SummarizationComponent {
   public async summarize(): Promise<any> {
     // Reset some variables
     this.isSummarizationReady = false;
+    this.summarizationLoading = true;
     this.summarizedText = '';
 
-    let result = null;
+    let response = null;
     try {
       this.summarizationLoading = true;
-      result = await hf.summarization({
-        model: 'facebook/bart-large-cnn',
-        inputs: this.inputText,
+      let content = JSON.stringify({article: this.inputText});
+      // console.log(content);
+      response = await fetch(endpoint, {
+        method: 'POST',
+        body: content,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': '*',
+          'Access-Control-Allow-Headers': '*',
+        }
       });
     } catch (e) {
       this.summarizationLoading = false;
-      console.log(e);
+      // console.log(e);
+      alert('Error occurred while summarizing the text.');
+      return;
+    }
+
+    if (!response.ok) {
+      this.summarizationLoading = false;
+      alert('Error occurred while summarizing the text.');
+      return;
+    }
+    
+    // Parse the response
+    if (response.body == null) {
+      this.summarizationLoading = false;
       alert('Error occurred while summarizing the text.');
       return;
     }
 
     // Successfully summarized the text
-    console.log(result['summary_text']);
-    this.summarizedText = result['summary_text'];
+    // Convert `ReadableStream` to `string` and update the UI
+    var summary = await response.text();
+    this.summarizedText = summary;
     this.isSummarizationReady = true;
+    this.summarizationLoading = false;
   }
 }
