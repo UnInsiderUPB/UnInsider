@@ -15,7 +15,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { BrowserModule } from '@angular/platform-browser';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
-import { FormsModule } from "@angular/forms";
+import {FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { HomeComponent } from './pages/home/home.component';
@@ -32,6 +32,7 @@ import {MatTableModule} from "@angular/material/table";
 import { WelcomeUserComponent } from './pages/user/welcome-user/welcome-user.component';
 import { SidebarUserComponent } from './pages/user/sidebar-user/sidebar-user.component';
 import { ProfileUserComponent } from './pages/user/profile-user/profile-user.component';
+import { EditUserComponent } from './pages/user/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ProfileUserComponent } from './pages/user/profile-user/profile-user.com
     WelcomeUserComponent,
     SidebarUserComponent,
     ProfileUserComponent,
+    EditUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ import { ProfileUserComponent } from './pages/user/profile-user/profile-user.com
     MatToolbarModule,
     MatIconModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    ReactiveFormsModule,
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

@@ -11,6 +11,7 @@ import {ProfileComponent} from "./pages/admin/profile/profile.component";
 import {WelcomeComponent} from "./pages/admin/welcome/welcome.component";
 import {WelcomeUserComponent} from "./pages/user/welcome-user/welcome-user.component";
 import {ProfileUserComponent} from "./pages/user/profile-user/profile-user.component";
+import {EditUserComponent} from "./pages/user/edit-user/edit-user.component";
 
 const routes: Routes = [
   {
@@ -55,7 +56,11 @@ const routes: Routes = [
       {
         path:'profile-user',
         component: ProfileUserComponent,
-      }
+      },
+      {
+        path:'edit-user',
+        component: EditUserComponent,
+      },
     ]
   },
 
