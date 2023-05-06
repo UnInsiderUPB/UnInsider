@@ -24,11 +24,14 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import { authInterceptorProviders } from './services/auth.interceptor';
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
-import { ProfileComponent } from './pages/profile/profile.component';
+import { ProfileComponent } from './pages/admin/profile/profile.component';
 import {MatListModule} from "@angular/material/list";
 import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
 import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
 import {MatTableModule} from "@angular/material/table";
+import { WelcomeUserComponent } from './pages/user/welcome-user/welcome-user.component';
+import { SidebarUserComponent } from './pages/user/sidebar-user/sidebar-user.component';
+import { ProfileUserComponent } from './pages/user/profile-user/profile-user.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,9 @@ import {MatTableModule} from "@angular/material/table";
     ProfileComponent,
     SidebarComponent,
     WelcomeComponent,
+    WelcomeUserComponent,
+    SidebarUserComponent,
+    ProfileUserComponent,
   ],
   imports: [
     BrowserModule,
