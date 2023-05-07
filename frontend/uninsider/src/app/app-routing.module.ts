@@ -1,73 +1,66 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SignupComponent } from './pages/signup/signup.component';
-import { LoginComponent } from "./pages/login/login.component";
-import { HomeComponent } from "./pages/home/home.component";
+import { LoginComponent } from './pages/login/login.component';
+import { HomeComponent } from './pages/home/home.component';
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
 import { AdminGuard } from './services/admin.guard';
 import { NormalGuard } from './services/normal.guard';
-import {ProfileComponent} from "./pages/admin/profile/profile.component";
-import {WelcomeComponent} from "./pages/admin/welcome/welcome.component";
-import {WelcomeUserComponent} from "./pages/user/welcome-user/welcome-user.component";
-import {ProfileUserComponent} from "./pages/user/profile-user/profile-user.component";
-import {EditUserComponent} from "./pages/user/edit-user/edit-user.component";
+import { ProfileComponent } from './components/profile/profile.component';
+import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
+import { WelcomeUserComponent } from './pages/user/welcome-user/welcome-user.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'signup',
     component: SignupComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'login',
     component: LoginComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'admin',
     component: DashboardComponent,
     canActivate: [AdminGuard],
-    children:[
+    children: [
       {
-        path:'',
+        path: '',
         component: WelcomeComponent,
       },
       {
-        path:'profile',
+        path: 'profile',
         component: ProfileComponent,
       },
-    ]
+    ],
   },
   {
     path: 'user-dashboard',
     component: UserDashboardComponent,
     canActivate: [NormalGuard],
-    children:[
+    children: [
       {
-        path:'',
+        path: '',
         component: WelcomeUserComponent,
       },
       {
-        path:'profile-user',
-        component: ProfileUserComponent,
-      },
-      {
-        path:'edit-user',
-        component: EditUserComponent,
-      },
-    ]
+        path: 'profile',
+        component: ProfileComponent,
+      }
+    ],
   },
-
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -45,6 +45,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User updateUser(User user) {
+        if (!this.userRepository.existsById(user.getId())) {
+            System.out.println("User with id `" + user.getId() + "` not found");
+            return null;
+        }
+
+        return this.userRepository.save(user);
+    }
+
+    @Override
     public User getUser(String username) {
         return this.userRepository.findByUsername(username);
     }
@@ -53,15 +63,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByUsername(String username) {
         return userRepository.getUserByUsername(username);
-    }
-
-    @Override
-    public void updateUser(Long userId, User user) {
-
-        User userOld = userRepository.getUserByUsername(user.getUsername());
-        userOld.setFirstName(user.getFirstName());
-        userOld.setLastName(user.getLastName());
-        userOld.setPhone(user.getPhone());
     }
 
     @Override

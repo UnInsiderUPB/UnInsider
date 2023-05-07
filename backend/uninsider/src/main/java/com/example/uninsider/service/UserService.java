@@ -9,7 +9,10 @@ import java.util.Set;
 public interface UserService {
 
     //create user
-     User createUser(User user, Set<UserRole> userRoleSet) throws Exception;
+    User createUser(User user, Set<UserRole> userRoleSet) throws Exception;
+
+    // update user
+    User updateUser(User user) throws Exception;
 
      //get user
     User getUser(String username);
@@ -19,9 +22,6 @@ public interface UserService {
 
     //get user by username
     User getUserByUsername(String username);
-
-
-    void updateUser(Long userId, User user);
 
     //delete user by id
     void deleteUser(Long userId);

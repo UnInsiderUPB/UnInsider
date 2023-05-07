@@ -1,5 +1,6 @@
 package com.example.uninsider.controller;
 
+import com.example.uninsider.exeptions.UserNotFoundException;
 import com.example.uninsider.model.Role;
 import com.example.uninsider.model.User;
 import com.example.uninsider.model.UserRole;
@@ -45,6 +46,26 @@ public class UserController {
         return this.userService.createUser(user, userRoleSet);
     }
 
+    @PutMapping("/")
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public User updateUser(@RequestBody User requestBodyUser) throws Exception {
+        User originalUser = getUserByUsername(requestBodyUser.getUsername());
+        if (originalUser == null) {
+            throw new UserNotFoundException("User with username `" + requestBodyUser.getUsername() + "` not found");
+        }
+
+        originalUser.setFirstName(requestBodyUser.getFirstName());
+        originalUser.setLastName(requestBodyUser.getLastName());
+        originalUser.setEmail(requestBodyUser.getEmail());
+        originalUser.setPhone(requestBodyUser.getPhone());
+
+        if (requestBodyUser.getPassword() != null && !requestBodyUser.getPassword().isEmpty()) {
+            originalUser.setPassword(this.bCryptPasswordEncoder.encode(requestBodyUser.getPassword()));
+        }
+
+        return this.userService.updateUser(originalUser);
+    }
+
     @GetMapping("/")
     @ResponseStatus(code = HttpStatus.OK)
     public List<User> getAllUsers() {
@@ -61,11 +82,5 @@ public class UserController {
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteUserById(@PathVariable("userId") Long userid) {
         this.userService.deleteUser(userid);
-    }
-
-    @PutMapping("/{userId}")
-    @ResponseStatus(code = HttpStatus.OK)
-    public void updateUser(@PathVariable("userId") Long userid, @RequestBody User user) {
-        this.userService.updateUser(userid, user);
     }
 }
