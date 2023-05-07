@@ -10,14 +10,12 @@ const MAX_NONALPHA_PERCENTAGE = 10;
   templateUrl: './guidelines.component.html',
   styleUrls: ['./guidelines.component.css']
 })
-
 export class GuidelinesComponent {
-
   inputText: string = '';
   mapping: Map<string, Function>;
   passed: [string];
 
-  constructor() {    
+  constructor() {
     this.mapping = new Map<string, Function>();
     this.mapping.set(`Minimum ${MIN_WORDS} words`, this.minWords);
     this.mapping.set(`Maximum ${MAX_WORDS} words`, this.maxWords);
@@ -56,15 +54,17 @@ export class GuidelinesComponent {
       if (!char.match(/^[a-zA-Z]+$/) && char !== ' ')
         nonAlphanumericCount++;
     }
-
+    
     return nonAlphanumericCount / this.inputText.length * 100 <= MAX_NONALPHA_PERCENTAGE;
   }
 
-  // [TODO]: Profanity (`google-profanity-words`)
+  nlp() {
+    console.log('nlp');
+  }
 
-  // [TODO-ONLY-IF-ROMANIAN]: Check for language (Romanian)
-  
-  // [TODO-ONLY-IF-ROMANIAN]: Spelling and grammar errors (in Romanian)
+  // [TODO]: Check for language (English)
+  // [TODO]: Profanity (`google-profanity-words`)
+  // [TODO]: Spelling and grammar errors (in English)
 
   verifyText() {
     this.passed = [''];
