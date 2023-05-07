@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from '../../services/login.service';
-import { UserService } from '../../services/user.service';
+import { LoginService } from '../../../services/login.service';
+import { UserService } from '../../../services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
 
@@ -29,10 +29,6 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('test');
-    console.log(this.user);
-    console.log(this.formInput);
-
     this.user = this.login.getUser();
     this.formInput.firstName = this.user.firstName;
     this.formInput.lastName = this.user.lastName;

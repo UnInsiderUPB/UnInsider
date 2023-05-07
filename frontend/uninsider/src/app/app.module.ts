@@ -15,7 +15,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { BrowserModule } from '@angular/platform-browser';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
-import { FormsModule } from "@angular/forms";
+import {FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { HomeComponent } from './pages/home/home.component';
@@ -24,11 +24,15 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import { authInterceptorProviders } from './services/auth.interceptor';
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
-import { ProfileComponent } from './pages/profile/profile.component';
+import { ProfileComponent } from './pages/admin/profile/profile.component';
 import {MatListModule} from "@angular/material/list";
 import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
 import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
 import {MatTableModule} from "@angular/material/table";
+import { WelcomeUserComponent } from './pages/user/welcome-user/welcome-user.component';
+import { SidebarUserComponent } from './pages/user/sidebar-user/sidebar-user.component';
+import { ProfileUserComponent } from './pages/user/profile-user/profile-user.component';
+import { EditUserComponent } from './pages/user/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +47,10 @@ import {MatTableModule} from "@angular/material/table";
     ProfileComponent,
     SidebarComponent,
     WelcomeComponent,
+    WelcomeUserComponent,
+    SidebarUserComponent,
+    ProfileUserComponent,
+    EditUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +67,8 @@ import {MatTableModule} from "@angular/material/table";
     MatToolbarModule,
     MatIconModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    ReactiveFormsModule,
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

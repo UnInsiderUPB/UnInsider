@@ -7,8 +7,11 @@ import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
 import { AdminGuard } from './services/admin.guard';
 import { NormalGuard } from './services/normal.guard';
-import { ProfileComponent } from './pages/profile/profile.component';
+import { ProfileComponent } from './pages/admin/profile/profile.component';
 import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
+import { WelcomeUserComponent } from './pages/user/welcome-user/welcome-user.component';
+import { ProfileUserComponent } from './pages/user/profile-user/profile-user.component';
+import { EditUserComponent } from './pages/user/edit-user/edit-user.component';
 
 const routes: Routes = [
   {
@@ -44,12 +47,19 @@ const routes: Routes = [
   {
     path: 'user-dashboard',
     component: UserDashboardComponent,
-    // pathMatch: 'full',
     canActivate: [NormalGuard],
     children: [
       {
-        path: 'profile',
-        component: ProfileComponent,
+        path: '',
+        component: WelcomeUserComponent,
+      },
+      {
+        path: 'profile-user',
+        component: ProfileUserComponent,
+      },
+      {
+        path: 'edit-user',
+        component: EditUserComponent,
       },
     ],
   },
