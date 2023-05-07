@@ -1,54 +1,94 @@
 <mat-card *ngIf="user">
   <mat-card-content>
-    <h1> Your profile details </h1>
+    <h1>Your profile details</h1>
     <div class="bootstrap-wrapper">
       <div class="container">
         <div class="container text-center">
-          <img class="profile-image" alt="" src="../../../assets/profile.jpg">
-          <h1 class="mt20"> {{ user.firstName }} {{ user.lastName }} </h1>
+          <img class="profile-image" alt="" src="../../../assets/profile.jpg" />
+          <h1 class="mt20">{{ user.firstName }} {{ user.lastName }}</h1>
         </div>
         <div class="row">
           <div class="col-md-10 offset-md-1">
-            <table class="details-table text-center">
-              <tr>
-                <td class="label"> Username</td>
-                <td> {{user.username }}</td>
-              </tr>
+            <form class="container text-center" (ngSubmit)="formSubmit()">
+              <div>
+                <!-- First name -->
+                <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>First Name</mat-label>
+                  <input
+                    [(ngModel)]="formInput.firstName"
+                    name="firstName"
+                    matInput
+                  />
+                </mat-form-field>
+              </div>
 
-              <tr>
-                <td class="label"> UserId</td>
-                <td> {{user.id}}</td>
-              </tr>
+              <div>
+                <!-- Last name -->
+                <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>Last Name</mat-label>
+                  <input
+                    [(ngModel)]="formInput.lastName"
+                    name="lastName"
+                    matInput
+                  />
+                </mat-form-field>
+              </div>
 
-              <tr>
-                <td class="label"> Email</td>
-                <td> {{user.email}}</td>
-              </tr>
+              <div>
+                <!-- Email -->
+                <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>E-mail address</mat-label>
+                  <input [(ngModel)]="formInput.email" name="email" matInput />
+                </mat-form-field>
+              </div>
 
-              <tr>
-                <td class="label"> Phone</td>
-                <td> {{user.phone}}</td>
-              </tr>
+              <div>
+                <!-- Phone -->
+                <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>Phone number</mat-label>
+                  <input [(ngModel)]="formInput.phone" name="phone" matInput />
+                </mat-form-field>
+              </div>
 
-              <tr>
-                <td class="label"> Role</td>
-                <td> {{user.authorities[0].authority}}</td>
-              </tr>
-
-              <tr>
-                <td class="label"> Status</td>
-                <td> {{user.enabled ? "ACTIVE" : "NONACTIVE"}}</td>
-              </tr>
-
-            </table>
+              <div>
+                <!-- Password -->
+                <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>New password</mat-label>
+                  <input
+                    [(ngModel)]="formInput.password"
+                    name="password"
+                    type="password"
+                    matInput
+                  />
+                  <button
+                    *ngIf="formInput.password"
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="formInput.password = ''"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+              <mat-card-actions class="text-center">
+                <button mat-raised-button type="submit" color="primary">
+                  UPDATE
+                </button>
+                <button
+                  mat-raised-button
+                  style="margin-left: 20px"
+                  color="accent"
+                  type="button"
+                  (click)="resetForm()"
+                >
+                  RESET
+                </button>
+              </mat-card-actions>
+            </form>
           </div>
         </div>
       </div>
     </div>
-    <mat-card-actions class="text-center">
-      <button mat-raised-button color="primary">UPDATE</button>
-      <button mat-raised-button color="accent">SHARE</button>
-    </mat-card-actions>
   </mat-card-content>
-
 </mat-card>

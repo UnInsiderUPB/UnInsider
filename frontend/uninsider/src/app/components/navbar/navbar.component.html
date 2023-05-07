@@ -46,4 +46,13 @@
   >
     {{ user.username }}
   </button>
+
+  <button
+    *ngIf="isLoggedIn && user"
+    (click)="toProfileSettings()"
+    mat-fab
+    class="example-icon favorite-icon"
+  >
+    <mat-icon>settings</mat-icon>
+  </button>
 </mat-toolbar>

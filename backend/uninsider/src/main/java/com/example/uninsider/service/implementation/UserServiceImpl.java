@@ -45,6 +45,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User updateUser(User user) {
+        if (!this.userRepository.existsById(user.getId())) {
+            System.out.println("User with id `" + user.getId() + "` not found");
+            return null;
+        }
+
+        return this.userRepository.save(user);
+    }
+
+    @Override
     public User getUser(String username) {
         return this.userRepository.findByUsername(username);
     }
