@@ -1,0 +1,39 @@
+<mat-card-content>
+  <h1> Update profile details </h1>
+  <div class="bootstrap-wrapper">
+    <div class="container">
+      <div class="container text-center">
+        <img class="profile-image" alt="" src="../../../../assets/profile.jpg">
+        <h1 class="mt20"> {{ user.firstName }} {{ user.lastName }} </h1>
+      </div>
+      <div class="row">
+        <div class="col-md-10 offset-md-1">
+
+          <form [formGroup]="userForm">
+            <mat-form-field appearance="outline">
+              <mat-label>First Name</mat-label>
+              <input matInput formControlName="firstName" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="lastName" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Phone</mat-label>
+              <input matInput formControlName="phone" required>
+            </mat-form-field>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <mat-card-actions class="text-center">
+    <button mat-raised-button color="primary" (click)="saveUser()">Save</button>
+    <button mat-raised-button color="accent" routerLink="/user-dashboard/profile-user">Cancel</button>
+  </mat-card-actions>
+</mat-card-content>
+
+

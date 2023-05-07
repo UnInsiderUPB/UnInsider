@@ -12,4 +12,9 @@ export class UserService {
   public addUser(user: any) {
     return this.http.post(`${baseUrl}/user/`, user);
   }
+
+  public updateUser(user: any) {
+    const url = `${baseUrl}/${user.id}`; // Assuming the API URL uses the user's ID to identify the resource
+    return this.http.put(url, user);
+  }
 }

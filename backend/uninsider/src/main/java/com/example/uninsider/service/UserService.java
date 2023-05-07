@@ -20,6 +20,9 @@ public interface UserService {
     //get user by username
     User getUserByUsername(String username);
 
+
+    void updateUser(Long userId, User user);
+
     //delete user by id
     void deleteUser(Long userId);
 }
