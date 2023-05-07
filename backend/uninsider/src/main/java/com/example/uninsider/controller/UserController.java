@@ -62,4 +62,10 @@ public class UserController {
     public void deleteUserById(@PathVariable("userId") Long userid) {
         this.userService.deleteUser(userid);
     }
+
+    @PutMapping("/{userId}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public void updateUser(@PathVariable("userId") Long userid, @RequestBody User user) {
+        this.userService.updateUser(userid, user);
+    }
 }
