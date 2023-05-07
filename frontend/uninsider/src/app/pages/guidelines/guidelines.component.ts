@@ -24,6 +24,10 @@ export class GuidelinesComponent {
     this.passed = [''];
   }
 
+  get getMappingKeys() {
+    return Array.from(this.mapping.keys());
+  }
+
   // Minimum words
   minWords(): boolean {
     return this.inputText.split(' ').length >= MIN_WORDS;

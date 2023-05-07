@@ -6,7 +6,7 @@
 
     <textarea id="input-text" [(ngModel)]="inputText" (ngModelChange)="verifyText()"></textarea>
   
-    <div *ngFor="let key of mapping.keys(); let i = index">
+    <div *ngFor="let key of getMappingKeys; let i = index">
       <input type="checkbox" id="checkbox{{i}}" [checked]="passed.includes(key)">
       <label for="checkbox{{i}}">{{key}}</label>
     </div>
