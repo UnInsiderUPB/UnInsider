@@ -1,13 +1,10 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { UserService } from '../../services/user.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {UserService} from '../../services/user.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {
-  AbstractControl,
   FormControl,
   FormGroup,
-  ValidationErrors,
-  ValidatorFn,
   Validators
 } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -19,6 +16,11 @@ import Swal from 'sweetalert2';
 })
 export class SignupComponent {
 
+  hide = true;
+  errorPassword = "Password must be a combination of lower-case,upper-case, numbers and at least 9 characters long";
+  emaiLError = "This field should have an email format"
+  phoneError = "Phone format: 07## ### ###"
+
   registerForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
     firstname: new FormControl('', [Validators.required]),
@@ -26,9 +28,7 @@ export class SignupComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$')]),
     phone: new FormControl('', [Validators.required, Validators.pattern('^07\\d{2}\\s\\d{3}\\s\\d{3}$')]),
-    confirmPassword: new FormControl('', Validators.required)
-  }, { validators: confirmPasswordValidator});
-
+  });
 
   constructor(
     private userService: UserService,
@@ -45,9 +45,39 @@ export class SignupComponent {
     phone: this.registerForm.value.phone
   };
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   formSubmit() {
+
+    //every user should have an email, password and username
+    if (this.user.username == '' || this.user.username == null) {
+      this.snack.open('Username cannot be empty!', 'OK', {
+        duration: 3000,
+      });
+      return;
+    }
+
+    if (this.user.email == '' || this.user.email == null) {
+      this.snack.open('Email cannot be empty!', 'OK', {
+        duration: 3000,
+      });
+      return;
+    }
+
+    if (this.user.password == '' || this.user.password == null) {
+      this.snack.open('Password cannot be empty!', 'OK', {
+        duration: 3000,
+      });
+      return;
+    }
+
+    if (!this.registerForm.valid) {
+      this.snack.open('Please complete the fields correctly!', 'OK', {
+        duration: 3000,
+      });
+      return;
+    }
 
     // Add user
     this.userService.addUser(this.registerForm.value).subscribe({
@@ -55,7 +85,8 @@ export class SignupComponent {
         console.log(data);
         Swal.fire('Success!', 'User created successfully', 'success').then(
           (_) => {
-            this.router.navigate(['/login']).then(_ => {});
+            this.router.navigate(['/login']).then(_ => {
+            });
           }
         );
       },
@@ -67,11 +98,8 @@ export class SignupComponent {
       },
     });
   }
+
+  togglePasswordVisibility() {
+    this.hide = !this.hide;
+  }
 }
-
-export const confirmPasswordValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-  const password = control.get('password');
-  const confirmPassword = control.get('confirmPassword');
-
-  return password && confirmPassword && password.value === confirmPassword.value ? { confirmPassword: true } : null;
-};
