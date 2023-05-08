@@ -16,7 +16,7 @@
             "allowedCommonJsDependencies": [
               "sweetalert2"
             ],
-            "outputPath": "dist/uninsider",
+            "outputPath": "./static",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
