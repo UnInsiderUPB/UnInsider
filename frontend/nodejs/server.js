@@ -7,24 +7,16 @@ const app = express();
 
 app.use(express.static(path_));
 
-// app.use('*', function (req, res) {
-//   res.sendFile(path.join(path_, 'index.html'));
-// });
-
-var corsOptions = {
-  origin: "http://localhost:8081"
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
-app.get('/', function (req,res) {
+app.get('/', function (req, res) {
   res.sendFile(path_ + "index.html");
 });
 
 require("./app/routes/turorial.routes")(app);
+require("./app/routes/guidelines.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 4200;

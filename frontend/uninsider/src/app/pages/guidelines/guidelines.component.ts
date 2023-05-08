@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GuidelinesService } from 'src/app/services/guidelines.service';
 
 const MIN_WORDS = 30;
 const MAX_WORDS = 300;
@@ -15,7 +16,7 @@ export class GuidelinesComponent {
   mapping: Map<string, Function>;
   passed: [string];
 
-  constructor() {
+  constructor(private guidelinesService: GuidelinesService) {
     this.mapping = new Map<string, Function>();
     this.mapping.set(`Minimum ${MIN_WORDS} words`, this.minWords);
     this.mapping.set(`Maximum ${MAX_WORDS} words`, this.maxWords);
@@ -23,6 +24,8 @@ export class GuidelinesComponent {
     this.mapping.set(`Maximum ${MAX_NONALPHA_PERCENTAGE}% non-alpha characters`, this.maxNonAlpha);
     this.passed = [''];
   }
+
+  ngOnInit() { }
 
   get getMappingKeys() {
     return Array.from(this.mapping.keys());
@@ -64,6 +67,14 @@ export class GuidelinesComponent {
 
   nlp() {
     console.log('nlp');
+    this.guidelinesService.getAll()
+      .subscribe(
+        (data: any) => {
+          console.log(data);
+        },
+        (error: any) => {
+          console.log(error);
+        });
   }
 
   // [TODO]: Check for language (English)
