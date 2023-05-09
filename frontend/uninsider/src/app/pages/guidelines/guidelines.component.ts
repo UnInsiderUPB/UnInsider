@@ -5,6 +5,7 @@ const MIN_WORDS = 50;
 const MAX_WORDS = 300;
 const MAX_UPPERCASE_PERCENTAGE = 10;
 const MAX_NONALPHA_PERCENTAGE = 10;
+const MAX_MISSPELLED_WORDS_PERCENTAGE = 20;
 
 @Component({
   selector: 'app-guidelines',
@@ -17,6 +18,7 @@ export class GuidelinesComponent {
   passed: [string];
   detectedLanguage: string = 'none';
   detectedProfanity: boolean = false;
+  detectedMisspelling: boolean = false;
 
   constructor(private guidelinesService: GuidelinesService) {
     this.mapping = new Map<string, Function>();
@@ -26,6 +28,7 @@ export class GuidelinesComponent {
     this.mapping.set(`Maximum ${MAX_NONALPHA_PERCENTAGE}% non-alpha characters`, this.maxNonAlpha);
     this.mapping.set(`English text`, this.languageDetection);
     this.mapping.set(`No profanity`, this.profanityDetection);
+    this.mapping.set(`No spelling or grammar errors`, this.spellCheck);
     this.passed = [''];
   }
 
@@ -88,12 +91,11 @@ export class GuidelinesComponent {
   }
 
   // Profanity detection
-  profanityDetection() {
+  profanityDetection(): boolean {
     this.guidelinesService.getProfanityWords(this.inputText).subscribe({
       next: (data: any) => {
-        if (data.profanity === 'true') {
+        if (data.profanity === 'true')
           this.detectedProfanity = true;
-        }
         else
           this.detectedProfanity = false;
       },
@@ -105,7 +107,23 @@ export class GuidelinesComponent {
     return this.detectedProfanity === false;
   }
 
-  // [TODO]: Spelling and grammar errors (in English)
+  // Spelling and grammar errors
+  spellCheck(): boolean {
+    this.guidelinesService.getSpellCheck(this.inputText).subscribe({
+      next: (data: any) => {
+        console.log(data);
+        if (data.misspelledWordsPerc <= MAX_MISSPELLED_WORDS_PERCENTAGE)
+          this.detectedMisspelling = false;
+        else
+          this.detectedMisspelling = true;
+      },
+      error: (_: any) => {
+        this.detectedMisspelling = false;
+      }
+    })
+
+    return this.detectedMisspelling === false;
+  }
 
   verifyText() {
     this.passed = [''];

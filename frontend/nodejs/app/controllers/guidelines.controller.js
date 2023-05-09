@@ -4,6 +4,9 @@ const lngDetector = new LanguageDetect();
 const ProfanityFilter = require('bad-words');
 const profanityFilter = new ProfanityFilter();
 
+const SpellChecker = require('simple-spellchecker');
+const spellCheckerDictionary = SpellChecker.getDictionarySync('en-US');
+
 // Language detection
 exports.languageDetection = (req, res) => {
   const text = req.body.text;
@@ -40,5 +43,31 @@ exports.profanityDetection = (req, res) => {
     res.send({profanity: 'true'});
   else
     res.send({profanity: 'false'});
+}
+
+exports.spellCheck = (req, res) => {
+  let text = req.body.text;
+
+  // Lowercase everything
+  text = text.toLowerCase();
+
+  // Remove punctuation
+  text = text.replace(/[.,\/#?!$%\^&\*;:{}=\-_`~()]/g, '');
+
+  // Remove extra spaces
+  text = text.replace(/\s{2,}/g, ' ');
+
+  // Check each word if it is misspelled, jump over spaces
+  let misspelledCounter = 0;
+  let totalWordsCounter = 0;
+  for (let word of text.split(' ')) {
+    if (word === '')
+      continue;
+    if (!spellCheckerDictionary.spellCheck(word))
+      misspelledCounter++;
+    totalWordsCounter++;
+  }
+
+  res.send({misspelledWordsPerc: misspelledCounter / totalWordsCounter * 100});
 }
 

@@ -10,5 +10,8 @@ module.exports = app => {
 
     // Profanity detection
     router.post('/profanity', guidelines.profanityDetection);
+
+    // Spell check
+    router.post('/spellcheck', guidelines.spellCheck);
 };
   

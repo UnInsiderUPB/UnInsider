@@ -19,4 +19,9 @@ export class GuidelinesService {
     const data = {'text': text}
     return this.http.post(`${baseUrl}/profanity`, data);
   }
+
+  getSpellCheck(text: any) {
+    const data = {'text': text}
+    return this.http.post(`${baseUrl}/spellcheck`, data);
+  }
 }
