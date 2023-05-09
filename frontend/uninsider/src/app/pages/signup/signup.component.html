@@ -24,9 +24,6 @@
               <button *ngIf="user.username" matSuffix mat-icon-button aria-label="Clear" (click)="user.username=''">
                 <mat-icon>close</mat-icon>
               </button>
-
-
-              <mat-hint>Username must be unique</mat-hint>
             </mat-form-field>
 
             <!-- Password -->
@@ -95,8 +92,7 @@
               <button *ngIf="user.email" matSuffix mat-icon-button aria-label="Clear" (click)="user.email=''">
                 <mat-icon>close</mat-icon>
               </button>
-              <mat-error *ngIf="registerForm.value.email">{{emaiLError}}</mat-error>
-              <mat-hint>E-mail must be unique</mat-hint>
+              <mat-error *ngIf="registerForm.value.email">{{emailError}}</mat-error>
             </mat-form-field>
 
             <!-- Phone -->

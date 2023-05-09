@@ -16,8 +16,8 @@ import Swal from 'sweetalert2';
 })
 export class SignupComponent {
 
-  errorPassword = "Password must be a combination of lower-case,upper-case, numbers and at least 9 characters long";
-  emaiLError = "This field should have an email format"
+  errorPassword = "Password must be a combination of lower-case, upper-case, numbers and at least 9 characters long";
+  emailError = "This field should have an email format"
   phoneError = "Phone should only contain digits."
   registerForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
