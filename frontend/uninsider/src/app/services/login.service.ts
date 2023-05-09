@@ -9,7 +9,7 @@ import baseUrl from './helper';
 export class LoginService {
 
   public loginStatusSubject = new Subject<boolean>();
-  
+
   constructor(private http: HttpClient) { }
 
   // Get current user which is logged in

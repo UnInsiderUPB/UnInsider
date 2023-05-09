@@ -11,6 +11,8 @@ export class NavbarComponent implements OnInit {
   isLoggedIn = false;
   user: any = null;
 
+  currentUserType: string = 'unknown';
+
   constructor(public login: LoginService, public router: Router) {}
 
   ngOnInit(): void {
@@ -19,6 +21,7 @@ export class NavbarComponent implements OnInit {
     this.login.loginStatusSubject.asObservable().subscribe((data) => {
       this.isLoggedIn = this.login.isLoggedIn();
       this.user = this.login.getUser();
+      this.currentUserType = this.login.getUserRole();
     });
   }
 
@@ -28,9 +31,17 @@ export class NavbarComponent implements OnInit {
   }
 
   public toDashboard() {
-    let user_role = this.login.getUserRole();
+    const user_role = this.login.getUserRole();
     if (user_role == 'ADMIN') this.router.navigate(['/admin']).then((_) => {});
     else if (user_role == 'NORMAL')
       this.router.navigate(['/user-dashboard']).then((_) => {});
+  }
+
+  public toProfileSettings() {
+    const user_role = this.login.getUserRole();
+    if (user_role == 'ADMIN')
+      this.router.navigate(['/admin/profile']).then((_) => {});
+    else if (user_role == 'NORMAL')
+      this.router.navigate(['/user-dashboard/profile']).then((_) => {});
   }
 }

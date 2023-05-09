@@ -1,0 +1,50 @@
+.dark-mode-button {
+  display: inline-block;
+  position: relative;
+  outline: none;
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 2rem;
+}
+
+.dark-mode-button .circle {
+  display: block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: var(--background-color);
+  border-radius: 50%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.dark-mode-button.dark-mode .circle {
+  left: calc(100% - 1.5rem - 0.5rem);
+  transform: translateX(100%);
+}
+
+mat-sidenav {
+  width: 200px;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 16px;
+}
+
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.custom-sidenav {
+  position: absolute;
+  top: 64px; /* adjust this value to match the height of your toolbar */
+  left: 0;
+  width: 200px;
+}

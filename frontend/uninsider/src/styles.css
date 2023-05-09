@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'styles.scss';
 
 html, body {
   height: 100%;
@@ -10,10 +11,70 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+body.dark-mode {
+  background-color: #333;
+  color: #fff;
+  text-color: #000;
+}
+
+body.dark-mode mat-card {
+  background-color: #333;
+  color: #fff;
+  text-color: #000;
+}
+
+body.dark-mode mat-form-field {
+  background-color: #333;
+  color: #fff;
+  text-color: #000;
+}
+
+body.dark-mode mat-label {
+  background-color: #333;
+  color: #fff;
+  text-color: #000;
+}
+
+body.dark-mode form {
+  background-color: #333;
+  color: #fff;
+  text-color: #000;
+}
+
+body.dark-mode mat-hint {
+  background-color: #333;
+  color: #fff;
+  text-color: #000;
+}
+
+body.dark-mode mat-sidenav {
+  background-color: #333;
+  color: #fff;
+  text-color: #000;
+}
+
+body.dark-mode button {
+  background-color: #333;
+  color: #fff;
+  text-color: #000;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   max-height: 100%;
+}
+
+#main-container {
+  min-height: calc(100% - 50px); /* replace 50px with the height of your footer */
+}
+
+footer {
+  height: 50px; /* replace 50px with the height of your footer */
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: right;
 }
 
 .text-center {

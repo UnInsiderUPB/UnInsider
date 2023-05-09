@@ -1,1 +1,13 @@
-<p>footer works!</p>
+<footer id="footer">
+  <nav>
+    <button class="dark-mode-button" (click)="darkModeService.toggleDarkMode()">
+      <span class="circle"></span>
+      <span class="label">Dark mode</span>
+    </button>
+    &nbsp;
+    <a routerLink="/about-us"><button>About Us</button></a>
+    &nbsp;
+    <a routerLink="/contact-us"><button>Contact Us</button></a>
+    &nbsp;
+  </nav>
+</footer>

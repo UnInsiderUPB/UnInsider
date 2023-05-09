@@ -21,6 +21,10 @@
                 matInput
                 placeholder="Enter here"
               />
+              <button *ngIf="user.username" matSuffix mat-icon-button aria-label="Clear" (click)="user.username=''">
+                <mat-icon>close</mat-icon>
+              </button>
+
               <mat-hint>Username must be unique</mat-hint>
             </mat-form-field>
 
@@ -35,6 +39,9 @@
                 matInput
                 placeholder="Enter here"
               />
+              <button *ngIf="user.password" matSuffix mat-icon-button aria-label="Clear" (click)="user.password=''">
+                <mat-icon>close</mat-icon>
+              </button>
             </mat-form-field>
 
             <!-- First name -->
@@ -47,6 +54,10 @@
                 matInput
                 placeholder="Enter here"
               />
+              <button *ngIf="user.firstName" matSuffix mat-icon-button aria-label="Clear" (click)="user.firstName=''">
+                <mat-icon>close</mat-icon>
+              </button>
+
             </mat-form-field>
 
             <!-- Last name -->
@@ -59,6 +70,9 @@
                 matInput
                 placeholder="Enter here"
               />
+              <button *ngIf="user.lastName" matSuffix mat-icon-button aria-label="Clear" (click)="user.lastName=''">
+                <mat-icon>close</mat-icon>
+              </button>
             </mat-form-field>
 
             <!-- Email -->
@@ -72,6 +86,9 @@
                 matInput
                 placeholder="Enter here"
               />
+              <button *ngIf="user.email" matSuffix mat-icon-button aria-label="Clear" (click)="user.email=''">
+                <mat-icon>close</mat-icon>
+              </button>
               <mat-hint>E-mail must be unique</mat-hint>
             </mat-form-field>
 
@@ -85,11 +102,14 @@
                 type="number"
                 matInput placeholder="Enter here"
               />
+              <button *ngIf="user.phone" matSuffix mat-icon-button aria-label="Clear" (click)="user.phone=''">
+                <mat-icon>close</mat-icon>
+              </button>
             </mat-form-field>
 
             <div class="text-center">
               <button type="submit" mat-raised-button color="primary">Register</button>
-              <button style="margin-left: 20px;" mat-raised-button color="accent">Clear</button>
+              <button style="margin-left: 20px;" mat-raised-button color="accent" type="reset">Clear</button>
             </div>
 
           </form>

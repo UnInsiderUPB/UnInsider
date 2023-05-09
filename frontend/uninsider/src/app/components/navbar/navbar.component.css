@@ -1,17 +1,19 @@
-.navbar-spacer {
+.example-spacer {
   flex: 1 1 auto;
 }
 
-.navbar-button {
+.example-icon {
   font-size: 18px;
+  margin-right: 20px;
   margin-left: 10px;
-  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
-.navbar-home {
-  margin-right: 10px;
+.example-icon.register {
+  margin-right: 40px;
 }
 
 .title {
   font-size: 25px;
+  margin-left: 10px;
 }

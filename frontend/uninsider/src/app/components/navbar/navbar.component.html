@@ -1,16 +1,24 @@
-<mat-toolbar color="accent">
-  <a routerLink="/" mat-fab extended class="navbar-home">
+<div>
+  <mat-toolbar color="accent">
+    <button *ngIf="isLoggedIn" mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    &nbsp;
+
+    <a routerLink="/" mat-button class="example-icon">
     <mat-icon>home</mat-icon>
+
     <span class="title">UnInsider</span>
   </a>
-
-  <span class="navbar-spacer"></span>
+  <span class="example-spacer"></span>
 
   <a
     *ngIf="!isLoggedIn"
     [routerLink]="'/login'"
     mat-button
-    class="navbar-button login"
+    class="example-icon login favorite-icon"
+    aria-label="Example icon-button with a heart icon"
   >
     Login
   </a>
@@ -19,26 +27,74 @@
     *ngIf="!isLoggedIn"
     [routerLink]="'/signup'"
     mat-button
-    class="navbar-button register"
+    class="example-icon favorite-icon register"
+    aria-label="Example icon-button with a heart icon"
   >
     Register
   </a>
 
-  <a
+  <button
     (click)="logout()"
     *ngIf="isLoggedIn"
     mat-button
-    class="navbar-button register"
+    class="example-icon register"
+    aria-label="Example icon-button with a heart icon"
   >
     Logout
-  </a>
+  </button>
 
   <button
     *ngIf="isLoggedIn && user"
     (click)="toDashboard()"
     mat-button
-    class="navbar-button"
+    routerLink="/admin/profile"
+    class="example-icon favorite-icon"
+    aria-label="Example icon-button with a heart icon"
   >
     {{ user.username }}
   </button>
+
+  <button
+    *ngIf="isLoggedIn && user"
+    (click)="toProfileSettings()"
+    mat-fab
+    class="example-icon favorite-icon"
+  >
+    <mat-icon>settings</mat-icon>
+  </button>
 </mat-toolbar>
+
+<mat-sidenav #sidenav class="custom-sidenav" mode="over" [opened]="false" style="z-index: 100">
+  <button *ngIf="isLoggedIn && (currentUserType == 'ADMIN')" mat-list-item routerLink="/admin">
+    <mat-icon>home</mat-icon>Home
+  </button>
+
+  <button *ngIf="isLoggedIn && (currentUserType == 'NORMAL')" mat-list-item routerLink="/user-dashboard">
+    <mat-icon>home</mat-icon>Home
+  </button>
+
+  <button *ngIf="isLoggedIn" mat-list-item>
+    <mat-icon>school</mat-icon>Universities
+  </button>
+
+  <button *ngIf="isLoggedIn && (currentUserType == 'ADMIN')" mat-list-item>
+    <mat-icon>add</mat-icon>Add University
+  </button>
+
+  <button *ngIf="isLoggedIn && (currentUserType == 'NORMAL')" mat-list-item>
+    <mat-icon>add</mat-icon>Add Review
+  </button>
+
+  <button *ngIf="isLoggedIn" mat-list-item>
+    <mat-icon> rate_review </mat-icon>Reviews
+  </button>
+
+  <button
+    (click)="logout()"
+    *ngIf="isLoggedIn"
+    mat-list-item routerLink="/login">
+    <mat-icon>logout</mat-icon>Logout
+  </button>
+</mat-sidenav>
+
+</div>
