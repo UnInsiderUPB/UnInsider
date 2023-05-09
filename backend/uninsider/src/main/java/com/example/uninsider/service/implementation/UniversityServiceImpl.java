@@ -1,7 +1,7 @@
 package com.example.uninsider.service.implementation;
 
 import com.example.uninsider.exeptions.UniversityAlreadyExists;
-import com.example.uninsider.exeptions.UniversityNotFoundException;;
+import com.example.uninsider.exeptions.UniversityNotFoundException;
 import com.example.uninsider.model.University;
 import com.example.uninsider.repo.UniversityRepository;
 import com.example.uninsider.service.UniversityService;
