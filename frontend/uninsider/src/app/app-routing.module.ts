@@ -8,6 +8,8 @@ import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboa
 import { AdminGuard } from './services/admin.guard';
 import { NormalGuard } from './services/normal.guard';
 import { ProfileComponent } from './components/profile/profile.component';
+import { UniversityAddComponent } from './pages/admin/university-add/university-add.component';
+import { UniversityListComponent } from './components/university-list/university-list.component';
 import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
 import { WelcomeUserComponent } from './pages/user/welcome-user/welcome-user.component';
 
@@ -40,6 +42,14 @@ const routes: Routes = [
         path: 'profile',
         component: ProfileComponent,
       },
+      {
+        path: 'universities',
+        component: UniversityListComponent,
+      },
+      {
+        path: 'universities/add',
+        component: UniversityAddComponent,
+      }
     ],
   },
   {
@@ -54,6 +64,10 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
+      },
+      {
+        path: 'universities',
+        component: UniversityListComponent,
       }
     ],
   },

@@ -1,6 +1,7 @@
 package com.example.uninsider.service.implementation;
 
 import com.example.uninsider.exeptions.UserAlreadyExists;
+import com.example.uninsider.exeptions.UserNotFoundException;
 import com.example.uninsider.model.User;
 import com.example.uninsider.model.UserRole;
 import com.example.uninsider.repo.RoleRepository;
@@ -45,10 +46,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(User user) {
+    public User updateUser(User user) throws UserNotFoundException {
         if (!this.userRepository.existsById(user.getId())) {
             System.out.println("User with id `" + user.getId() + "` not found");
-            return null;
+            throw new UserNotFoundException("User with id `" + user.getId() + "` not found");
         }
 
         return this.userRepository.save(user);
