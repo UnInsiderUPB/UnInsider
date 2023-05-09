@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { GuidelinesService } from 'src/app/services/guidelines.service';
 
-const MIN_WORDS = 30;
+const MIN_WORDS = 50;
 const MAX_WORDS = 300;
 const MAX_UPPERCASE_PERCENTAGE = 10;
 const MAX_NONALPHA_PERCENTAGE = 10;
@@ -15,6 +15,7 @@ export class GuidelinesComponent {
   inputText: string = '';
   mapping: Map<string, Function>;
   passed: [string];
+  detectedLanguage: string = 'none';
 
   constructor(private guidelinesService: GuidelinesService) {
     this.mapping = new Map<string, Function>();
@@ -22,6 +23,7 @@ export class GuidelinesComponent {
     this.mapping.set(`Maximum ${MAX_WORDS} words`, this.maxWords);
     this.mapping.set(`Maximum ${MAX_UPPERCASE_PERCENTAGE}% uppercase letters`, this.maxUppercase);
     this.mapping.set(`Maximum ${MAX_NONALPHA_PERCENTAGE}% non-alpha characters`, this.maxNonAlpha);
+    this.mapping.set(`English text`, this.languageDetection);
     this.passed = [''];
   }
 
@@ -65,19 +67,24 @@ export class GuidelinesComponent {
     return nonAlphanumericCount / this.inputText.length * 100 <= MAX_NONALPHA_PERCENTAGE;
   }
 
-  nlp() {
-    console.log('nlp');
-    this.guidelinesService.getAll()
-      .subscribe(
-        (data: any) => {
-          console.log(data);
-        },
-        (error: any) => {
-          console.log(error);
-        });
+  // Language detection
+  languageDetection() {
+    this.guidelinesService.getLanguage(this.inputText).subscribe({
+      next: (data: any) => {
+        // console.log(data);
+        if (data.language === 'english')
+          this.detectedLanguage = 'english';
+        else
+          this.detectedLanguage = 'none';
+      },
+      error: (_: any) => {
+        this.detectedLanguage = 'none';
+      }
+    })
+
+    return this.detectedLanguage === 'english';
   }
 
-  // [TODO]: Check for language (English)
   // [TODO]: Profanity (`google-profanity-words`)
   // [TODO]: Spelling and grammar errors (in English)
 

@@ -1,11 +1,11 @@
 module.exports = app => {
-    const guidelines = require("../controllers/guidelines.controller");
+    const guidelines = require('../controllers/guidelines.controller');
   
-    var router = require("express").Router();
+    var router = require('express').Router();
   
     app.use('/guidelines', router);
 
-    // Retrieve all
-    router.get("/", guidelines.findAll);
+    // Language detection
+    router.post('/language', guidelines.languageDetection);
 };
   

@@ -10,7 +10,8 @@ export class GuidelinesService {
 
   constructor(private http: HttpClient) { }
 
-  getAll() {
-    return this.http.get(baseUrl);
+  getLanguage(text: any) {
+    const data = {'text': text}
+    return this.http.post(`${baseUrl}/language`, data);
   }
 }
