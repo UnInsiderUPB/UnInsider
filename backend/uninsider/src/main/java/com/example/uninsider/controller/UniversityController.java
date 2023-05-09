@@ -59,7 +59,7 @@ public class UniversityController {
 
     @DeleteMapping("/{universityId}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void deleteUserById(@PathVariable("universityId") Long universityId) {
+    public void deleteUniversityById(@PathVariable("universityId") Long universityId) {
         this.universityService.deleteUniversity(universityId);
     }
 }

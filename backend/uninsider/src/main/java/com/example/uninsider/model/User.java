@@ -20,12 +20,12 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements UserDetails {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     //@Column(name = "iduser")
     private Long id;
-    
+
     private String username;
     private String password;
 
@@ -34,7 +34,7 @@ public class User implements UserDetails {
     private String email;
 
     private String phone;
-    
+
     private boolean enabled = true;
 
     private String profile;
@@ -43,8 +43,12 @@ public class User implements UserDetails {
     @JsonIgnore
     private Set<UserRole> userRoles = new HashSet<>();
 
-    public User(String username, String password, String firstName, String lastName,
-                String email, String phone, boolean enabled, String profile, Set<UserRole> userRoles) {
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Review> reviews = new HashSet<>();
+
+    public User(String username, String password, String firstName, String lastName, String email, String phone,
+                boolean enabled, String profile, Set<UserRole> userRoles) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
