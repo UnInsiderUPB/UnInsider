@@ -18,7 +18,7 @@ public class UniversityServiceImpl implements UniversityService {
 
     @Override
     public University createUniversity(University university) throws UniversityAlreadyExists {
-        // User with the same `username` already exists
+        // University with the same `name` already exists
         if (this.universityRepository.existsByName(university.getName())) {
             System.out.println("University with name `" + university.getName() + "` already exists");
             throw new UniversityAlreadyExists("University with name `" + university.getName() + "` already exists");
