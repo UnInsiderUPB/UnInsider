@@ -1,6 +1,9 @@
 const LanguageDetect = require('languagedetect');
 const lngDetector = new LanguageDetect();
 
+const ProfanityFilter = require('bad-words');
+const profanityFilter = new ProfanityFilter();
+
 // Language detection
 exports.languageDetection = (req, res) => {
   const text = req.body.text;
@@ -27,5 +30,15 @@ exports.languageDetection = (req, res) => {
     probability: result[0][1],
   }
   res.send(data);
+}
+
+// Profanity detection
+exports.profanityDetection = (req, res) => {
+  const text = req.body.text;
+
+  if (profanityFilter.isProfane(text))
+    res.send({profanity: 'true'});
+  else
+    res.send({profanity: 'false'});
 }
 

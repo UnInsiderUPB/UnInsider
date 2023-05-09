@@ -16,6 +16,7 @@ export class GuidelinesComponent {
   mapping: Map<string, Function>;
   passed: [string];
   detectedLanguage: string = 'none';
+  detectedProfanity: boolean = false;
 
   constructor(private guidelinesService: GuidelinesService) {
     this.mapping = new Map<string, Function>();
@@ -24,6 +25,7 @@ export class GuidelinesComponent {
     this.mapping.set(`Maximum ${MAX_UPPERCASE_PERCENTAGE}% uppercase letters`, this.maxUppercase);
     this.mapping.set(`Maximum ${MAX_NONALPHA_PERCENTAGE}% non-alpha characters`, this.maxNonAlpha);
     this.mapping.set(`English text`, this.languageDetection);
+    this.mapping.set(`No profanity`, this.profanityDetection);
     this.passed = [''];
   }
 
@@ -68,7 +70,7 @@ export class GuidelinesComponent {
   }
 
   // Language detection
-  languageDetection() {
+  languageDetection(): boolean {
     this.guidelinesService.getLanguage(this.inputText).subscribe({
       next: (data: any) => {
         // console.log(data);
@@ -85,7 +87,24 @@ export class GuidelinesComponent {
     return this.detectedLanguage === 'english';
   }
 
-  // [TODO]: Profanity (`google-profanity-words`)
+  // Profanity detection
+  profanityDetection() {
+    this.guidelinesService.getProfanityWords(this.inputText).subscribe({
+      next: (data: any) => {
+        if (data.profanity === 'true') {
+          this.detectedProfanity = true;
+        }
+        else
+          this.detectedProfanity = false;
+      },
+      error: (_: any) => {
+        this.detectedProfanity = false;
+      }
+    })
+
+    return this.detectedProfanity === false;
+  }
+
   // [TODO]: Spelling and grammar errors (in English)
 
   verifyText() {

@@ -7,5 +7,8 @@ module.exports = app => {
 
     // Language detection
     router.post('/language', guidelines.languageDetection);
+
+    // Profanity detection
+    router.post('/profanity', guidelines.profanityDetection);
 };
   
