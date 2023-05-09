@@ -1,19 +1,13 @@
 package com.example.uninsider.controller;
 
 import com.example.uninsider.exeptions.UniversityNotFoundException;
-import com.example.uninsider.exeptions.UserNotFoundException;
-import com.example.uninsider.model.Role;
 import com.example.uninsider.model.University;
-import com.example.uninsider.model.User;
-import com.example.uninsider.model.UserRole;
 import com.example.uninsider.service.UniversityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/university")
@@ -32,10 +26,10 @@ public class UniversityController {
     @PutMapping("/")
     @ResponseStatus(code = HttpStatus.CREATED)
     public University updateUniversity(@RequestBody University requestBodyUniversity) throws Exception {
-        University originalUniversity = this.universityService.getUniversity(requestBodyUniversity.getName());
+        University originalUniversity = this.universityService.getUniversity(requestBodyUniversity.getId());
         if (originalUniversity == null) {
-            System.out.println("University with name `" + requestBodyUniversity.getName() + "` not found!");
-            throw new UniversityNotFoundException("University with name `" + requestBodyUniversity.getName() + "` not found");
+            System.out.println("University with id `" + requestBodyUniversity.getId() + "` not found!");
+            throw new UniversityNotFoundException("University with id `" + requestBodyUniversity.getId() + "` not found");
         }
 
         originalUniversity.setName(requestBodyUniversity.getName());
@@ -59,7 +53,7 @@ public class UniversityController {
 
     @DeleteMapping("/{universityId}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void deleteUserById(@PathVariable("universityId") Long universityId) {
+    public void deleteUniversityById(@PathVariable("universityId") Long universityId) {
         this.universityService.deleteUniversity(universityId);
     }
 }
