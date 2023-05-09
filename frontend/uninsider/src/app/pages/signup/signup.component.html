@@ -38,11 +38,8 @@
                 formControlName="password"
                 name="password"
                 placeholder="Enter here"
-                [type]="hide ? 'password' : 'text'"
+                type="password"
               />
-              <button *ngIf="user.password" matSuffix mat-icon-button (click)="togglePasswordVisibility()">
-                <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
-              </button>
 
               <button *ngIf="user.password" matSuffix mat-icon-button aria-label="Clear" (click)="user.password=''">
                 <mat-icon>close</mat-icon>

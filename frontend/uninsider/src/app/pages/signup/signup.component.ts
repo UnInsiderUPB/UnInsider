@@ -16,18 +16,16 @@ import Swal from 'sweetalert2';
 })
 export class SignupComponent {
 
-  hide = true;
   errorPassword = "Password must be a combination of lower-case,upper-case, numbers and at least 9 characters long";
   emaiLError = "This field should have an email format"
-  phoneError = "Phone format: 07## ### ###"
-
+  phoneError = "Phone should only contain digits."
   registerForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
     firstname: new FormControl('', [Validators.required]),
     lastname: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$')]),
-    phone: new FormControl('', [Validators.required, Validators.pattern('^07\\d{2}\\s\\d{3}\\s\\d{3}$')]),
+    phone: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
   });
 
   constructor(
@@ -99,7 +97,4 @@ export class SignupComponent {
     });
   }
 
-  togglePasswordVisibility() {
-    this.hide = !this.hide;
-  }
 }
