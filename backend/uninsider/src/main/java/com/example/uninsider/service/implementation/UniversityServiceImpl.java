@@ -1,7 +1,7 @@
 package com.example.uninsider.service.implementation;
 
 import com.example.uninsider.exeptions.UniversityAlreadyExists;
-import com.example.uninsider.exeptions.UniversityNotFoundException;;
+import com.example.uninsider.exeptions.UniversityNotFoundException;
 import com.example.uninsider.model.University;
 import com.example.uninsider.repo.UniversityRepository;
 import com.example.uninsider.service.UniversityService;
@@ -18,7 +18,7 @@ public class UniversityServiceImpl implements UniversityService {
 
     @Override
     public University createUniversity(University university) throws UniversityAlreadyExists {
-        // User with the same `username` already exists
+        // University with the same `name` already exists
         if (this.universityRepository.existsByName(university.getName())) {
             System.out.println("University with name `" + university.getName() + "` already exists");
             throw new UniversityAlreadyExists("University with name `" + university.getName() + "` already exists");
