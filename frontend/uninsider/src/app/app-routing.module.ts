@@ -59,6 +59,10 @@ const routes: Routes = [
       {
         path: 'university-reviews/add',
         component: ReviewAddComponent,
+      },
+      {
+        path: 'my-reviews',
+        component: ReviewListComponent,
       }
     ],
   },
@@ -86,6 +90,10 @@ const routes: Routes = [
       {
         path: 'university-reviews/add',
         component: ReviewAddComponent,
+      },
+      {
+        path: 'my-reviews',
+        component: ReviewListComponent,
       }
     ],
   },

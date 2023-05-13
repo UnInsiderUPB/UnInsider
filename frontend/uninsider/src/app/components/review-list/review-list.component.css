@@ -6,9 +6,9 @@
 }
 
 .liked {
-    color: primary;
+    background-color: 'primary';
 }
 
 .disliked {
-    color: primary;
+    background-color: 'primary';
 }

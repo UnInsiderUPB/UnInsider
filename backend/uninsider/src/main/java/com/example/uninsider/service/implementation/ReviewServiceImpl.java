@@ -95,8 +95,12 @@ public class ReviewServiceImpl implements ReviewService {
         if (!review.addLike(userId)) {
             // User already liked this review, therefore the like is removed
             review.removeLike(userId);
+        } else {
+            // User liked this review, therefore the possibly existing dislike is removed
+            review.removeDislike(userId);
         }
 
+        this.reviewRepository.save(review);
         return review;
     }
 
@@ -111,8 +115,12 @@ public class ReviewServiceImpl implements ReviewService {
         if (!review.addDislike(userId)) {
             // User already disliked this review, therefore the dislike is removed
             review.removeDislike(userId);
+        } else {
+            // User disliked this review, therefore the possibly existing like is removed
+            review.removeLike(userId);
         }
 
+        this.reviewRepository.save(review);
         return review;
     }
 

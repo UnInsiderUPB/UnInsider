@@ -15,6 +15,7 @@ export class ReviewListComponent implements OnInit {
   ownReviews: any = [];
   allReviews: any = [];
   universityId: any;
+  userId: any;
   likedReviews: any = [];
   dislikedReviews: any = [];
 
@@ -26,23 +27,64 @@ export class ReviewListComponent implements OnInit {
     private snack: MatSnackBar
   ) {}
 
+  hydrateAllReviews() {
+    if (this.universityId && this.userId) {
+      // Get reviews by university id and author id
+      this.reviewService.getReviewsByUniversityIdAndAuthorId(
+        this.universityId,
+        this.userId
+      ).subscribe({
+        next: (data) => {
+          this.allReviews = data;
+        },
+      });
+    } else if (this.universityId) {
+      // Get reviews by university id
+      this.reviewService.getReviewsByUniversityId(this.universityId).subscribe({
+        next: (data) => {
+          this.allReviews = data;
+        },
+      });
+    } else if (this.userId) {
+      // Get reviews by author id
+      this.reviewService.getReviewsByAuthorId(this.userId).subscribe({
+        next: (data) => {
+          this.allReviews = data;
+        },
+      });
+    } else {
+      // Get all reviews
+      this.reviewService.getAllReviews().subscribe({
+        next: (data) => {
+          this.allReviews = data;
+        },
+      });
+    }
+  }
+
   ngOnInit(): void {
     this.user = this.login.getUser();
     this.universityId = JSON.parse(
-      this.route.snapshot.paramMap.get('universityId') || '{}'
-    );
+      this.route.snapshot.paramMap.get('universityId') || 'null'
+    ) || undefined;
 
-    this.reviewService.getReviewsByUniversityId(this.universityId).subscribe({
-      next: (data) => {
-        this.allReviews = data;
-      },
-    });
+    this.userId = JSON.parse(
+      this.route.snapshot.paramMap.get('userId') || 'null'
+    ) || undefined;
 
-    this.reviewService.getReviewsByAuthorId(this.user.id).subscribe({
-      next: (data) => {
-        this.ownReviews = data;
-      },
-    });
+    this.hydrateAllReviews();
+
+    if (this.userId && !this.universityId) {
+      // All hydrated reviews are own reviews
+      this.ownReviews = this.allReviews;
+    } else {
+      // Get own reviews
+      this.reviewService.getReviewsByAuthorId(this.user.id).subscribe({
+        next: (data) => {
+          this.ownReviews = data;
+        },
+      });
+    }
 
     this.reviewService.getReviewsLikedByUser(this.user.id).subscribe({
       next: (data) => {
@@ -80,27 +122,32 @@ export class ReviewListComponent implements OnInit {
   }
 
   public isLiked(review: any) {
-    return this.likedReviews.some((r: any) => r.id == review.id);
+    return this.likedReviews.some((r: any) => r.id === review.id);
   }
 
   public isDisliked(review: any) {
-    return this.dislikedReviews.some((r: any) => r.id == review.id);
+    return this.dislikedReviews.some((r: any) => r.id === review.id);
   }
 
   public likeReview(review: any) {
     this.reviewService.likeReview(review.id, this.user.id).subscribe({
       next: (updatedReview: any) => {
-        if (updatedReview.likes > review.likes) {
-          // Review was liked
-          this.likedReviews.push(review);
-        } else {
-          // Review was unliked
-          this.likedReviews = this.likedReviews.filter(
-            (r: any) => r.id != review.id
-          );
-        }
+        // Update liked reviews
+        this.reviewService.getReviewsLikedByUser(this.user.id).subscribe({
+          next: (data) => {
+            this.likedReviews = data;
+          },
+        });
+
+        // Update disliked reviews
+        this.reviewService.getReviewsDislikedByUser(this.user.id).subscribe({
+          next: (data) => {
+            this.dislikedReviews = data;
+          },
+        });
 
         review.likes = updatedReview.likes;
+        review.dislikes = updatedReview.dislikes;
       },
       error: (error) => {
         console.log(error);
@@ -112,13 +159,23 @@ export class ReviewListComponent implements OnInit {
   }
 
   public dislikeReview(review: any) {
-    this.reviewService.likeReview(review.id, this.user.id).subscribe({
+    this.reviewService.dislikeReview(review.id, this.user.id).subscribe({
       next: (updatedReview: any) => {
-        if (updatedReview.dislikes > review.dislikes) {
-          // Review was disliked
-          this.dislikedReviews.push(review);
-        }
+        // Update liked reviews
+        this.reviewService.getReviewsLikedByUser(this.user.id).subscribe({
+          next: (data) => {
+            this.likedReviews = data;
+          },
+        });
 
+        // Update disliked reviews
+        this.reviewService.getReviewsDislikedByUser(this.user.id).subscribe({
+          next: (data) => {
+            this.dislikedReviews = data;
+          },
+        });
+
+        review.likes = updatedReview.likes;
         review.dislikes = updatedReview.dislikes;
       },
       error: (error) => {

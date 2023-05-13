@@ -5,21 +5,35 @@
         <mat-card>
           <button mat-button>
             <mat-card-header (click)="goToReviews(university)">
-              <mat-card-title>{{ university.name }} - {{ university.location }}</mat-card-title>
-              <mat-card-subtitle>{{ university.description }}</mat-card-subtitle>
+              <mat-card-title
+                >{{ university.name }} -
+                {{ university.location }}</mat-card-title
+              >
+              <mat-card-subtitle>{{
+                university.description
+              }}</mat-card-subtitle>
             </mat-card-header>
           </button>
-          <br>
+          <br />
           <mat-card-actions *ngIf="getUserRole() === 'ADMIN'" align="end">
-            <button mat-button (click)="editUniversity(university)">EDIT</button>
-            <button mat-button (click)="deleteUniversity(university)">DELETE</button>
+            <button mat-button (click)="editUniversity(university)">
+              EDIT
+            </button>
+            <button mat-button (click)="deleteUniversity(university)">
+              DELETE
+            </button>
           </mat-card-actions>
         </mat-card>
-        <br>
+        <br />
       </div>
     </div>
   </mat-card-content>
 </mat-card>
-<button mat-fab class="add-button" *ngIf="getUserRole() === 'ADMIN'" (click)="goToAddUniversity()">
+<button
+  mat-fab
+  class="add-button"
+  *ngIf="user && getUserRole() === 'ADMIN'"
+  (click)="goToAddUniversity()"
+>
   <mat-icon>add</mat-icon>
 </button>

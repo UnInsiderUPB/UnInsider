@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.persistence.*;
 import java.util.HashMap;
@@ -44,16 +45,24 @@ public class Review {
 
     @JsonIgnore
     @ElementCollection
-    private Set<Long> likes = new HashSet<>();
+    private Set<Long> liked_by = new HashSet<>();
 
     @JsonIgnore
     @ElementCollection
-    private Set<Long> dislikes = new HashSet<>();
+    private Set<Long> disliked_by = new HashSet<>();
+
+    @NotNull
+    private int likes;
+
+    @NotNull
+    private int dislikes;
 
     public Review(String text, User author, University university) {
         this.text = text;
         this.author = author;
         this.university = university;
+        this.likes = 0;
+        this.dislikes = 0;
     }
 
     public String getText() {
@@ -86,35 +95,57 @@ public class Review {
 
     @JsonProperty("likes")
     public int getLikes() {
-        return likes.size();
+        return likes;
     }
 
     @JsonProperty("dislikes")
     public int getDislikes() {
-        return dislikes.size();
+        return dislikes;
     }
 
     public boolean addLike(Long userId) {
-        return likes.add(userId);
+        boolean was_added = liked_by.add(userId);
+        if (was_added) {
+            // Successfully liked
+            likes++;
+        }
+
+        return was_added;
     }
 
     public boolean addDislike(Long userId) {
-        return dislikes.add(userId);
+        boolean was_added = disliked_by.add(userId);
+        if (was_added) {
+            // Successfully disliked
+            dislikes++;
+        }
+
+        return was_added;
     }
 
     public boolean removeLike(Long userId) {
-        return likes.remove(userId);
+        boolean was_removed = liked_by.remove(userId);
+        if (was_removed) {
+            likes--;
+        }
+
+        return was_removed;
     }
 
     public boolean removeDislike(Long userId) {
-        return dislikes.remove(userId);
+        boolean was_removed = disliked_by.remove(userId);
+        if (was_removed) {
+            dislikes--;
+        }
+
+        return was_removed;
     }
 
     public boolean isLikedBy(Long userId) {
-        return likes.contains(userId);
+        return liked_by.contains(userId);
     }
 
     public boolean isDislikedBy(Long userId) {
-        return dislikes.contains(userId);
+        return disliked_by.contains(userId);
     }
 }
