@@ -4,3 +4,11 @@
     left: 50%;
     z-index: 100;
 }
+
+.liked {
+    color: primary;
+}
+
+.disliked {
+    color: primary;
+}

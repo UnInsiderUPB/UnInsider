@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -81,5 +82,71 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public void deleteReview(Long id) {
         this.reviewRepository.deleteById(id);
+    }
+
+    @Override
+    public Review likeReview(Long reviewId, Long userId) throws ReviewNotFoundException {
+        Review review = this.getReview(reviewId);
+        if (review == null) {
+            System.out.println("Review with id `" + reviewId + "` not found");
+            throw new ReviewNotFoundException("Review with id `" + reviewId + "` not found");
+        }
+
+        if (!review.addLike(userId)) {
+            // User already liked this review, therefore the like is removed
+            review.removeLike(userId);
+        }
+
+        return review;
+    }
+
+    @Override
+    public Review dislikeReview(Long reviewId, Long userId) throws ReviewNotFoundException {
+        Review review = this.getReview(reviewId);
+        if (review == null) {
+            System.out.println("Review with id `" + reviewId + "` not found");
+            throw new ReviewNotFoundException("Review with id `" + reviewId + "` not found");
+        }
+
+        if (!review.addDislike(userId)) {
+            // User already disliked this review, therefore the dislike is removed
+            review.removeDislike(userId);
+        }
+
+        return review;
+    }
+
+    @Override
+    public boolean getLikeStatus(Long reviewId, Long userId) throws ReviewNotFoundException {
+        Review review = this.getReview(reviewId);
+        if (review == null) {
+            System.out.println("Review with id `" + reviewId + "` not found");
+            throw new ReviewNotFoundException("Review with id `" + reviewId + "` not found");
+        }
+
+        return review.isLikedBy(userId);
+    }
+
+    @Override
+    public boolean getDislikeStatus(Long reviewId, Long userId) throws ReviewNotFoundException {
+        Review review = this.getReview(reviewId);
+        if (review == null) {
+            System.out.println("Review with id `" + reviewId + "` not found");
+            throw new ReviewNotFoundException("Review with id `" + reviewId + "` not found");
+        }
+
+        return review.isDislikedBy(userId);
+    }
+
+    @Override
+    public List<Review> getLikedReviews(Long userId) {
+        List<Review> reviews = this.reviewRepository.findAll();
+        return reviews.stream().filter((review) -> review.isLikedBy(userId)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Review> getDislikedReviews(Long userId) {
+        List<Review> reviews = this.reviewRepository.findAll();
+        return reviews.stream().filter((review) -> review.isDislikedBy(userId)).collect(Collectors.toList());
     }
 }

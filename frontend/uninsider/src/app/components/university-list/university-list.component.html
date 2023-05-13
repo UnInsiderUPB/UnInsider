@@ -3,10 +3,12 @@
     <div class="bootstrap-wrapper">
       <div class="container" *ngFor="let university of universities">
         <mat-card>
-          <mat-card-header>
-            <mat-card-title>{{ university.name }} - {{ university.location }}</mat-card-title>
-            <mat-card-subtitle>{{ university.description }}</mat-card-subtitle>
-          </mat-card-header>
+          <button mat-button>
+            <mat-card-header (click)="goToReviews(university)">
+              <mat-card-title>{{ university.name }} - {{ university.location }}</mat-card-title>
+              <mat-card-subtitle>{{ university.description }}</mat-card-subtitle>
+            </mat-card-header>
+          </button>
           <br>
           <mat-card-actions *ngIf="getUserRole() === 'ADMIN'" align="end">
             <button mat-button (click)="editUniversity(university)">EDIT</button>
@@ -18,3 +20,6 @@
     </div>
   </mat-card-content>
 </mat-card>
+<button mat-fab class="add-button" *ngIf="getUserRole() === 'ADMIN'" (click)="goToAddUniversity()">
+  <mat-icon>add</mat-icon>
+</button>

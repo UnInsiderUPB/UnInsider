@@ -30,4 +30,22 @@ public interface ReviewService {
 
     // Delete review by its id
     void deleteReview(Long id);
+
+    // Process a like for review with id `reviewId` by user with id `userId`
+    Review likeReview(Long reviewId, Long userId) throws Exception;
+
+    // Process a dislike for review with id `reviewId` by user with id `userId`
+    Review dislikeReview(Long reviewId, Long userId) throws Exception;
+
+    // Get like status for review with id `reviewId` by user with id `userId`
+    boolean getLikeStatus(Long reviewId, Long userId) throws Exception;
+
+    // Get dislike status for review with id `reviewId` by user with id `userId`
+    boolean getDislikeStatus(Long reviewId, Long userId) throws Exception;
+
+    // Get all liked reviews by user with id `userId`
+    List<Review> getLikedReviews(Long userId) throws Exception;
+
+    // Get all disliked reviews by user with id `userId`
+    List<Review> getDislikedReviews(Long userId) throws Exception;
 }

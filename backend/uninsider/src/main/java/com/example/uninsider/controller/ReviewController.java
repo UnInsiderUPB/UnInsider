@@ -19,7 +19,7 @@ public class ReviewController {
 
     @PostMapping("/")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Review createReview(@RequestBody Review review) throws Exception {
+    public Review createReview(@RequestBody Review review) {
         return this.reviewService.createReview(review);
     }
 
@@ -71,5 +71,41 @@ public class ReviewController {
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteReviewById(@PathVariable("reviewId") Long reviewId) {
         this.reviewService.deleteReview(reviewId);
+    }
+
+    @PutMapping("/{reviewId}/like/{userId}")
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public Review likeReview(@PathVariable("reviewId") Long reviewId, @PathVariable("userId") Long userId) throws Exception {
+        return this.reviewService.likeReview(reviewId, userId);
+    }
+
+    @PutMapping("/{reviewId}/dislike/{userId}")
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public Review dislikeReview(@PathVariable("reviewId") Long reviewId, @PathVariable("userId") Long userId) throws Exception {
+        return this.reviewService.dislikeReview(reviewId, userId);
+    }
+
+    @GetMapping("/{reviewId}/like-status/{userId}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public boolean getLikeStatus(@PathVariable("reviewId") Long reviewId, @PathVariable("userId") Long userId) throws Exception {
+        return this.reviewService.getLikeStatus(reviewId, userId);
+    }
+
+    @GetMapping("/{reviewId}/dislike-status/{userId}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public boolean getDislikeStatus(@PathVariable("reviewId") Long reviewId, @PathVariable("userId") Long userId) throws Exception {
+        return this.reviewService.getDislikeStatus(reviewId, userId);
+    }
+
+    @GetMapping("/liked-reviews/{userId}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<Review> getLikedReviews(@PathVariable("userId") Long userId) throws Exception {
+        return this.reviewService.getLikedReviews(userId);
+    }
+
+    @GetMapping("/disliked-reviews/{userId}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<Review> getDislikedReviews(@PathVariable("userId") Long userId) throws Exception {
+        return this.reviewService.getDislikedReviews(userId);
     }
 }
