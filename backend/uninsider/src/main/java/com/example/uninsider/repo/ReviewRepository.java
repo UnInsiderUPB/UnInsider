@@ -8,13 +8,13 @@ import java.util.List;
 public interface ReviewRepository extends JpaRepository<Review, Long> {
     boolean existsByUniversityId(Long universityId);
 
-    boolean existsByUserId(Long userId);
+    boolean existsByAuthorId(Long authorId);
 
-    boolean existsByUniversityIdAndUserId(Long universityId, Long userId);
+    boolean existsByUniversityIdAndAuthorId(Long universityId, Long authorId);
 
     List<Review> findAllByUniversityId(Long universityId);
 
-    List<Review> findAllByUserId(Long userId);
+    List<Review> findAllByAuthorId(Long authorId);
 
-    List<Review> findAllByUniversityIdAndUserId(Long universityId, Long userId);
+    List<Review> findAllByUniversityIdAndAuthorId(Long universityId, Long authorId);
 }

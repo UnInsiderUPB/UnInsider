@@ -19,11 +19,11 @@ public interface ReviewService {
     // Get all reviews by university id
     List<Review> getReviewsByUniversityId(Long universityId) throws Exception;
 
-    // Get all reviews by user id
-    List<Review> getReviewsByUserId(Long userId) throws Exception;
+    // Get all reviews by author id
+    List<Review> getReviewsByAuthorId(Long authorId) throws Exception;
 
-    // Get all reviews by university id and user id
-    List<Review> getReviewsByUniversityIdAndUserId(Long universityId, Long userId) throws Exception;
+    // Get all reviews by university id and author id
+    List<Review> getReviewsByUniversityIdAndAuthorId(Long universityId, Long authorId) throws Exception;
 
     // Get all reviews
     List<Review> getReviews();

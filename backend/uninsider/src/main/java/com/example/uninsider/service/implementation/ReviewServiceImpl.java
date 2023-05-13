@@ -5,10 +5,12 @@ import com.example.uninsider.model.Review;
 import com.example.uninsider.repo.ReviewRepository;
 import com.example.uninsider.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ReviewServiceImpl implements ReviewService {
 
     @Autowired
@@ -52,23 +54,23 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<Review> getReviewsByUserId(Long userId) throws ReviewNotFoundException {
-        if (!this.reviewRepository.existsByUserId(userId)) {
-            System.out.println("Reviews with user id `" + userId + "` not found");
-            throw new ReviewNotFoundException("Reviews with user id `" + userId + "` not found");
+    public List<Review> getReviewsByAuthorId(Long authorId) throws ReviewNotFoundException {
+        if (!this.reviewRepository.existsByAuthorId(authorId)) {
+            System.out.println("Reviews with author id `" + authorId + "` not found");
+            throw new ReviewNotFoundException("Reviews with author id `" + authorId + "` not found");
         }
 
-        return this.reviewRepository.findAllByUserId(userId);
+        return this.reviewRepository.findAllByAuthorId(authorId);
     }
 
     @Override
-    public List<Review> getReviewsByUniversityIdAndUserId(Long universityId, Long userId) throws ReviewNotFoundException {
-        if (!this.reviewRepository.existsByUniversityIdAndUserId(universityId, userId)) {
-            System.out.println("Reviews with university id `" + universityId + "` and user id `" + userId + "` not found");
-            throw new ReviewNotFoundException("Reviews with university id `" + universityId + "` and user id `" + userId + "` not found");
+    public List<Review> getReviewsByUniversityIdAndAuthorId(Long universityId, Long authorId) throws ReviewNotFoundException {
+        if (!this.reviewRepository.existsByUniversityIdAndAuthorId(universityId, authorId)) {
+            System.out.println("Reviews with university id `" + universityId + "` and author id `" + authorId + "` not found");
+            throw new ReviewNotFoundException("Reviews with university id `" + universityId + "` and author id `" + authorId + "` not found");
         }
 
-        return this.reviewRepository.findAllByUniversityIdAndUserId(universityId, userId);
+        return this.reviewRepository.findAllByUniversityIdAndAuthorId(universityId, authorId);
     }
 
     @Override
