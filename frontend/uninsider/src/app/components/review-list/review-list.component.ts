@@ -30,14 +30,13 @@ export class ReviewListComponent implements OnInit {
   hydrateAllReviews() {
     if (this.universityId && this.userId) {
       // Get reviews by university id and author id
-      this.reviewService.getReviewsByUniversityIdAndAuthorId(
-        this.universityId,
-        this.userId
-      ).subscribe({
-        next: (data) => {
-          this.allReviews = data;
-        },
-      });
+      this.reviewService
+        .getReviewsByUniversityIdAndAuthorId(this.universityId, this.userId)
+        .subscribe({
+          next: (data) => {
+            this.allReviews = data;
+          },
+        });
     } else if (this.universityId) {
       // Get reviews by university id
       this.reviewService.getReviewsByUniversityId(this.universityId).subscribe({
@@ -64,27 +63,22 @@ export class ReviewListComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.login.getUser();
-    this.universityId = JSON.parse(
-      this.route.snapshot.paramMap.get('universityId') || 'null'
-    ) || undefined;
+    this.universityId =
+      JSON.parse(this.route.snapshot.paramMap.get('universityId') || 'null') ||
+      undefined;
 
-    this.userId = JSON.parse(
-      this.route.snapshot.paramMap.get('userId') || 'null'
-    ) || undefined;
+    this.userId =
+      JSON.parse(this.route.snapshot.paramMap.get('userId') || 'null') ||
+      undefined;
 
     this.hydrateAllReviews();
 
-    if (this.userId && !this.universityId) {
-      // All hydrated reviews are own reviews
-      this.ownReviews = this.allReviews;
-    } else {
-      // Get own reviews
-      this.reviewService.getReviewsByAuthorId(this.user.id).subscribe({
-        next: (data) => {
-          this.ownReviews = data;
-        },
-      });
-    }
+    // Get own reviews
+    this.reviewService.getReviewsByAuthorId(this.user.id).subscribe({
+      next: (data) => {
+        this.ownReviews = data;
+      },
+    });
 
     this.reviewService.getReviewsLikedByUser(this.user.id).subscribe({
       next: (data) => {
