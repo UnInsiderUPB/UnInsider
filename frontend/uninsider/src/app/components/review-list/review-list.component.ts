@@ -215,16 +215,26 @@ export class ReviewListComponent implements OnInit {
 
   public editReview(review: any) {
     Swal.fire({
+      width: '800px',
       title: 'Edit review',
-      html: `
-      <textarea id="swal-input" class="swal2-input" placeholder="Text">${review.text}</textarea>
+      html:
+      `
+      <textarea
+        id="swal-input"
+        class="swal2-input"
+        style="width: 90%; height: 300px; font-size: 16px;"
+        placeholder="Text">
+        ${review.text}
+      </textarea>
       <div id="checkboxes">
-        ${this.getMappingKeys.map((key, i) => `
+        ${this.getMappingKeys.map((key, i) =>
+          `
           <div>
             <input type="checkbox" id="checkbox${i}" name="${key}"}>
             <label for="checkbox${i}">${key}</label>
           </div>
-        `).join('')}
+          `
+        ).join('')}
       </div>
       `,
       focusConfirm: false,
