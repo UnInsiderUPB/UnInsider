@@ -14,6 +14,7 @@ import { UniversityListComponent } from './components/university-list/university
 import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
 import { WelcomeUserComponent } from './pages/user/welcome-user/welcome-user.component';
 import { ReviewAddComponent } from './components/review-add/review-add.component';
+import { GuidelinesComponent } from './pages/guidelines/guidelines.component';
 
 const routes: Routes = [
   {
@@ -97,10 +98,15 @@ const routes: Routes = [
       }
     ],
   },
+  {
+    path: 'guidelines',
+    component: GuidelinesComponent,
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}
