@@ -33,6 +33,8 @@ import { UniversityAddComponent } from './pages/admin/university-add/university-
 import { UniversityListComponent } from './components/university-list/university-list.component';
 import { WelcomeUserComponent } from './pages/user/welcome-user/welcome-user.component';
 import { SidebarUserComponent } from './pages/user/sidebar-user/sidebar-user.component';
+import { ReviewListComponent } from './components/review-list/review-list.component';
+import { ReviewAddComponent } from './components/review-add/review-add.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { SidebarUserComponent } from './pages/user/sidebar-user/sidebar-user.com
     DashboardComponent,
     UserDashboardComponent,
     ProfileComponent,
+    ReviewAddComponent,
+    ReviewListComponent,
     SidebarComponent,
     UniversityAddComponent,
     UniversityListComponent,

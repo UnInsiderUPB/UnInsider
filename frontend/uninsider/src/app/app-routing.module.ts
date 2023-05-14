@@ -8,10 +8,12 @@ import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboa
 import { AdminGuard } from './services/admin.guard';
 import { NormalGuard } from './services/normal.guard';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ReviewListComponent } from './components/review-list/review-list.component';
 import { UniversityAddComponent } from './pages/admin/university-add/university-add.component';
 import { UniversityListComponent } from './components/university-list/university-list.component';
 import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
 import { WelcomeUserComponent } from './pages/user/welcome-user/welcome-user.component';
+import { ReviewAddComponent } from './components/review-add/review-add.component';
 
 const routes: Routes = [
   {
@@ -49,6 +51,18 @@ const routes: Routes = [
       {
         path: 'universities/add',
         component: UniversityAddComponent,
+      },
+      {
+        path: 'university-reviews',
+        component: ReviewListComponent,
+      },
+      {
+        path: 'university-reviews/add',
+        component: ReviewAddComponent,
+      },
+      {
+        path: 'my-reviews',
+        component: ReviewListComponent,
       }
     ],
   },
@@ -68,6 +82,18 @@ const routes: Routes = [
       {
         path: 'universities',
         component: UniversityListComponent,
+      },
+      {
+        path: 'university-reviews',
+        component: ReviewListComponent,
+      },
+      {
+        path: 'university-reviews/add',
+        component: ReviewAddComponent,
+      },
+      {
+        path: 'my-reviews',
+        component: ReviewListComponent,
       }
     ],
   },

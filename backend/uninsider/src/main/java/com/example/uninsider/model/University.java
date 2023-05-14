@@ -1,11 +1,14 @@
 package com.example.uninsider.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "universities")
@@ -27,6 +30,10 @@ public class University {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User admin;
+
+    @OneToMany(mappedBy = "university", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Review> reviews;
 
     public University(String name, String description, String location, User admin) {
         this.name = name;

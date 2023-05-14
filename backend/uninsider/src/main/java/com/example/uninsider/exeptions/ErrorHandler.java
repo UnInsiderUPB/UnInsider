@@ -17,7 +17,7 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
         return ErrorResponse.of(exception.getMessage());
     }
 
-    @ExceptionHandler({ UserNotFoundException.class, UniversityNotFoundException.class })
+    @ExceptionHandler({UserNotFoundException.class, UniversityNotFoundException.class, ReviewNotFoundException.class})
     @ResponseStatus(code = HttpStatus.NOT_FOUND)
     @ResponseBody
     public ResponseEntity<?> exceptionHandler(Exception ex) {

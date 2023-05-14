@@ -1,0 +1,58 @@
+<mat-card *ngIf="user">
+  <mat-card-content>
+    <div class="bootstrap-wrapper">
+      <div class="container" *ngFor="let review of allReviews">
+        <mat-card>
+          <mat-card-content>
+            <p>{{ review.text }}</p>
+          </mat-card-content>
+          <br />
+          <mat-card-actions align="end">
+            <button
+              mat-button
+              [ngStyle]="{ color: isLiked(review) ? 'blue' : 'black' }"
+              (click)="likeReview(review)"
+            >
+              <mat-icon>thumb_up</mat-icon>
+              <span>{{ review.likes }}</span>
+            </button>
+            <button
+              mat-button
+              [ngStyle]="{ color: isDisliked(review) ? 'red' : 'black' }"
+              (click)="dislikeReview(review)"
+            >
+              <mat-icon>thumb_down</mat-icon>
+              <span>{{ review.dislikes }}</span>
+            </button>
+          </mat-card-actions>
+          <br />
+          <mat-card-actions align="end">
+            <button
+              mat-button
+              *ngIf="hasEditRights(review)"
+              (click)="editReview(review)"
+            >
+              EDIT
+            </button>
+            <button
+              mat-button
+              *ngIf="getUserRole() === 'ADMIN'"
+              (click)="deleteReview(review)"
+            >
+              DELETE
+            </button>
+          </mat-card-actions>
+        </mat-card>
+        <br />
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<button
+  *ngIf="user && universityId"
+  mat-fab
+  class="add-button"
+  (click)="goToAddReview()"
+>
+  <mat-icon>add</mat-icon>
+</button>

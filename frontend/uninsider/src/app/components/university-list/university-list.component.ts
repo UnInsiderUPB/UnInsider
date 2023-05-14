@@ -3,6 +3,7 @@ import { LoginService } from '../../services/login.service';
 import { UniversityService } from '../../services/university.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-university-list',
@@ -15,6 +16,7 @@ export class UniversityListComponent implements OnInit {
 
   constructor(
     private login: LoginService,
+    private router: Router,
     private snack: MatSnackBar,
     private universityService: UniversityService
   ) {}
@@ -32,6 +34,28 @@ export class UniversityListComponent implements OnInit {
     return this.login.getUserRole();
   }
 
+  public goToReviews(university: any) {
+    const user_role = this.login.getUserRole();
+    if (user_role == 'ADMIN')
+      this.router
+        .navigate([
+          '/admin/university-reviews',
+          { universityId: university.id },
+        ])
+        .then((_) => {});
+    else if (user_role == 'NORMAL')
+      this.router
+        .navigate([
+          '/user-dashboard/university-reviews',
+          { universityId: university.id },
+        ])
+        .then((_) => {});
+  }
+
+  public goToAddUniversity() {
+    this.router.navigate(['/admin/universities/add']).then((_) => {});
+  }
+
   public editUniversity(university: any) {
     Swal.fire({
       title: 'Edit university',
@@ -40,15 +64,15 @@ export class UniversityListComponent implements OnInit {
       <textarea id="swal-input3" class="swal2-input" placeholder="Description">${university.description}`,
       focusConfirm: false,
       preConfirm: () => {
-        const name = (document.getElementById(
-          'swal-input1'
-        ) as HTMLInputElement).value;
-        const location = (document.getElementById(
-          'swal-input2'
-        ) as HTMLInputElement).value;
-        const description = (document.getElementById(
-          'swal-input3'
-        ) as HTMLInputElement).value;
+        const name = (
+          document.getElementById('swal-input1') as HTMLInputElement
+        ).value;
+        const location = (
+          document.getElementById('swal-input2') as HTMLInputElement
+        ).value;
+        const description = (
+          document.getElementById('swal-input3') as HTMLInputElement
+        ).value;
 
         if (!name || !location || !description) {
           Swal.showValidationMessage(`Please fill in all fields`);
@@ -66,32 +90,26 @@ export class UniversityListComponent implements OnInit {
         const backedUpAuthorities = university.admin.authorities;
         university.admin.authorities = undefined;
 
-        this.universityService
-          .updateUniversity(university)
-          .subscribe({
-            next: (_) => {
-              // Restore authorities, maybe it will be needed later
-              university.admin.authorities = backedUpAuthorities;
+        this.universityService.updateUniversity(university).subscribe({
+          next: (_) => {
+            // Restore authorities, maybe it will be needed later
+            university.admin.authorities = backedUpAuthorities;
 
-              this.universities = this.universities.map((u: any) => {
-                if (u.id === university.id) {
-                  u = university;
-                }
-                return u;
-              });
-              Swal.fire(
-                'Edited!',
-                'Your university has been edited.',
-                'success'
-              );
-            },
-            error: (error) => {
-              console.log(error);
-              this.snack.open(error.error.message, 'OK', {
-                duration: 3000,
-              });
-            },
-          });
+            this.universities = this.universities.map((u: any) => {
+              if (u.id === university.id) {
+                u = university;
+              }
+              return u;
+            });
+            Swal.fire('Edited!', 'Your university has been edited.', 'success');
+          },
+          error: (error) => {
+            console.log(error);
+            this.snack.open(error.error.message, 'OK', {
+              duration: 3000,
+            });
+          },
+        });
       }
     });
   }
