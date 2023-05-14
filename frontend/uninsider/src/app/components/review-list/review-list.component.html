@@ -1,49 +1,90 @@
 <mat-card *ngIf="user">
   <mat-card-content>
     <div class="bootstrap-wrapper">
-      <div class="container" *ngFor="let review of allReviews">
-        <mat-card>
-          <mat-card-content style="white-space: pre-line;">
-            <p>{{ review.text }}</p>
-          </mat-card-content>
-          <br />
-          <mat-card-actions align="end">
-            <button
-              mat-button
-              [ngStyle]="{ color: isLiked(review) ? 'blue' : 'black' }"
-              (click)="likeReview(review)"
-            >
-              <mat-icon>thumb_up</mat-icon>
-              <span>{{ review.likes }}</span>
-            </button>
-            <button
-              mat-button
-              [ngStyle]="{ color: isDisliked(review) ? 'red' : 'black' }"
-              (click)="dislikeReview(review)"
-            >
-              <mat-icon>thumb_down</mat-icon>
-              <span>{{ review.dislikes }}</span>
-            </button>
-          </mat-card-actions>
-          <br />
-          <mat-card-actions align="end">
-            <button
-              mat-button
-              *ngIf="hasEditRights(review)"
-              (click)="editReview(review)"
-            >
-              EDIT
-            </button>
-            <button
-              mat-button
-              *ngIf="getUserRole() === 'ADMIN'"
-              (click)="deleteReview(review)"
-            >
-              DELETE
-            </button>
-          </mat-card-actions>
-        </mat-card>
-        <br />
+      <div class="row">
+
+        <div class="col-md-9">
+          <div class="container" *ngFor="let review of allReviews">
+            <mat-card>
+              <mat-card-content style="white-space: pre-line;">
+                <p>{{ review.text }}</p>
+              </mat-card-content>
+              <br />
+              <mat-card-actions align="end">
+                <button
+                  mat-button
+                  [ngStyle]="{ color: isLiked(review) ? 'blue' : 'black' }"
+                  (click)="likeReview(review)"
+                >
+                  <mat-icon>thumb_up</mat-icon>
+                  <span>{{ review.likes }}</span>
+                </button>
+                <button
+                  mat-button
+                  [ngStyle]="{ color: isDisliked(review) ? 'red' : 'black' }"
+                  (click)="dislikeReview(review)"
+                >
+                  <mat-icon>thumb_down</mat-icon>
+                  <span>{{ review.dislikes }}</span>
+                </button>
+              </mat-card-actions>
+              <br />
+              <mat-card-actions align="end">
+                <button
+                  mat-button
+                  *ngIf="hasEditRights(review)"
+                  (click)="editReview(review)"
+                >
+                  EDIT
+                </button>
+                <button
+                  mat-button
+                  *ngIf="getUserRole() === 'ADMIN'"
+                  (click)="deleteReview(review)"
+                >
+                  DELETE
+                </button>
+              </mat-card-actions>
+            </mat-card>
+            <br />
+          </div>
+        </div>
+
+        <!-- [TODO]: Make this `div` vertically scrollable -->
+        <div class="col-md-3" style="overflow-y: auto;">
+          <div class="container text-center">
+            <h2>Summarization</h2>
+          
+            <button *ngIf="!summarizationLoading" (click)="summarize()">Summarize</button>
+            
+            <div *ngIf="summarizationLoading">
+              <div class="spinner-border" role="status">
+                  <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+
+            <br>
+
+            <!-- <label for="input-text">Input Text:</label> -->
+            <mat-card>
+                <mat-card-content>
+                    <p>{{ summarizedText }}</p>
+                </mat-card-content>
+            </mat-card>
+
+
+            <!-- <button (click)="initSummarization()">Init</button> -->
+            <!-- <br> -->
+
+            <!-- <div *ngIf="isSummarizationReady">
+                <label for="summarized-text">Summarized Text:</label>
+                <br>
+                <textarea id="summarized-text" [(ngModel)]="summarizedText"></textarea>
+            </div> -->
+
+          </div>
+        </div>
+
       </div>
     </div>
   </mat-card-content>
