@@ -13,12 +13,21 @@
                 <mat-form-field class="full-width" appearance="outline">
                   <mat-label>Review Text</mat-label>
                   <textarea
-                    [(ngModel)]="formInput.text"
+                    [(ngModel)]="inputText"
+                    (ngModelChange)="verifyText()"
                     name="text"
+                    rows="10"
+                    cols="30"
                     matInput
                   ></textarea>
                 </mat-form-field>
               </div>
+
+              <div *ngFor="let key of getMappingKeys; let i = index">
+                <input type="checkbox" id="checkbox{{i}}" [checked]="passed.includes(key)">
+                <label for="checkbox{{i}}">{{key}}</label>
+              </div>
+
               <div class="text-center">
                 <button
                   type="submit"
