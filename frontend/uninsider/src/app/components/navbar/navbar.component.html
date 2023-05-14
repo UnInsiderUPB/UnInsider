@@ -40,9 +40,19 @@
     *ngIf="isLoggedIn && user"
     (click)="toDashboard()"
     mat-button
+    routerLink="/admin/profile"
     class="example-icon favorite-icon"
     aria-label="Example icon-button with a heart icon"
   >
     {{ user.username }}
+  </button>
+
+  <button
+    *ngIf="isLoggedIn && user"
+    (click)="toProfileSettings()"
+    mat-fab
+    class="example-icon favorite-icon"
+  >
+    <mat-icon>settings</mat-icon>
   </button>
 </mat-toolbar>

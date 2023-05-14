@@ -1,0 +1,57 @@
+<mat-card *ngIf="user">
+  <mat-card-content>
+    <div class="bootstrap-wrapper">
+      <div class="container">
+        <div class="container text-center">
+          <h1>Add University</h1>
+        </div>
+        <div class="row">
+          <div class="col-md-10 offset-md-1">
+            <form class="container text-center" (ngSubmit)="formSubmit()">
+              <div>
+                <!-- University name -->
+                <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>University Name</mat-label>
+                  <input [(ngModel)]="formInput.name" name="name" matInput />
+                </mat-form-field>
+              </div>
+
+              <div>
+                <!-- University location -->
+                <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>University Location</mat-label>
+                  <input
+                    [(ngModel)]="formInput.location"
+                    name="location"
+                    matInput
+                  />
+                </mat-form-field>
+              </div>
+
+              <div>
+                <!-- University description -->
+                <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>University Description</mat-label>
+                  <textarea
+                    [(ngModel)]="formInput.description"
+                    name="description"
+                    matInput
+                  ></textarea>
+                </mat-form-field>
+              </div>
+              <div class="text-center">
+                <button
+                  type="submit"
+                  mat-raised-button color="primary"
+                  [disabled]="!isFormValid()"
+                >
+                  Add
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
