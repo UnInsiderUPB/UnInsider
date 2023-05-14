@@ -7,7 +7,13 @@ const app = express();
 
 app.use(express.static(path_));
 
-app.use(cors());
+// Enable CORS
+app.use(cors({
+  origin: true,
+  credentials: true,
+  methods: 'POST, GET, PUT, OPTIONS, DELETE'
+}));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
