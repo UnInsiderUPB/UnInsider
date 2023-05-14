@@ -22,6 +22,7 @@ app.get('/', function (req, res) {
 });
 
 require('./app/routes/guidelines.routes')(app);
+require('./app/routes/summarization.routes')(app);
 
 // Set port, listen for requests
 const PORT = process.env.PORT || 4200;

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { SummarizationService } from 'src/app/services/summarization.service';
 
-const endpoint = 'https://us-central1-bart-proj.cloudfunctions.net/uninsider-bart-cnn-cors-all-global'
 const MIN_CHARS = 50;
 
 // [TODO]
@@ -25,97 +25,45 @@ export class SummarizationComponent {
   isSummarizationReady: boolean = false;
   summarizationLoading: boolean = false;
 
-  constructor() {}
+  constructor(private summarizationService: SummarizationService) {}
 
-  public async initSummarization(): Promise<any> {
-    let response = null;
-    try {
-      response = await fetch(endpoint, {
-        method: 'POST',
-        body: JSON.stringify({article: 'init'}),
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': '*',
-          'Access-Control-Allow-Headers': '*',
-        }
-      });
-    } catch (e) {
-      console.log(e);
-      alert('Could not initialize the summarization model');
-      return;
-    }
-
-    if (response.ok) {
-      console.log('Successfully initialized the summarization model');
-    }
+  public initSummarization() {
+    this.summarizationService.initSummarizationModule().subscribe({
+      next: (data: any) => {
+        console.log(data);
+      },
+      error: (_: any) => {
+        alert('Could not initialize the summarization model');
+      }
+    })
   }
 
-  public async summarize(): Promise<any> {
+  public summarize() {
     // Reset some variables
     this.isSummarizationReady = false;
     this.summarizationLoading = true;
     this.summarizedText = '';
 
-    // [TODO]: ...
+      // If the input text is too short, then return
+      if (this.inputText.length < MIN_CHARS) {
+        alert('Please enter a longer text to summarize.');
+        this.summarizationLoading = false;
+        return;
+      }
 
-    let response = null;
-    try {
-        // If the input text is too short, then return
-        if (this.inputText.length < MIN_CHARS) {
-          alert('Please enter a longer text to summarize.');
-          this.summarizationLoading = false;
-          return;
-        }
+    // [TODOs]: ...
 
-        // Send the request to the server
-        this.summarizationLoading = true;
-        let content = JSON.stringify({article: this.inputText});
-        // console.log(content);
-        response = await fetch(endpoint, {
-          method: 'POST',
-          body: content,
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': '*',
-            'Access-Control-Allow-Headers': '*',
-          }
-        });
-    } catch (e) {
-      this.summarizationLoading = false;
-      // console.log(e);
-      alert('Error occurred while summarizing the text.');
-      return;
-    }
-
-    if (!response.ok) {
-      this.summarizationLoading = false;
-      alert('Error occurred while summarizing the text.');
-      return;
-    }
-    
-    // Parse the response
-    if (response.body == null) {
-      this.summarizationLoading = false;
-      alert('Error occurred while summarizing the text.');
-      return;
-    }
-
-    // Successfully summarized the text
-    // Convert `ReadableStream` to `string` and update the UI
-    var summary = await response.text();
-
-    // Ensure that the summary ends with a period (.)
-    // Find the last index of the period (.)
-    let lastPeriodIndex = summary.lastIndexOf('.');
-
-    // Cut the summary at the last period (.)
-    if (lastPeriodIndex != -1)
-      summary = summary.substring(0, lastPeriodIndex + 1);
-
-    this.summarizedText = summary;
-    this.isSummarizationReady = true;
-    this.summarizationLoading = false;
+    // Make the `summarization` request
+    this.summarizationService.getSummary(this.inputText).subscribe({
+      next: (data: any) => {
+        // console.log(data);
+        this.summarizedText = data.summary;
+        this.isSummarizationReady = true;
+        this.summarizationLoading = false;
+      },
+      error: (_: any) => {
+        alert('Error occurred while summarizing the text.');
+      }
+    })
   }
 }
