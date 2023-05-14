@@ -16,10 +16,13 @@ exports.initSummarizationModule = async (_, res) => {
       });
     } catch (e) {
       res.send({summary: 'cannot initialize the summarization model'});
+      return;
     }
 
-    if (response.ok)
+    if (response.ok) {
       res.send({summary: 'successfully initialized the summarization model'});
+      return;
+    }
 
     res.send({summary: 'cannot initialize the summarization model'});
 }
@@ -43,15 +46,20 @@ exports.summarizeArticle = async (req, res) => {
         });
     } catch (e) {
       res.send({summary: 'none'});
+      return;
     }
 
     // Check if the response is ok
-    if (!response.ok)
+    if (!response.ok) {
       res.send({summary: 'none'});
-    
+      return;
+    }
+
     // Parse the response
-    if (response.body == null)
+    if (response.body == null) {
       res.send({summary: 'none'});
+      return;
+    }
 
     // Successfully summarized the text
     // Convert `ReadableStream` to `string` and update the UI
