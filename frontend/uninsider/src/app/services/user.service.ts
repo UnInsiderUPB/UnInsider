@@ -12,4 +12,9 @@ export class UserService {
   public addUser(user: any) {
     return this.http.post(`${baseUrl}/user/`, user);
   }
+
+  // Update user
+  public updateUser(user: any) {
+    return this.http.put(`${baseUrl}/user/`, user);
+  }
 }

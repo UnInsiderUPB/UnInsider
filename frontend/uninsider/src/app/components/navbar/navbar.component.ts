@@ -7,19 +7,18 @@ const endpoint = 'https://us-central1-bart-proj.cloudfunctions.net/uninsider-bar
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-
   isLoggedIn = false;
-  user:any = null;
+  user: any = null;
 
   constructor(public login: LoginService, public router: Router) {}
 
   ngOnInit(): void {
     this.isLoggedIn = this.login.isLoggedIn();
     this.user = this.login.getUser();
-    this.login.loginStatusSubject.asObservable().subscribe(data => {
+    this.login.loginStatusSubject.asObservable().subscribe((data) => {
       this.isLoggedIn = this.login.isLoggedIn();
       this.user = this.login.getUser();
     });
@@ -57,10 +56,17 @@ export class NavbarComponent implements OnInit {
   }
 
   public toDashboard() {
-    let user_role = this.login.getUserRole();
-    if (user_role == "ADMIN")
-      this.router.navigate(['/admin']).then(_ => {});
-    else if (user_role == "NORMAL")
-      this.router.navigate(['/user-dashboard']).then(_ => {});
+    const user_role = this.login.getUserRole();
+    if (user_role == 'ADMIN') this.router.navigate(['/admin']).then((_) => {});
+    else if (user_role == 'NORMAL')
+      this.router.navigate(['/user-dashboard']).then((_) => {});
+  }
+
+  public toProfileSettings() {
+    const user_role = this.login.getUserRole();
+    if (user_role == 'ADMIN')
+      this.router.navigate(['/admin/profile']).then((_) => {});
+    else if (user_role == 'NORMAL')
+      this.router.navigate(['/user-dashboard/profile']).then((_) => {});
   }
 }
