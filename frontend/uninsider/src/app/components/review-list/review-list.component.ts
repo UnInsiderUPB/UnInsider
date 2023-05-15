@@ -470,7 +470,7 @@ export class ReviewListComponent implements OnInit {
 
     // Sort the `this.allReviews` array by `likes` in descending order
     // and `dislikes` in ascending order (to get the most appreciated reviews)
-    let sortedReviews = this.allReviews.sort((r1: any, r2: any) => {
+    let sortedReviews = [...this.allReviews].sort((r1: any, r2: any) => {
       if (r1.likes > r2.likes) return -1;
       if (r1.likes < r2.likes) return 1;
       if (r1.dislikes > r2.dislikes) return 1;
