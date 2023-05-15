@@ -1,29 +1,18 @@
-import Swal from 'sweetalert2';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { LoginService } from '../../services/login.service';
-import { ReviewService } from '../../services/review.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { UniversityService } from 'src/app/services/university.service';
+import { Component } from '@angular/core';
 import { GuidelinesService } from 'src/app/services/guidelines.service';
 
 const MIN_WORDS = 50;
 const MAX_WORDS = 300;
 const MAX_UPPERCASE_PERCENTAGE = 10;
 const MAX_NONALPHA_PERCENTAGE = 10;
-const MAX_MISSPELLED_WORDS_PERCENTAGE = 35;
+const MAX_MISSPELLED_WORDS_PERCENTAGE = 20;
 
 @Component({
-  selector: 'app-review-add',
-  templateUrl: './review-add.component.html',
-  styleUrls: ['./review-add.component.css'],
+  selector: 'app-guidelines',
+  templateUrl: './guidelines.component.html',
+  styleUrls: ['./guidelines.component.css']
 })
-export class ReviewAddComponent implements OnInit {
-  user = this.login.getUser();
-  reviews: any = [];
-  universityId: any = undefined;
-  university: any = undefined;
-
+export class GuidelinesComponent {
   inputText: string = '';
   mapping: Map<string, Function>;
   passed: [string];
@@ -31,20 +20,7 @@ export class ReviewAddComponent implements OnInit {
   detectedProfanity: boolean = false;
   detectedMisspelling: boolean = false;
 
-  public review: any = {
-    university: undefined,
-    author: undefined,
-  };
-
-  constructor(
-    private login: LoginService,
-    private snack: MatSnackBar,
-    private router: Router,
-    private route: ActivatedRoute,
-    private reviewService: ReviewService,
-    private universityService: UniversityService,
-    private guidelinesService: GuidelinesService
-  ) {
+  constructor(private guidelinesService: GuidelinesService) {
     this.mapping = new Map<string, Function>();
     this.mapping.set(`Minimum ${MIN_WORDS} words`, this.minWords);
     this.mapping.set(`Maximum ${MAX_WORDS} words`, this.maxWords);
@@ -56,29 +32,7 @@ export class ReviewAddComponent implements OnInit {
     this.passed = [''];
   }
 
-  ngOnInit(): void {
-    this.user = this.login.getUser();
-    this.universityId = JSON.parse(
-      this.route.snapshot.paramMap.get('universityId') || '{}'
-    );
-    this.university = this.universityService
-      .getUniversityById(this.universityId)
-      .subscribe({
-        next: (data) => {
-          this.university = data;
-        },
-      });
-  }
-
-  public isFormValid() {
-    // A form is valid if all keys from `mapping` are present in `passed`
-    for (let key of this.mapping.keys()) {
-      if (!this.passed.includes(key)) {
-        return false;
-      }
-    }
-    return true;
-  }
+  ngOnInit() { }
 
   get getMappingKeys() {
     return Array.from(this.mapping.keys());
@@ -181,57 +135,5 @@ export class ReviewAddComponent implements OnInit {
         this.passed.push(key);
       }
     }
-  }
-
-  formSubmit() {
-    this.review['text'] = this.inputText;
-    console.log(this.review);
-
-    // Remove authorities from user object before sending to server, as the server cannot deserialize it (for now)
-    const backedUpUserAuthorities = this.user.authorities;
-    this.user.authorities = undefined;
-
-    this.review.author = this.user;
-    this.review.university = this.university;
-
-    // Remove authorities from university admin object before sending to server, as the server cannot deserialize it (for now)
-    const backedUpAdminAuthorities = this.university.admin.authorities;
-    this.university.admin.authorities = undefined;
-
-    this.reviewService.addReview(this.review).subscribe({
-      next: (data) => {
-        console.log(data);
-
-        // Restore authorities, maybe it will be needed later
-        this.user.authorities = backedUpUserAuthorities;
-        this.university.admin.authorities = backedUpAdminAuthorities;
-
-        Swal.fire('Success!', 'Review added successfully', 'success').then(
-          (_) => {
-            const user_role = this.login.getUserRole();
-            if (user_role == 'ADMIN')
-              this.router
-                .navigate([
-                  '/admin/university-reviews',
-                  { universityId: this.universityId },
-                ])
-                .then((_) => {});
-            else if (user_role == 'NORMAL')
-              this.router
-                .navigate([
-                  '/user-dashboard/university-reviews',
-                  { universityId: this.universityId },
-                ])
-                .then((_) => {});
-          }
-        );
-      },
-      error: (error) => {
-        console.log(error);
-        this.snack.open(error.error.message, 'OK', {
-          duration: 3000,
-        });
-      },
-    });
   }
 }

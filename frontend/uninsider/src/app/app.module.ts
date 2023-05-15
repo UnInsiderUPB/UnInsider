@@ -28,6 +28,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { MatListModule } from '@angular/material/list';
 import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
 import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
+import { SummarizationComponent } from './pages/summarization/summarization.component';
+import { GuidelinesComponent } from './pages/guidelines/guidelines.component';
 import { MatTableModule } from '@angular/material/table';
 import { UniversityAddComponent } from './pages/admin/university-add/university-add.component';
 import { UniversityListComponent } from './components/university-list/university-list.component';
@@ -53,6 +55,8 @@ import { ReviewAddComponent } from './components/review-add/review-add.component
     UniversityAddComponent,
     UniversityListComponent,
     WelcomeComponent,
+    SummarizationComponent,
+    GuidelinesComponent,
     WelcomeUserComponent,
     SidebarUserComponent,
   ],
