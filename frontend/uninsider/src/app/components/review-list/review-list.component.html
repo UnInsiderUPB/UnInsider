@@ -3,7 +3,7 @@
     <div class="bootstrap-wrapper">
       <div class="row">
 
-        <div class="col-md-9">
+        <div [ngClass]="enableSummOnlyOnUniver() ? 'col-md-9' : 'col-md-12'">
           <div class="container" *ngFor="let review of allReviews">
             <mat-card>
               <mat-card-content style="white-space: pre-line;">
@@ -51,7 +51,7 @@
         </div>
 
         <!-- [TODO]: Make this `div` vertically scrollable -->
-        <div class="col-md-3" style="overflow-y: auto;" *ngIf="allReviews.length > 0">
+        <div class="col-md-3" style="overflow-y: auto;" *ngIf="allReviews.length > 0 && enableSummOnlyOnUniver()">
           <div class="container text-center">
             <h2>Summarization</h2>
           
@@ -65,22 +65,14 @@
 
             <br>
 
-            <!-- <label for="input-text">Input Text:</label> -->
             <mat-card>
                 <mat-card-content>
                     <p>{{ summarizedText }}</p>
                 </mat-card-content>
             </mat-card>
 
-
             <!-- <button (click)="initSummarization()">Init</button> -->
             <!-- <br> -->
-
-            <!-- <div *ngIf="isSummarizationReady">
-                <label for="summarized-text">Summarized Text:</label>
-                <br>
-                <textarea id="summarized-text" [(ngModel)]="summarizedText"></textarea>
-            </div> -->
 
           </div>
         </div>

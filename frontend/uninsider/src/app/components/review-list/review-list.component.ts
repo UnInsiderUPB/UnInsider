@@ -128,6 +128,10 @@ export class ReviewListComponent implements OnInit {
     });
   }
 
+  public enableSummOnlyOnUniver() {
+    return this.router.url.includes('universityId');
+  }
+
   public getUserRole() {
     return this.login.getUserRole();
   }
@@ -507,7 +511,6 @@ export class ReviewListComponent implements OnInit {
           }, i * 25);
         }
 
-        // this.summarizedText = data.summary;
         this.isSummarizationReady = true;
         this.summarizationLoading = false;
       },
