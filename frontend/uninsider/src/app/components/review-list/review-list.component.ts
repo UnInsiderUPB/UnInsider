@@ -5,12 +5,16 @@ import { ReviewService } from '../../services/review.service';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GuidelinesService } from 'src/app/services/guidelines.service';
+import { SummarizationService } from 'src/app/services/summarization.service';
 
 const MIN_WORDS = 50;
 const MAX_WORDS = 300;
 const MAX_UPPERCASE_PERCENTAGE = 10;
 const MAX_NONALPHA_PERCENTAGE = 10;
 const MAX_MISSPELLED_WORDS_PERCENTAGE = 35;
+
+const MIN_CHARS = 50;
+const SUMMARIZATION_REVIEWS_PERCENTAGE = 30;
 
 @Component({
   selector: 'app-review-list',
@@ -33,13 +37,19 @@ export class ReviewListComponent implements OnInit {
   detectedProfanity: boolean = false;
   detectedMisspelling: boolean = false;
 
+  articleText: string = '';
+  summarizedText: string = '';
+  isSummarizationReady: boolean = false;
+  summarizationLoading: boolean = false;
+
   constructor(
     private login: LoginService,
     private reviewService: ReviewService,
     private router: Router,
     private route: ActivatedRoute,
     private snack: MatSnackBar,
-    private guidelinesService: GuidelinesService
+    private guidelinesService: GuidelinesService,
+    private summarizationService: SummarizationService
   ) {
     this.mapping = new Map<string, Function>();
     this.mapping.set(`Minimum ${MIN_WORDS} words`, this.minWords);
@@ -116,6 +126,10 @@ export class ReviewListComponent implements OnInit {
         this.dislikedReviews = data;
       },
     });
+  }
+
+  public enableSummOnlyOnUniver() {
+    return this.router.url.includes('universityId');
   }
 
   public getUserRole() {
@@ -436,4 +450,74 @@ export class ReviewListComponent implements OnInit {
       }
     }
   }
+
+  /**
+   * Summarization
+   */
+
+  public initSummarization() {
+    this.summarizationService.initSummarizationModule().subscribe({
+      next: (data: any) => {
+        console.log(data);
+      },
+      error: (_: any) => {
+        alert('Could not initialize the summarization model');
+      }
+    })
+  }
+
+  public summarize() {
+    // Reset some variables
+    this.isSummarizationReady = false;
+    this.summarizationLoading = true;
+    this.summarizedText = '';
+
+    // Sort the `this.allReviews` array by `likes` in descending order
+    // and `dislikes` in ascending order (to get the most appreciated reviews)
+    let sortedReviews = [...this.allReviews].sort((r1: any, r2: any) => {
+      if (r1.likes > r2.likes) return -1;
+      if (r1.likes < r2.likes) return 1;
+      if (r1.dislikes > r2.dislikes) return 1;
+      if (r1.dislikes < r2.dislikes) return -1;
+      return 0;
+    });
+
+    // Get the first `SUMMARIZATION_REVIEWS_PERCENTAGE` reviews
+    let reviews = sortedReviews.slice(0, Math.ceil(sortedReviews.length * SUMMARIZATION_REVIEWS_PERCENTAGE / 100));
+
+    // Concate all the reviews into a single string, separated by `=====`
+    this.articleText = reviews.map((r: any) => r.text).join('\n\n=====\n\n');
+    // console.log(this.articleText);
+
+    // If the input text is too short, then return
+    if (this.articleText.length < MIN_CHARS) {
+      alert('Please provide a longer text to summarize.');
+      this.summarizationLoading = false;
+      return;
+    }
+
+    // [TODOs]: ...
+
+    // Make the `summarization` request
+    this.summarizationService.getSummary(this.articleText).subscribe({
+      next: (data: any) => {
+        // console.log(data);
+
+        // Append the `data.summary` character by character to the `this.summarizedText` variable
+        // this will make the text appear as if it is being typed
+        for (let i = 0; i < data.summary.length; i++) {
+          setTimeout(() => {
+            this.summarizedText += data.summary[i];
+          }, i * 25);
+        }
+
+        this.isSummarizationReady = true;
+        this.summarizationLoading = false;
+      },
+      error: (_: any) => {
+        alert('Error occurred while summarizing the text.');
+      }
+    })
+  }
+
 }
