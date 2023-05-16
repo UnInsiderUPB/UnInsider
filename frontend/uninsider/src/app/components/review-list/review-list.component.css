@@ -1,0 +1,14 @@
+.add-button {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    z-index: 100;
+}
+
+.liked {
+    background-color: 'primary';
+}
+
+.disliked {
+    background-color: 'primary';
+}

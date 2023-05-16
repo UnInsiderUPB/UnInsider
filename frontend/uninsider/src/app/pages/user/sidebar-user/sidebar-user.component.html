@@ -4,22 +4,23 @@
       <mat-icon>home</mat-icon>Home
     </button>
 
-    <button mat-list-item>
+    <button mat-list-item routerLink="/user-dashboard/universities">
       <mat-icon>school</mat-icon>Universities
     </button>
 
-    <button mat-list-item>
-      <mat-icon>add</mat-icon>Add Review
-    </button>
-
-    <button mat-list-item>
-      <mat-icon> rate_review </mat-icon>Reviews
+    <button
+      mat-list-item
+      [routerLink]="['/user-dashboard/my-reviews', { userId: this.user.id }]"
+    >
+      <mat-icon>rate_review</mat-icon>My Reviews
     </button>
 
     <button
       (click)="logout()"
       *ngIf="isLoggedIn"
-      mat-list-item routerLink="/login">
+      mat-list-item
+      routerLink="/login"
+    >
       <mat-icon>logout</mat-icon>Logout
     </button>
   </mat-action-list>
