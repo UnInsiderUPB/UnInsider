@@ -10,49 +10,52 @@
           <h1 class="text-center">Register Here</h1>
 
 
-          <form (ngSubmit)="formSubmit()">
+          <form (ngSubmit)="formSubmit()" [formGroup]="registerForm">
             <!-- Username -->
             <mat-form-field class="full-width" appearance="outline">
               <mat-label>Username</mat-label>
               <input
-                required
+                matInput
+                formControlName="username"
                 [(ngModel)]="user.username"
                 name="username"
-                matInput
                 placeholder="Enter here"
               />
               <button *ngIf="user.username" matSuffix mat-icon-button aria-label="Clear" (click)="user.username=''">
                 <mat-icon>close</mat-icon>
               </button>
-
-              <mat-hint>Username must be unique</mat-hint>
             </mat-form-field>
 
             <!-- Password -->
             <mat-form-field class="full-width" appearance="outline">
               <mat-label>Password</mat-label>
               <input
-                required
-                [(ngModel)]="user.password"
-                name="password"
-                type="password"
                 matInput
+                [(ngModel)]="user.password"
+                formControlName="password"
+                name="password"
                 placeholder="Enter here"
+                type="password"
               />
+
               <button *ngIf="user.password" matSuffix mat-icon-button aria-label="Clear" (click)="user.password=''">
                 <mat-icon>close</mat-icon>
               </button>
+
+              <mat-error *ngIf="registerForm.value.password"> {{errorPassword}}
+              </mat-error>
             </mat-form-field>
 
             <!-- First name -->
             <mat-form-field class="full-width" appearance="outline">
               <mat-label>First name</mat-label>
               <input
-                required
-                [(ngModel)]="user.firstName"
-                name="firstName"
                 matInput
+                formControlName="firstname"
+                name="firstname"
                 placeholder="Enter here"
+                [(ngModel)]="user.firstName"
+
               />
               <button *ngIf="user.firstName" matSuffix mat-icon-button aria-label="Clear" (click)="user.firstName=''">
                 <mat-icon>close</mat-icon>
@@ -64,11 +67,11 @@
             <mat-form-field class="full-width" appearance="outline">
               <mat-label>Last name</mat-label>
               <input
-                required
-                [(ngModel)]="user.lastName"
-                name="lastName"
                 matInput
+                formControlName="lastname"
+                name="lastname"
                 placeholder="Enter here"
+                [(ngModel)]="user.lastName"
               />
               <button *ngIf="user.lastName" matSuffix mat-icon-button aria-label="Clear" (click)="user.lastName=''">
                 <mat-icon>close</mat-icon>
@@ -79,32 +82,34 @@
             <mat-form-field class="full-width" appearance="outline">
               <mat-label>Email address</mat-label>
               <input
-                required
-                [(ngModel)]="user.email"
-                name="email"
-                type="email"
                 matInput
+                formControlName="email"
+                name="email"
                 placeholder="Enter here"
+                [(ngModel)]="user.email"
               />
               <button *ngIf="user.email" matSuffix mat-icon-button aria-label="Clear" (click)="user.email=''">
                 <mat-icon>close</mat-icon>
               </button>
-              <mat-hint>E-mail must be unique</mat-hint>
+              <mat-error *ngIf="registerForm.value.email">{{emailError}}</mat-error>
             </mat-form-field>
 
             <!-- Phone -->
             <mat-form-field class="full-width" appearance="outline">
               <mat-label>Phone number</mat-label>
               <input
-                required
-                [(ngModel)]="user.phone"
+                matInput
+                formControlName="phone"
                 name="phone"
-                type="number"
-                matInput placeholder="Enter here"
+                placeholder="Enter here"
+                [(ngModel)]="user.phone"
+
               />
               <button *ngIf="user.phone" matSuffix mat-icon-button aria-label="Clear" (click)="user.phone=''">
                 <mat-icon>close</mat-icon>
               </button>
+              <mat-error *ngIf="registerForm.value.phone">{{phoneError}}</mat-error>
+
             </mat-form-field>
 
             <div class="text-center">
