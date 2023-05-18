@@ -15,21 +15,21 @@ exports.initSummarizationModule = async (_, res) => {
         }
       });
     } catch (e) {
-      res.send({summary: 'cannot initialize the summarization model'});
+      res.send({summary: 'Cannot initialize the summarization model!'});
       return;
     }
 
     if (response.ok) {
-      res.send({summary: 'successfully initialized the summarization model'});
+      res.send({summary: 'Successfully initialized the summarization model!'});
       return;
     }
 
-    res.send({summary: 'cannot initialize the summarization model'});
+    res.send({summary: 'Cannot initialize the summarization model!'});
 }
 
 // Summarize the article
 exports.summarizeArticle = async (req, res) => {
-    let response = null;
+  let response = null;
     try {
         // Send the request to the server
         let content = JSON.stringify({article: req.body.article});
@@ -45,19 +45,19 @@ exports.summarizeArticle = async (req, res) => {
           }
         });
     } catch (e) {
-      res.send({summary: 'none'});
+      res.send({summary: 'Try again!'});
       return;
     }
 
     // Check if the response is ok
     if (!response.ok) {
-      res.send({summary: 'none'});
+      res.send({summary: 'Try again!'});
       return;
     }
 
     // Parse the response
     if (response.body == null) {
-      res.send({summary: 'none'});
+      res.send({summary: 'Try again!'});
       return;
     }
 
