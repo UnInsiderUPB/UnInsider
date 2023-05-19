@@ -1,58 +1,86 @@
-<mat-toolbar color="accent">
-  <a routerLink="/" mat-button class="example-icon">
-    <mat-icon>home</mat-icon>
+<mat-toolbar>
+  <a class="example-icon" mat-button routerLink="/">
 
     <span class="title">UnInsider</span>
   </a>
   <span class="example-spacer"></span>
 
+
+
+  <a class="example-icon login favorite-icon" href="/" mat-button onclick="w3_close()">HOME</a>
+
+  <a class="example-icon login favorite-icon"   href="#about" mat-button onclick="w3_close()">ABOUT</a>
+  <a class="example-icon login favorite-icon"  href="#team" mat-button onclick="w3_close()">TEAM</a>
+  <a class="example-icon login favorite-icon" href="#work" mat-button onclick="w3_close()">WORK</a>
+  <a class="example-icon login favorite-icon"  href="#contact" mat-button onclick="w3_close()">CONTACT</a>
   <a
     *ngIf="!isLoggedIn"
     [routerLink]="'/login'"
-    mat-button
-    class="example-icon login favorite-icon"
     aria-label="Example icon-button with a heart icon"
+    class="example-icon login favorite-icon"
+    mat-button
   >
-    Login
+    LOGIN
   </a>
 
   <a
     *ngIf="!isLoggedIn"
     [routerLink]="'/signup'"
-    mat-button
-    class="example-icon favorite-icon register"
     aria-label="Example icon-button with a heart icon"
+    class="example-icon favorite-icon register"
+    mat-button
   >
-    Register
+    REGISTER
   </a>
 
   <a
     (click)="logout()"
     *ngIf="isLoggedIn"
-    mat-button
-    class="example-icon register"
     aria-label="Example icon-button with a heart icon"
+    class="example-icon register"
+    mat-button
   >
-    Logout
+    LOGOUT
   </a>
 
   <button
-    *ngIf="isLoggedIn && user"
     (click)="toDashboard()"
+    *ngIf="isLoggedIn && user"
+    aria-label="Example icon-button with a heart icon"
+    class="example-icon favorite-icon"
     mat-button
     routerLink="/admin/profile"
-    class="example-icon favorite-icon"
-    aria-label="Example icon-button with a heart icon"
   >
     {{ user.username }}
   </button>
 
   <button
-    *ngIf="isLoggedIn && user"
     (click)="toProfileSettings()"
-    mat-fab
+    *ngIf="isLoggedIn && user"
     class="example-icon favorite-icon"
+    mat-icon-button
   >
-    <mat-icon>settings</mat-icon>
+    <mat-icon>more_vert</mat-icon>
   </button>
+
 </mat-toolbar>
+
+<script>
+  function w3_close() {
+    mySidebar.style.display = "none";
+  }
+
+    // Get the current URL
+    var currentURL = window.location.pathname;
+
+    // Check if the current URL is the homepage
+    if (currentURL === "/") {
+    // Show the buttons for "About" and "Contact"
+    document.getElementById("aboutBtn").style.display = "inline";
+    document.getElementById("contactBtn").style.display = "inline";
+  } else {
+    // Hide the buttons for "About" and "Contact"
+    document.getElementById("aboutBtn").style.display = "none";
+    document.getElementById("contactBtn").style.display = "none";
+  }
+</script>
