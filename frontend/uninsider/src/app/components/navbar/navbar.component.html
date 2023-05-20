@@ -1,86 +1,34 @@
-<mat-toolbar>
-  <a class="example-icon" mat-button routerLink="/">
+<mat-toolbar class="example-spacer">
+  <a class="example-icon" mat-button routerLink="/"><span class="title">UnInsider</span></a>
 
-    <span class="title">UnInsider</span>
-  </a>
-  <span class="example-spacer"></span>
+  <div style="margin-left: auto; margin-right: 0;">
+    <a class="example-icon login favorite-icon" routerLink="/" fragment="about" mat-button>ABOUT</a>
+    <a class="example-icon login favorite-icon" routerLink="/" fragment="team" mat-button>TEAM</a>
+    <a class="example-icon login favorite-icon" routerLink="/" fragment="work" mat-button>WORK</a>
+    <a class="example-icon login favorite-icon" routerLink="/" fragment="contact" mat-button>CONTACT</a>
+    <a *ngIf="!isLoggedIn" [routerLink]="'/login'" aria-label="Example icon-button with a heart icon"
+      class="example-icon login favorite-icon" mat-button>
+      LOGIN
+    </a>
 
+    <a *ngIf="!isLoggedIn" [routerLink]="'/signup'" aria-label="Example icon-button with a heart icon"
+      class="example-icon favorite-icon register" mat-button>
+      REGISTER
+    </a>
 
+    <a (click)="logout()" *ngIf="isLoggedIn" aria-label="Example icon-button with a heart icon"
+      class="example-icon register" mat-button>
+      LOGOUT
+    </a>
 
-  <a class="example-icon login favorite-icon" href="/" mat-button onclick="w3_close()">HOME</a>
+    <button (click)="toDashboard()" *ngIf="isLoggedIn && user" aria-label="Example icon-button with a heart icon"
+      class="example-icon favorite-icon" mat-button routerLink="/admin/profile">
+      {{ user.username }}
+    </button>
 
-  <a class="example-icon login favorite-icon"   href="#about" mat-button onclick="w3_close()">ABOUT</a>
-  <a class="example-icon login favorite-icon"  href="#team" mat-button onclick="w3_close()">TEAM</a>
-  <a class="example-icon login favorite-icon" href="#work" mat-button onclick="w3_close()">WORK</a>
-  <a class="example-icon login favorite-icon"  href="#contact" mat-button onclick="w3_close()">CONTACT</a>
-  <a
-    *ngIf="!isLoggedIn"
-    [routerLink]="'/login'"
-    aria-label="Example icon-button with a heart icon"
-    class="example-icon login favorite-icon"
-    mat-button
-  >
-    LOGIN
-  </a>
-
-  <a
-    *ngIf="!isLoggedIn"
-    [routerLink]="'/signup'"
-    aria-label="Example icon-button with a heart icon"
-    class="example-icon favorite-icon register"
-    mat-button
-  >
-    REGISTER
-  </a>
-
-  <a
-    (click)="logout()"
-    *ngIf="isLoggedIn"
-    aria-label="Example icon-button with a heart icon"
-    class="example-icon register"
-    mat-button
-  >
-    LOGOUT
-  </a>
-
-  <button
-    (click)="toDashboard()"
-    *ngIf="isLoggedIn && user"
-    aria-label="Example icon-button with a heart icon"
-    class="example-icon favorite-icon"
-    mat-button
-    routerLink="/admin/profile"
-  >
-    {{ user.username }}
-  </button>
-
-  <button
-    (click)="toProfileSettings()"
-    *ngIf="isLoggedIn && user"
-    class="example-icon favorite-icon"
-    mat-icon-button
-  >
-    <mat-icon>more_vert</mat-icon>
-  </button>
+    <button (click)="toProfileSettings()" *ngIf="isLoggedIn && user" class="example-icon favorite-icon" mat-icon-button>
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </div>
 
 </mat-toolbar>
-
-<script>
-  function w3_close() {
-    mySidebar.style.display = "none";
-  }
-
-    // Get the current URL
-    var currentURL = window.location.pathname;
-
-    // Check if the current URL is the homepage
-    if (currentURL === "/") {
-    // Show the buttons for "About" and "Contact"
-    document.getElementById("aboutBtn").style.display = "inline";
-    document.getElementById("contactBtn").style.display = "inline";
-  } else {
-    // Hide the buttons for "About" and "Contact"
-    document.getElementById("aboutBtn").style.display = "none";
-    document.getElementById("contactBtn").style.display = "none";
-  }
-</script>
