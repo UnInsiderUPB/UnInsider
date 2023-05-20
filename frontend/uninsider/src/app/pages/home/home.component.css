@@ -10,7 +10,7 @@ body, html {
 .bgimg-1 {
   background-position: center;
   background-size: cover;
-  background-image: url("/assets/laptop.png");
+  background-image: url("/assets/bg_home.png");
   min-height: 100%;
 }
 
