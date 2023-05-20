@@ -23,7 +23,7 @@ $> pwd
 $> .../UnInsider/frontend/uninsider # Angular frontend
 $> npm i
 $> # This will build the `static` pages and place them into the `views/` dir from `nodejs/`
-$> ng build --configuration production --watch
+$> npm run watch
 
 $> pwd
 $> .../UnInsider/frontend/nodejs # Nodejs backend
