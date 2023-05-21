@@ -23,6 +23,7 @@ export class NavbarComponent implements OnInit {
       this.user = this.login.getUser();
     });
     // [TODO]: Uncomment this when deploying to production
+    //         Make a request to the `nodejs` backend instead
     // this.initSummarization();
   }
 
@@ -57,7 +58,8 @@ export class NavbarComponent implements OnInit {
 
   public toDashboard() {
     const user_role = this.login.getUserRole();
-    if (user_role == 'ADMIN') this.router.navigate(['/admin']).then((_) => {});
+    if (user_role == 'ADMIN')
+      this.router.navigate(['/admin']).then((_) => {});
     else if (user_role == 'NORMAL')
       this.router.navigate(['/user-dashboard']).then((_) => {});
   }
