@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GuidelinesService } from 'src/app/services/guidelines.service';
 import { SummarizationService } from 'src/app/services/summarization.service';
+import FuzzySearch from 'fuzzy-search';
 
 const MIN_WORDS = 50;
 const MAX_WORDS = 300;
@@ -25,10 +26,13 @@ export class ReviewListComponent implements OnInit {
   user = this.login.getUser();
   ownReviews: any = [];
   allReviews: any = [];
+  filteredReviews: any = [];
   universityId: any;
   userId: any;
   likedReviews: any = [];
   dislikedReviews: any = [];
+
+  searchItem: string = '';
 
   inputText: string = '';
   mapping: Map<string, Function>;
@@ -70,6 +74,7 @@ export class ReviewListComponent implements OnInit {
         .subscribe({
           next: (data) => {
             this.allReviews = data;
+            this.filteredReviews = data;
           },
         });
     } else if (this.universityId) {
@@ -77,6 +82,7 @@ export class ReviewListComponent implements OnInit {
       this.reviewService.getReviewsByUniversityId(this.universityId).subscribe({
         next: (data) => {
           this.allReviews = data;
+          this.filteredReviews = data;
         },
       });
     } else if (this.userId) {
@@ -84,6 +90,7 @@ export class ReviewListComponent implements OnInit {
       this.reviewService.getReviewsByAuthorId(this.userId).subscribe({
         next: (data) => {
           this.allReviews = data;
+          this.filteredReviews = data;
         },
       });
     } else {
@@ -91,6 +98,7 @@ export class ReviewListComponent implements OnInit {
       this.reviewService.getAllReviews().subscribe({
         next: (data) => {
           this.allReviews = data;
+          this.filteredReviews = data;
         },
       });
     }
@@ -346,6 +354,13 @@ export class ReviewListComponent implements OnInit {
       }
     }
     return true;
+  }
+
+  public searchReview(searchItem: string) {
+    this.filteredReviews = this.allReviews;
+    const searcher = new FuzzySearch(this.filteredReviews, ['text']);
+
+    this.filteredReviews = searcher.search(searchItem);
   }
 
   get getMappingKeys() {

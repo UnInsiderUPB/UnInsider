@@ -1,7 +1,21 @@
 <mat-card *ngIf="user">
   <mat-card-content>
+    <form class="container">
+      <mat-form-field>
+        <span matPrefix> </span>
+        <input
+          type="search"
+          matInput
+          placeholder="Search University"
+          name="search"
+          [(ngModel)]="searchItem"
+          (ngModelChange)="searchUniversity(searchItem)"
+        />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </form>
     <div class="bootstrap-wrapper">
-      <div class="container" *ngFor="let university of universities">
+      <div class="container" *ngFor="let university of filteredUniversities">
         <mat-card>
           <button mat-button>
             <mat-card-header (click)="goToReviews(university)">

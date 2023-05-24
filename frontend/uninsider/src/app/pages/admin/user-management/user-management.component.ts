@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginService } from 'src/app/services/login.service';
 import { UserService } from 'src/app/services/user.service';
+import FuzzySearch from 'fuzzy-search';
 
 @Component({
   selector: 'app-user-management',
@@ -11,8 +12,10 @@ import { UserService } from 'src/app/services/user.service';
 export class UserManagementComponent implements OnInit {
   admin = this.login.getUser();
   users: any = [];
+  filteredUsers: any = [];
+  searchItem: string = '';
 
-  roles = ["ADMIN", "NORMAL"];
+  roles = ['ADMIN', 'NORMAL'];
 
   constructor(
     private login: LoginService,
@@ -24,7 +27,8 @@ export class UserManagementComponent implements OnInit {
     this.userService.getAllUsers().subscribe({
       next: (data: any) => {
         this.users = data;
-      }
+        this.filteredUsers = data;
+      },
     });
   }
 
@@ -35,10 +39,17 @@ export class UserManagementComponent implements OnInit {
   public changeRole(user: any, role: string) {
     this.userService.updateUserRole(user.username, role).subscribe({
       next: (_: any) => {
-        this.snack.open("Role updated successfully!", "OK", {
+        this.snack.open('Role updated successfully!', 'OK', {
           duration: 3000,
         });
-      }
+      },
     });
+  }
+
+  public searchUser(searchItem: string) {
+    this.filteredUsers = this.users;
+    const searcher = new FuzzySearch(this.filteredUsers, ['username']);
+
+    this.filteredUsers = searcher.search(searchItem);
   }
 }

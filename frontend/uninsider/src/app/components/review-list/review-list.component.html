@@ -1,10 +1,24 @@
 <mat-card *ngIf="user">
   <mat-card-content>
+    <form class="container">
+      <mat-form-field>
+        <span matPrefix> </span>
+        <input
+          type="search"
+          matInput
+          placeholder="Search Review"
+          name="search"
+          [(ngModel)]="searchItem"
+          (ngModelChange)="searchReview(searchItem)"
+        />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </form>
     <div class="bootstrap-wrapper">
       <div class="row">
 
         <div [ngClass]="enableSummOnlyOnUniver() ? 'col-md-9' : 'col-md-12'">
-          <div class="container" *ngFor="let review of allReviews">
+          <div class="container" *ngFor="let review of filteredReviews">
             <mat-card>
               <mat-card-content style="white-space: pre-line;">
                 <p>{{ review.text }}</p>

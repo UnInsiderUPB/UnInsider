@@ -3,8 +3,22 @@
     <div class="container text-center">
       <h1>All Users</h1>
     </div>
+    <form class="container">
+      <mat-form-field>
+        <span matPrefix> </span>
+        <input
+          type="search"
+          matInput
+          placeholder="Search User"
+          name="search"
+          [(ngModel)]="searchItem"
+          (ngModelChange)="searchUser(searchItem)"
+        />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </form>
     <div class="bootstrap-wrapper">
-      <div class="container text-center" *ngFor="let user of users">
+      <div class="container text-center" *ngFor="let user of filteredUsers">
         <div *ngIf="user.id !== admin.id">
           <mat-card class="container text-center">
             <mat-card-title>{{ user.username }}</mat-card-title>
