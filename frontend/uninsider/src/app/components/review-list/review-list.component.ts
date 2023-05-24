@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GuidelinesService } from 'src/app/services/guidelines.service';
 import { SummarizationService } from 'src/app/services/summarization.service';
+import { UniversityService } from 'src/app/services/university.service';
 
 const MIN_WORDS = 50;
 const MAX_WORDS = 300;
@@ -22,6 +23,7 @@ const SUMMARIZATION_REVIEWS_PERCENTAGE = 30;
   styleUrls: ['./review-list.component.css'],
 })
 export class ReviewListComponent implements OnInit {
+  university: any = undefined;
   user = this.login.getUser();
   ownReviews: any = [];
   allReviews: any = [];
@@ -51,13 +53,20 @@ export class ReviewListComponent implements OnInit {
     private route: ActivatedRoute,
     private snack: MatSnackBar,
     private guidelinesService: GuidelinesService,
-    private summarizationService: SummarizationService
+    private summarizationService: SummarizationService,
+    private universityService: UniversityService
   ) {
     this.mapping = new Map<string, Function>();
     this.mapping.set(`Minimum ${MIN_WORDS} words`, this.minWords);
     this.mapping.set(`Maximum ${MAX_WORDS} words`, this.maxWords);
-    this.mapping.set(`Maximum ${MAX_UPPERCASE_PERCENTAGE}% uppercase letters`, this.maxUppercase);
-    this.mapping.set(`Maximum ${MAX_NONALPHA_PERCENTAGE}% non-alpha characters`, this.maxNonAlpha);
+    this.mapping.set(
+      `Maximum ${MAX_UPPERCASE_PERCENTAGE}% uppercase letters`,
+      this.maxUppercase
+    );
+    this.mapping.set(
+      `Maximum ${MAX_NONALPHA_PERCENTAGE}% non-alpha characters`,
+      this.maxNonAlpha
+    );
     this.mapping.set(`English text`, this.languageDetection);
     this.mapping.set(`No profanity`, this.profanityDetection);
     this.mapping.set(`No spelling or grammar errors`, this.spellCheck);
@@ -107,6 +116,14 @@ export class ReviewListComponent implements OnInit {
     this.userId =
       JSON.parse(this.route.snapshot.paramMap.get('userId') || 'null') ||
       undefined;
+
+    this.university = this.universityId
+      ? this.universityService.getUniversityById(this.universityId).subscribe({
+          next: (data) => {
+            this.university = data;
+          },
+        })
+      : undefined;
 
     this.hydrateAllReviews();
 
@@ -233,8 +250,7 @@ export class ReviewListComponent implements OnInit {
     Swal.fire({
       width: '800px',
       title: 'Edit review',
-      html:
-      `
+      html: `
       <textarea
         id="swal-input"
         class="swal2-input"
@@ -243,24 +259,29 @@ export class ReviewListComponent implements OnInit {
         ${review.text}
       </textarea>
       <div id="checkboxes">
-        ${this.getMappingKeys.map((key, i) =>
-          `
+        ${this.getMappingKeys
+          .map(
+            (key, i) =>
+              `
           <div>
             <input type="checkbox" id="checkbox${i}" name="${key}"}>
             <label for="checkbox${i}">${key}</label>
           </div>
           `
-        ).join('')}
+          )
+          .join('')}
       </div>
       `,
       focusConfirm: false,
       didOpen: () => {
         const textarea = document.getElementById('swal-input');
         const checkboxes = document.querySelectorAll('[id^="checkbox"]');
-        
+
         // Event listener for `textarea` element
         textarea?.addEventListener('input', () => {
-          this.inputText = (document.getElementById('swal-input') as HTMLInputElement).value;
+          this.inputText = (
+            document.getElementById('swal-input') as HTMLInputElement
+          ).value;
           // console.log(this.inputText);
           this.verifyText();
 
@@ -277,8 +298,8 @@ export class ReviewListComponent implements OnInit {
       },
       preConfirm: () => {
         const text = (document.getElementById('swal-input') as HTMLInputElement)
-        .value;
-        
+          .value;
+
         this.inputText = text;
         this.verifyText();
         if (!this.isFormValid()) {
@@ -373,7 +394,9 @@ export class ReviewListComponent implements OnInit {
         uppercaseCount++;
     }
 
-    return uppercaseCount / this.inputText.length * 100 <= MAX_UPPERCASE_PERCENTAGE;
+    return (
+      (uppercaseCount / this.inputText.length) * 100 <= MAX_UPPERCASE_PERCENTAGE
+    );
   }
 
   // Non-alpha excluding spaces
@@ -381,11 +404,13 @@ export class ReviewListComponent implements OnInit {
     let nonAlphanumericCount = 0;
     for (let i = 0; i < this.inputText.length; i++) {
       const char = this.inputText[i];
-      if (!char.match(/^[a-zA-Z]+$/) && char !== ' ')
-        nonAlphanumericCount++;
+      if (!char.match(/^[a-zA-Z]+$/) && char !== ' ') nonAlphanumericCount++;
     }
-    
-    return nonAlphanumericCount / this.inputText.length * 100 <= MAX_NONALPHA_PERCENTAGE;
+
+    return (
+      (nonAlphanumericCount / this.inputText.length) * 100 <=
+      MAX_NONALPHA_PERCENTAGE
+    );
   }
 
   // Language detection
@@ -393,15 +418,13 @@ export class ReviewListComponent implements OnInit {
     this.guidelinesService.getLanguage(this.inputText).subscribe({
       next: (data: any) => {
         // console.log(data);
-        if (data.language === 'english')
-          this.detectedLanguage = 'english';
-        else
-          this.detectedLanguage = 'none';
+        if (data.language === 'english') this.detectedLanguage = 'english';
+        else this.detectedLanguage = 'none';
       },
       error: (_: any) => {
         this.detectedLanguage = 'none';
-      }
-    })
+      },
+    });
 
     return this.detectedLanguage === 'english';
   }
@@ -410,15 +433,13 @@ export class ReviewListComponent implements OnInit {
   profanityDetection(): boolean {
     this.guidelinesService.getProfanityWords(this.inputText).subscribe({
       next: (data: any) => {
-        if (data.profanity === 'true')
-          this.detectedProfanity = true;
-        else
-          this.detectedProfanity = false;
+        if (data.profanity === 'true') this.detectedProfanity = true;
+        else this.detectedProfanity = false;
       },
       error: (_: any) => {
         this.detectedProfanity = false;
-      }
-    })
+      },
+    });
 
     return this.detectedProfanity === false;
   }
@@ -430,13 +451,12 @@ export class ReviewListComponent implements OnInit {
         // console.log(data);
         if (data.misspelledWordsPerc <= MAX_MISSPELLED_WORDS_PERCENTAGE)
           this.detectedMisspelling = false;
-        else
-          this.detectedMisspelling = true;
+        else this.detectedMisspelling = true;
       },
       error: (_: any) => {
         this.detectedMisspelling = false;
-      }
-    })
+      },
+    });
 
     return this.detectedMisspelling === false;
   }
@@ -464,8 +484,8 @@ export class ReviewListComponent implements OnInit {
       },
       error: (_: any) => {
         alert('Could not initialize the summarization model');
-      }
-    })
+      },
+    });
   }
 
   public summarize() {
@@ -485,7 +505,10 @@ export class ReviewListComponent implements OnInit {
     });
 
     // Get the first `SUMMARIZATION_REVIEWS_PERCENTAGE` reviews
-    let reviews = sortedReviews.slice(0, Math.ceil(sortedReviews.length * SUMMARIZATION_REVIEWS_PERCENTAGE / 100));
+    let reviews = sortedReviews.slice(
+      0,
+      Math.ceil((sortedReviews.length * SUMMARIZATION_REVIEWS_PERCENTAGE) / 100)
+    );
 
     // Concate all the reviews into a single string, separated by `=====`
     this.articleText = reviews.map((r: any) => r.text).join('\n\n=====\n\n');
@@ -518,8 +541,7 @@ export class ReviewListComponent implements OnInit {
       },
       error: (_: any) => {
         alert('Error occurred while summarizing the text.');
-      }
-    })
+      },
+    });
   }
-
 }
