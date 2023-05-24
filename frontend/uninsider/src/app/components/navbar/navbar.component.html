@@ -16,7 +16,7 @@
       REGISTER
     </a>
 
-    <a (click)="logout()" *ngIf="isLoggedIn" aria-label="Example icon-button with a heart icon"
+    <a (click)="logout()" *ngIf="isLoggedIn" [routerLink]="'/login'" aria-label="Example icon-button with a heart icon"
       class="example-icon register" mat-button>
       LOGOUT
     </a>

@@ -144,14 +144,14 @@ export class ReviewListComponent implements OnInit {
           '/admin/university-reviews/add',
           { universityId: this.universityId },
         ])
-        .then((_) => {});
+        .then((_) => { });
     else if (user_role == 'NORMAL')
       this.router
         .navigate([
           '/user-dashboard/university-reviews/add',
           { universityId: this.universityId },
         ])
-        .then((_) => {});
+        .then((_) => { });
   }
 
   public isLiked(review: any) {
@@ -236,15 +236,22 @@ export class ReviewListComponent implements OnInit {
       <textarea
         id="swal-input"
         class="swal2-input"
-        style="width: 90%; height: 300px; font-size: 16px;"
+        style="width: 90%; height: 275px; font-size: 16px;"
         placeholder="Text">
         ${review.text}
       </textarea>
-      <div id="checkboxes">
+      <div id="checkboxes" style="font-size: 15px;">
         ${this.getMappingKeys.map((key, i) =>
           `
-          <div>
-            <input type="checkbox" id="checkbox${i}" name="${key}"}>
+          <div style="margin: 1%;">
+            <image
+              name="${key}"
+              alt="checkbox${i}"
+              id="checkbox${i}"
+              src="assets/checkbox_empty.png"
+              style="width: 3%; margin-bottom: -1%;"
+            >
+
             <label for="checkbox${i}">${key}</label>
           </div>
           `
@@ -255,7 +262,7 @@ export class ReviewListComponent implements OnInit {
       didOpen: () => {
         const textarea = document.getElementById('swal-input');
         const checkboxes = document.querySelectorAll('[id^="checkbox"]');
-        
+
         // Event listener for `textarea` element
         textarea?.addEventListener('input', () => {
           this.inputText = (document.getElementById('swal-input') as HTMLInputElement).value;
@@ -264,19 +271,20 @@ export class ReviewListComponent implements OnInit {
 
           // Update checkboxes in real time
           checkboxes.forEach((checkbox) => {
-            var checkboxName = (checkbox as HTMLInputElement).name;
+            console.log(checkbox);
+            var checkboxName = (checkbox as HTMLImageElement).name;
             if (this.passed.includes(checkboxName)) {
-              (checkbox as HTMLInputElement).checked = true;
+              (checkbox as HTMLImageElement).src = 'assets/checkbox_filled.png';
             } else {
-              (checkbox as HTMLInputElement).checked = false;
+              (checkbox as HTMLImageElement).src = 'assets/checkbox_empty.png';
             }
           });
         });
       },
       preConfirm: () => {
         const text = (document.getElementById('swal-input') as HTMLInputElement)
-        .value;
-        
+          .value;
+
         this.inputText = text;
         this.verifyText();
         if (!this.isFormValid()) {
@@ -382,7 +390,7 @@ export class ReviewListComponent implements OnInit {
       if (!char.match(/^[a-zA-Z]+$/) && char !== ' ')
         nonAlphanumericCount++;
     }
-    
+
     return nonAlphanumericCount / this.inputText.length * 100 <= MAX_NONALPHA_PERCENTAGE;
   }
 
