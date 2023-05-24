@@ -17,4 +17,14 @@ export class UserService {
   public updateUser(user: any) {
     return this.http.put(`${baseUrl}/user/`, user);
   }
+
+  // Update user role
+  public updateUserRole(username: string, role: string) {
+    return this.http.put(`${baseUrl}/user/${username}/role/${role}`, null);
+  }
+
+  // Get all users
+  public getAllUsers() {
+    return this.http.get(`${baseUrl}/user/`);
+  }
 }

@@ -32,6 +32,8 @@ export class ReviewListComponent implements OnInit {
   likedReviews: any = [];
   dislikedReviews: any = [];
 
+  searchItem: string = '';
+
   inputText: string = '';
   mapping: Map<string, Function>;
   passed: [string];

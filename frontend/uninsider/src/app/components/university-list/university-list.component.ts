@@ -4,6 +4,7 @@ import { UniversityService } from '../../services/university.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import FuzzySearch from 'fuzzy-search';
 
 @Component({
   selector: 'app-university-list',
@@ -13,6 +14,8 @@ import { Router } from '@angular/router';
 export class UniversityListComponent implements OnInit {
   user = this.login.getUser();
   universities: any = [];
+  filteredUniversities: any = [];
+  searchItem: string = '';
 
   constructor(
     private login: LoginService,
@@ -26,6 +29,7 @@ export class UniversityListComponent implements OnInit {
     this.universityService.getAllUniversities().subscribe({
       next: (data) => {
         this.universities = data;
+        this.filteredUniversities = data;
       },
     });
   }
@@ -144,5 +148,12 @@ export class UniversityListComponent implements OnInit {
         });
       }
     });
+  }
+
+  public searchUniversity(searchItem: string) {
+    this.filteredUniversities = this.universities;
+    const searcher = new FuzzySearch(this.filteredUniversities, ['name']);
+
+    this.filteredUniversities = searcher.search(searchItem);
   }
 }
