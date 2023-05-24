@@ -16,6 +16,7 @@ import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
 import { WelcomeUserComponent } from './pages/user/welcome-user/welcome-user.component';
 import { ReviewAddComponent } from './components/review-add/review-add.component';
 import { GuidelinesComponent } from './pages/guidelines/guidelines.component';
+import { UserManagementComponent } from './pages/admin/user-management/user-management.component';
 
 const routes: Routes = [
   {
@@ -65,6 +66,10 @@ const routes: Routes = [
       {
         path: 'my-reviews',
         component: ReviewListComponent,
+      },
+      {
+        path: 'users',
+        component: UserManagementComponent,
       }
     ],
   },

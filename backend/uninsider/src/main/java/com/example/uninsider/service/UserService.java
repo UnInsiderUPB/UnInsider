@@ -16,6 +16,9 @@ public interface UserService {
     // update user
     User updateUser(User user) throws Exception;
 
+    // update user role
+    User updateUserRole(User user, Set<UserRole> userRoleSet) throws Exception;
+
      //get user
     User getUser(String username);
 

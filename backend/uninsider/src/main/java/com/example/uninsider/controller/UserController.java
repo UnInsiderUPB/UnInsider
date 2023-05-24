@@ -66,6 +66,29 @@ public class UserController {
         return this.userService.updateUser(originalUser);
     }
 
+    @PutMapping("/{username}/role/{roleName}")
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public User updateUserRole(@PathVariable("username") String username, @PathVariable("roleName") String roleName) throws Exception {
+        User user = getUserByUsername(username);
+        if (user == null) {
+            throw new UserNotFoundException("User with username `" + username + "` not found");
+        }
+
+        Set<UserRole> userRoleSet = new HashSet<>();
+        Role role = new Role();
+
+        role.setRoleId((roleName.equals("ADMIN")) ? 0L : 45L);
+        role.setRoleName(roleName);
+
+        UserRole userRole = new UserRole();
+        userRole.setUser(user);
+        userRole.setRole(role);
+
+        userRoleSet.add(userRole);
+
+        return this.userService.updateUserRole(user, userRoleSet);
+    }
+
     @GetMapping("/")
     @ResponseStatus(code = HttpStatus.OK)
     public List<User> getAllUsers() {

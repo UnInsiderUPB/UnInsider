@@ -21,6 +21,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HomeComponent } from './pages/home/home.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatChipsModule } from '@angular/material/chips';
 import { authInterceptorProviders } from './services/auth.interceptor';
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
@@ -37,6 +38,7 @@ import { WelcomeUserComponent } from './pages/user/welcome-user/welcome-user.com
 import { SidebarUserComponent } from './pages/user/sidebar-user/sidebar-user.component';
 import { ReviewListComponent } from './components/review-list/review-list.component';
 import { ReviewAddComponent } from './components/review-add/review-add.component';
+import { UserManagementComponent } from './pages/admin/user-management/user-management.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +61,7 @@ import { ReviewAddComponent } from './components/review-add/review-add.component
     GuidelinesComponent,
     WelcomeUserComponent,
     SidebarUserComponent,
+    UserManagementComponent
   ],
   imports: [
     BrowserModule,
@@ -72,6 +75,7 @@ import { ReviewAddComponent } from './components/review-add/review-add.component
     HttpClientModule,
     MatSnackBarModule,
     MatCardModule,
+    MatChipsModule,
     MatToolbarModule,
     MatIconModule,
     MatListModule,
