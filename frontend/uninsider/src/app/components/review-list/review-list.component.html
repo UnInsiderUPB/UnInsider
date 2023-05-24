@@ -1,61 +1,33 @@
 <mat-card *ngIf="user">
   <mat-card-content>
-    <form class="container">
-      <mat-form-field>
-        <span matPrefix> </span>
-        <input
-          type="search"
-          matInput
-          placeholder="Search Review"
-          name="search"
-          [(ngModel)]="searchItem"
-          (ngModelChange)="searchReview(searchItem)"
-        />
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
-    </form>
     <div class="bootstrap-wrapper">
       <div class="row">
 
         <div [ngClass]="enableSummOnlyOnUniver() ? 'col-md-9' : 'col-md-12'">
-          <div class="container" *ngFor="let review of filteredReviews">
+          <div class="container" *ngFor="let review of allReviews">
             <mat-card>
               <mat-card-content style="white-space: pre-line;">
                 <p>{{ review.text }}</p>
               </mat-card-content>
               <br />
               <mat-card-actions align="end">
-                <button
-                  mat-button
-                  [ngStyle]="{ color: isLiked(review) ? 'blue' : 'black' }"
-                  (click)="likeReview(review)"
-                >
+                <button mat-button [ngStyle]="{ color: isLiked(review) ? 'blue' : 'black' }"
+                  (click)="likeReview(review)">
                   <mat-icon>thumb_up</mat-icon>
                   <span>{{ review.likes }}</span>
                 </button>
-                <button
-                  mat-button
-                  [ngStyle]="{ color: isDisliked(review) ? 'red' : 'black' }"
-                  (click)="dislikeReview(review)"
-                >
+                <button mat-button [ngStyle]="{ color: isDisliked(review) ? 'red' : 'black' }"
+                  (click)="dislikeReview(review)">
                   <mat-icon>thumb_down</mat-icon>
                   <span>{{ review.dislikes }}</span>
                 </button>
               </mat-card-actions>
               <br />
               <mat-card-actions align="end">
-                <button
-                  mat-button
-                  *ngIf="hasEditRights(review)"
-                  (click)="editReview(review)"
-                >
+                <button mat-button *ngIf="hasEditRights(review)" (click)="editReview(review)">
                   EDIT
                 </button>
-                <button
-                  mat-button
-                  *ngIf="getUserRole() === 'ADMIN'"
-                  (click)="deleteReview(review)"
-                >
+                <button mat-button *ngIf="getUserRole() === 'ADMIN'" (click)="deleteReview(review)">
                   DELETE
                 </button>
               </mat-card-actions>
@@ -68,21 +40,21 @@
         <div class="col-md-3" style="overflow-y: auto;" *ngIf="allReviews.length > 0 && enableSummOnlyOnUniver()">
           <div class="container text-center">
             <h2>Summarization</h2>
-          
+
             <button *ngIf="!summarizationLoading" (click)="summarize()">Summarize</button>
-            
+
             <div *ngIf="summarizationLoading">
               <div class="spinner-border" role="status">
-                  <span class="sr-only">Loading...</span>
+                <span class="sr-only">Loading...</span>
               </div>
             </div>
 
             <br>
 
             <mat-card>
-                <mat-card-content>
-                    <p>{{ summarizedText }}</p>
-                </mat-card-content>
+              <mat-card-content>
+                <p>{{ summarizedText }}</p>
+              </mat-card-content>
             </mat-card>
 
             <!-- <button (click)="initSummarization()">Init</button> -->
@@ -95,11 +67,6 @@
     </div>
   </mat-card-content>
 </mat-card>
-<button
-  *ngIf="user && universityId"
-  mat-fab
-  class="add-button"
-  (click)="goToAddReview()"
->
+<button *ngIf="user && universityId" mat-fab class="add-button" (click)="goToAddReview()">
   <mat-icon>add</mat-icon>
 </button>
