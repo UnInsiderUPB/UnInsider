@@ -2,45 +2,53 @@
   <mat-card-content>
     <div class="bootstrap-wrapper">
       <div class="container">
-        <div class="container text-center">
-          <h1>Add Review</h1>
-        </div>
+
         <div class="row">
-          <div class="col-md-10 offset-md-1">
-            <form class="container text-center" (ngSubmit)="formSubmit()">
+
+          <div class="col-md-8">
+            <div class="container text-center">
+              <h1>Add Review</h1>
+            </div>
+
+            <form class="container" (ngSubmit)="formSubmit()">
               <div style="width: 100%;">
                 <!-- Review text -->
-                <mat-form-field class="full-width" appearance="outline" style="width: 90%;">
+                <mat-form-field class="full-width" appearance="outline" style="width: 100%;">
                   <mat-label>Review Text</mat-label>
-                  <textarea
-                    [(ngModel)]="inputText"
-                    (ngModelChange)="verifyText()"
-                    name="text"
-                    style="font-size: 16px;"
-                    rows="10"
-                    matInput
-                  ></textarea>
+                  <textarea [(ngModel)]="inputText" (ngModelChange)="verifyText()" name="text" style="font-size: 16px;"
+                    rows="10" matInput></textarea>
                 </mat-form-field>
               </div>
 
-              <div *ngFor="let key of getMappingKeys; let i = index">
-                <input type="checkbox" id="checkbox{{i}}" [checked]="passed.includes(key)">
-                <label for="checkbox{{i}}">{{key}}</label>
-              </div>
-
               <div class="text-center">
-                <button
-                  type="submit"
-                  mat-raised-button
-                  color="primary"
-                  [disabled]="!isFormValid()"
-                >
+                <button type="submit" mat-raised-button color="primary" [disabled]="!isFormValid()">
                   Add
                 </button>
               </div>
             </form>
           </div>
+
+          <!-- [TODO]: Make this `div` scrollable -->
+          <div class="col-md-4">
+            <div class="container" style="width: 100%; margin-top: 20%; font-size: 16px;">
+              <div *ngFor="let key of getMappingKeys; let i = index">
+                <img *ngIf="passed.includes(key); else emptyCheck" alt="checkbox{{i}}" src="assets/checkbox_filled.png"
+                style="width: 8%; margin-bottom: -2%; margin-right: 2%; margin-top: 2%;">
+                
+                <ng-template #emptyCheck>
+                  <img
+                  alt="checkbox{{i}}"
+                  src="assets/checkbox_empty.png"
+                  style="width: 8%; margin-bottom: -2%; margin-right: 2%; margin-top: 2%;">
+                </ng-template>
+                
+                <label for="checkbox{{i}}">{{key}}</label>
+              </div>
+            </div>
+          </div>
+
         </div>
+
       </div>
     </div>
   </mat-card-content>
