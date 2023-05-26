@@ -119,10 +119,10 @@ export class ReviewListComponent implements OnInit {
 
     this.university = this.universityId
       ? this.universityService.getUniversityById(this.universityId).subscribe({
-          next: (data) => {
-            this.university = data;
-          },
-        })
+        next: (data) => {
+          this.university = data;
+        },
+      })
       : undefined;
 
     this.hydrateAllReviews();
@@ -163,14 +163,14 @@ export class ReviewListComponent implements OnInit {
           '/admin/university-reviews/add',
           { universityId: this.universityId },
         ])
-        .then((_) => {});
+        .then((_) => { });
     else if (user_role == 'NORMAL')
       this.router
         .navigate([
           '/user-dashboard/university-reviews/add',
           { universityId: this.universityId },
         ])
-        .then((_) => {});
+        .then((_) => { });
   }
 
   public isLiked(review: any) {
@@ -256,7 +256,7 @@ export class ReviewListComponent implements OnInit {
         class="swal2-input"
         style="width: 90%; height: 300px; font-size: 16px;"
         placeholder="Text">
-        ${review.text}
+        ${review.text.replace(/^[ \t]+/gm, '').replace(/ +/g, ' ').replace(/\n{3,}/g, '\n').replace(/^\s*$/gm, '').trimEnd()}
       </textarea>
       <div id="checkboxes">
         ${this.getMappingKeys
@@ -282,7 +282,12 @@ export class ReviewListComponent implements OnInit {
           this.inputText = (
             document.getElementById('swal-input') as HTMLInputElement
           ).value;
-          // console.log(this.inputText);
+          this.inputText = this.inputText
+            .replace(/^[ \t]+/gm, '')
+            .replace(/ +/g, ' ')
+            .replace(/\n{3,}/g, '\n')
+            .replace(/^\s*$/gm, '')
+            .trimEnd();
           this.verifyText();
 
           // Update checkboxes in real time
@@ -297,8 +302,13 @@ export class ReviewListComponent implements OnInit {
         });
       },
       preConfirm: () => {
-        const text = (document.getElementById('swal-input') as HTMLInputElement)
-          .value;
+        let text = (document.getElementById('swal-input') as HTMLInputElement).value;
+        text = text
+          .replace(/^[ \t]+/gm, '')
+          .replace(/ +/g, ' ')
+          .replace(/\n{3,}/g, '\n')
+          .replace(/^\s*$/gm, '')
+          .trimEnd();
 
         this.inputText = text;
         this.verifyText();
@@ -536,8 +546,11 @@ export class ReviewListComponent implements OnInit {
           }, i * 25);
         }
 
-        this.isSummarizationReady = true;
-        this.summarizationLoading = false;
+        // Wait `data.summary.length * 25` milliseconds before setting the `isSummarizationReady` variable to true
+        setTimeout(() => {
+          this.isSummarizationReady = true;
+          this.summarizationLoading = false;
+        }, data.summary.length * 25);
       },
       error: (_: any) => {
         alert('Error occurred while summarizing the text.');
