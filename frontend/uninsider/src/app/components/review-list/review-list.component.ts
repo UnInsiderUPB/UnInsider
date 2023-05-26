@@ -297,7 +297,6 @@ export class ReviewListComponent implements OnInit {
 
           // Update checkboxes in real time
           checkboxes.forEach((checkbox) => {
-            console.log(checkbox);
             var checkboxName = (checkbox as HTMLImageElement).name;
             if (this.passed.includes(checkboxName)) {
               (checkbox as HTMLImageElement).src = 'assets/checkbox_filled.png';
