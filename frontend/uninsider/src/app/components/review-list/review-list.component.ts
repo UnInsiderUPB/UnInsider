@@ -254,21 +254,26 @@ export class ReviewListComponent implements OnInit {
       <textarea
         id="swal-input"
         class="swal2-input"
-        style="width: 90%; height: 300px; font-size: 16px;"
+        style="width: 90%; height: 275px; font-size: 16px;"
         placeholder="Text">
         ${review.text.replace(/^[ \t]+/gm, '').replace(/ +/g, ' ').replace(/\n{3,}/g, '\n').replace(/^\s*$/gm, '').trimEnd()}
       </textarea>
-      <div id="checkboxes">
-        ${this.getMappingKeys
-          .map(
-            (key, i) =>
-              `
-          <div>
-            <input type="checkbox" id="checkbox${i}" name="${key}"}>
+      <div id="checkboxes" style="font-size: 15px;">
+        ${this.getMappingKeys.map((key, i) =>
+        `
+          <div style="margin: 1%;">
+            <image
+              name="${key}"
+              alt="checkbox${i}"
+              id="checkbox${i}"
+              src="assets/checkbox_filled.png"
+              style="width: 3%; margin-bottom: -1%;"
+            >
+
             <label for="checkbox${i}">${key}</label>
           </div>
           `
-          )
+      )
           .join('')}
       </div>
       `,
@@ -292,11 +297,12 @@ export class ReviewListComponent implements OnInit {
 
           // Update checkboxes in real time
           checkboxes.forEach((checkbox) => {
-            var checkboxName = (checkbox as HTMLInputElement).name;
+            console.log(checkbox);
+            var checkboxName = (checkbox as HTMLImageElement).name;
             if (this.passed.includes(checkboxName)) {
-              (checkbox as HTMLInputElement).checked = true;
+              (checkbox as HTMLImageElement).src = 'assets/checkbox_filled.png';
             } else {
-              (checkbox as HTMLInputElement).checked = false;
+              (checkbox as HTMLImageElement).src = 'assets/checkbox_empty.png';
             }
           });
         });
@@ -358,7 +364,14 @@ export class ReviewListComponent implements OnInit {
             this.allReviews = this.allReviews.filter(
               (r: any) => r.id !== review.id
             );
-            Swal.fire('Deleted!', 'The review has been deleted.', 'success');
+            Swal.fire(
+              'Deleted!',
+              'The review has been deleted.',
+              'success'
+              ).then((_) => {
+                window.location.reload();
+              }
+            )
           },
           error: (error) => {
             console.log(error);

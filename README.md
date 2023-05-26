@@ -38,6 +38,8 @@ $> # The `Spring Boot` backend is started as usual
 
 If you'd like to contribute to this project, please fork the repository and create a pull request.
 
+A very good example of a pull request is [this one](https://github.com/UnInsiderUPB/UnInsider/pull/80). The pull request is well documented, the changes are crystal clear and it also includes a form of humor. This is the kind of pull request we are looking for.
+
 ## Credits
 
 This project was created by [@sabidea23](https://github.com/sabidea23), [@cioabnu](https://github.com/cioabnu), [@Iulian277](https://github.com/Iulian277), and [@albertsamoila](https://github.com/albertsamoila). We would also like to extend our thanks to all the contributors who helped make this project possible.

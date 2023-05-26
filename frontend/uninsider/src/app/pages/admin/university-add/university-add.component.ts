@@ -70,7 +70,7 @@ export class UniversityAddComponent implements OnInit {
           'University added successfully',
           'success'
         ).then((_) => {
-          this.router.navigate(['/admin/universities/add']).then((_) => {});
+          this.router.navigate(['/admin/universities']).then((_) => {});
         });
       },
       error: (error) => {

@@ -12,7 +12,7 @@
           <form (ngSubmit)="formSubmit()">
             <!-- Username -->
             <mat-form-field class="full-width" appearance="outline">
-              <mat-label>User Name</mat-label>
+              <mat-label>Username</mat-label>
               <input
                 [(ngModel)]="loginData.username"
                 name="username"
@@ -23,7 +23,6 @@
                       (click)="loginData.username=''">
                 <mat-icon>close</mat-icon>
               </button>
-              <mat-hint>Valid User Name</mat-hint>
             </mat-form-field>
 
             <!-- Password -->
