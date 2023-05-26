@@ -260,7 +260,7 @@ export class ReviewListComponent implements OnInit {
       </textarea>
       <div id="checkboxes" style="font-size: 15px;">
         ${this.getMappingKeys.map((key, i) =>
-          `
+        `
           <div style="margin: 1%;">
             <image
               name="${key}"
@@ -273,7 +273,7 @@ export class ReviewListComponent implements OnInit {
             <label for="checkbox${i}">${key}</label>
           </div>
           `
-          )
+      )
           .join('')}
       </div>
       `,
@@ -364,7 +364,14 @@ export class ReviewListComponent implements OnInit {
             this.allReviews = this.allReviews.filter(
               (r: any) => r.id !== review.id
             );
-            Swal.fire('Deleted!', 'The review has been deleted.', 'success');
+            Swal.fire(
+              'Deleted!',
+              'The review has been deleted.',
+              'success'
+              ).then((_) => {
+                window.location.reload();
+              }
+            )
           },
           error: (error) => {
             console.log(error);

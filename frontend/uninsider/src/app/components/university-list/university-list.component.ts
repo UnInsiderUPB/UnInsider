@@ -137,7 +137,9 @@ export class UniversityListComponent implements OnInit {
               'Deleted!',
               'Your university has been deleted.',
               'success'
-            );
+            ).then((_) => {
+              window.location.reload();
+            });
           },
           error: (error) => {
             console.log(error);

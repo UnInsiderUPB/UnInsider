@@ -33,13 +33,13 @@
             <div class="container" style="width: 100%; margin-top: 20%; font-size: 16px;">
               <div *ngFor="let key of getMappingKeys; let i = index">
                 <img *ngIf="passed.includes(key); else emptyCheck" alt="checkbox{{i}}" src="assets/checkbox_filled.png"
-                style="width: 8%; margin-bottom: -2%; margin-right: 2%; margin-top: 2%;">
+                style="width: 8%; margin-right: 2%;">
                 
                 <ng-template #emptyCheck>
                   <img
                   alt="checkbox{{i}}"
                   src="assets/checkbox_empty.png"
-                  style="width: 8%; margin-bottom: -2%; margin-right: 2%; margin-top: 2%;">
+                  style="width: 8%; margin-right: 2%;">
                 </ng-template>
                 
                 <label for="checkbox{{i}}">{{key}}</label>
