@@ -119,10 +119,10 @@ export class ReviewListComponent implements OnInit {
 
     this.university = this.universityId
       ? this.universityService.getUniversityById(this.universityId).subscribe({
-          next: (data) => {
-            this.university = data;
-          },
-        })
+        next: (data) => {
+          this.university = data;
+        },
+      })
       : undefined;
 
     this.hydrateAllReviews();
@@ -256,7 +256,7 @@ export class ReviewListComponent implements OnInit {
         class="swal2-input"
         style="width: 90%; height: 275px; font-size: 16px;"
         placeholder="Text">
-        ${review.text}
+        ${review.text.replace(/^[ \t]+/gm, '').replace(/ +/g, ' ').replace(/\n{3,}/g, '\n').replace(/^\s*$/gm, '').trimEnd()}
       </textarea>
       <div id="checkboxes" style="font-size: 15px;">
         ${this.getMappingKeys.map((key, i) =>
@@ -287,7 +287,12 @@ export class ReviewListComponent implements OnInit {
           this.inputText = (
             document.getElementById('swal-input') as HTMLInputElement
           ).value;
-          // console.log(this.inputText);
+          this.inputText = this.inputText
+            .replace(/^[ \t]+/gm, '')
+            .replace(/ +/g, ' ')
+            .replace(/\n{3,}/g, '\n')
+            .replace(/^\s*$/gm, '')
+            .trimEnd();
           this.verifyText();
 
           // Update checkboxes in real time
@@ -303,8 +308,13 @@ export class ReviewListComponent implements OnInit {
         });
       },
       preConfirm: () => {
-        const text = (document.getElementById('swal-input') as HTMLInputElement)
-          .value;
+        let text = (document.getElementById('swal-input') as HTMLInputElement).value;
+        text = text
+          .replace(/^[ \t]+/gm, '')
+          .replace(/ +/g, ' ')
+          .replace(/\n{3,}/g, '\n')
+          .replace(/^\s*$/gm, '')
+          .trimEnd();
 
         this.inputText = text;
         this.verifyText();
@@ -542,8 +552,11 @@ export class ReviewListComponent implements OnInit {
           }, i * 25);
         }
 
-        this.isSummarizationReady = true;
-        this.summarizationLoading = false;
+        // Wait `data.summary.length * 25` milliseconds before setting the `isSummarizationReady` variable to true
+        setTimeout(() => {
+          this.isSummarizationReady = true;
+          this.summarizationLoading = false;
+        }, data.summary.length * 25);
       },
       error: (_: any) => {
         alert('Error occurred while summarizing the text.');

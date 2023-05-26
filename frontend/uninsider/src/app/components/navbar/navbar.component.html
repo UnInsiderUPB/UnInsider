@@ -6,6 +6,7 @@
     <a class="example-icon login favorite-icon" routerLink="/" fragment="team" mat-button>TEAM</a>
     <a class="example-icon login favorite-icon" routerLink="/" fragment="work" mat-button>WORK</a>
     <a class="example-icon login favorite-icon" routerLink="/" fragment="contact" mat-button>CONTACT</a>
+    
     <a *ngIf="!isLoggedIn" [routerLink]="'/login'" aria-label="Example icon-button with a heart icon"
       class="example-icon login favorite-icon" mat-button>
       LOGIN
@@ -16,8 +17,9 @@
       REGISTER
     </a>
 
-    <a (click)="logout()" *ngIf="isLoggedIn" [routerLink]="'/login'" aria-label="Example icon-button with a heart icon"
-      class="example-icon register" mat-button>
+    <a (click)="logout()" *ngIf="isLoggedIn" aria-label="Example icon-button with a heart icon"
+      class="example-icon favorite-icon" mat-button>
+
       LOGOUT
     </a>
 
@@ -27,7 +29,7 @@
     </button>
 
     <button (click)="toProfileSettings()" *ngIf="isLoggedIn && user" class="example-icon favorite-icon" mat-icon-button>
-      <mat-icon>more_vert</mat-icon>
+      <mat-icon>settings</mat-icon>
     </button>
   </div>
 
