@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
-
-const endpoint = 'https://us-central1-bart-proj.cloudfunctions.net/uninsider-bart-cnn-cors-all-global'
+import { SummarizationService } from 'src/app/services/summarization.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +12,10 @@ export class NavbarComponent implements OnInit {
   isLoggedIn = false;
   user: any = null;
 
-  constructor(public login: LoginService, public router: Router) {}
+  constructor(
+    public login: LoginService,
+    public router: Router,
+    private summarizationService: SummarizationService) {}
 
   ngOnInit(): void {
     this.isLoggedIn = this.login.isLoggedIn();
@@ -22,32 +24,50 @@ export class NavbarComponent implements OnInit {
       this.isLoggedIn = this.login.isLoggedIn();
       this.user = this.login.getUser();
     });
-    // [TODO]: Uncomment this when deploying to production
-    //         Make a request to the `nodejs` backend instead
-    // this.initSummarization();
-  }
 
-  private async initSummarization(): Promise<any> {
-    let response = null;
-    try {
-      response = await fetch(endpoint, {
-        method: 'POST',
-        body: JSON.stringify({article: 'init'}),
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': '*',
-          'Access-Control-Allow-Headers': '*',
-        }
-      });
-    } catch (e) {
-      console.log(e);
-      alert('Could not initialize the summarization model');
-      return;
+    // Set the `sessionStorage` item for summarization module initialization
+    let itemJson = {
+      value: 'true',
+      timestamp: new Date().getTime(),
     }
+    const summStorageItem = sessionStorage.getItem('initSumm');
 
-    if (response.ok) {
-      console.log('Successfully initialized the summarization model');
+    if (summStorageItem == undefined || summStorageItem == '' || summStorageItem == null) {
+      // Update the `sessionStorage` item
+      sessionStorage.setItem('initSumm', JSON.stringify(itemJson));
+      
+      console.log('Initializing the summarization module');
+
+      // Initialize the summarization module
+      this.summarizationService.initSummarizationModule().subscribe((_) => { });
+    } else {
+      // Check if the `sessionStorage` item is fresh or old
+      const summStorageItemJson = JSON.parse(summStorageItem);
+      const currentTime = new Date().getTime();
+      const timeDiff = currentTime - summStorageItemJson.timestamp;
+      const timeDiffInSeconds = Math.floor(timeDiff / 1000);
+
+      // console.log('Time difference in seconds: ' + timeDiffInSeconds);
+      // console.log('Intialization timestamp: ' + summStorageItemJson.timestamp);
+      // console.log('Current timestamp: ' + currentTime);
+      
+      if (timeDiffInSeconds >= 300) {
+        console.log('Reinitializing the summarization module');
+        
+        // Update timestamp
+        itemJson = {
+          value: 'true',
+          timestamp: new Date().getTime(),
+        }
+
+        // Update the `sessionStorage` item
+        sessionStorage.setItem('initSumm', JSON.stringify(itemJson));
+
+        // Reinitialize the summarization module
+        this.summarizationService.initSummarizationModule().subscribe((_) => { });
+      } else {
+        console.log('Summarization module is already initialized and fresh');
+      }
     }
   }
 

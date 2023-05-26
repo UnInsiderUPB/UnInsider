@@ -6,6 +6,7 @@
     <a class="example-icon login favorite-icon" routerLink="/" fragment="team" mat-button>TEAM</a>
     <a class="example-icon login favorite-icon" routerLink="/" fragment="work" mat-button>WORK</a>
     <a class="example-icon login favorite-icon" routerLink="/" fragment="contact" mat-button>CONTACT</a>
+    
     <a *ngIf="!isLoggedIn" [routerLink]="'/login'" aria-label="Example icon-button with a heart icon"
       class="example-icon login favorite-icon" mat-button>
       LOGIN
