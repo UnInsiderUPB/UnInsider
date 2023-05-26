@@ -27,6 +27,7 @@ public class Review {
     private Long id;
 
     @NotNull
+    @Column(length = 3000)
     private String text;
 
     @NotNull

@@ -6,6 +6,7 @@ import com.example.uninsider.model.User;
 import com.example.uninsider.model.UserRole;
 import com.example.uninsider.repo.RoleRepository;
 import com.example.uninsider.repo.UserRepository;
+import com.example.uninsider.repo.UserRoleRepository;
 import com.example.uninsider.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private UserRoleRepository userRoleRepository;
 
     @Override
     public User createUser(User user, Set<UserRole> userRoleSet) throws UserAlreadyExists {
@@ -51,6 +55,25 @@ public class UserServiceImpl implements UserService {
             System.out.println("User with id `" + user.getId() + "` not found");
             throw new UserNotFoundException("User with id `" + user.getId() + "` not found");
         }
+
+        return this.userRepository.save(user);
+    }
+
+    @Override
+    public User updateUserRole(User user, Set<UserRole> userRoleSet) throws UserNotFoundException {
+        if (!this.userRepository.existsById(user.getId())) {
+            System.out.println("User with id `" + user.getId() + "` not found");
+            throw new UserNotFoundException("User with id `" + user.getId() + "` not found");
+        }
+
+        Set<UserRole> existingUserRoles = user.getUserRoles();
+        this.userRoleRepository.deleteAll(existingUserRoles);
+
+        for (UserRole role: userRoleSet) {
+            this.roleRepository.save(role.getRole());
+        }
+
+        user.setUserRoles(userRoleSet);
 
         return this.userRepository.save(user);
     }

@@ -18,11 +18,27 @@ UnInsider is a web platform designed to allow students to submit reviews for the
 
 ## Getting Started
 
-TODO
+```sh
+$> pwd
+$> .../UnInsider/frontend/uninsider # Angular frontend
+$> npm i
+$> # This will build the `static` pages and place them into the `views/` dir from `nodejs/`
+$> npm run watch
+
+$> pwd
+$> .../UnInsider/frontend/nodejs # Nodejs backend
+$> npm i
+$> # This will run the `nodejs` server which runs on port `4200` (same as the old Angular server)
+$> npm run watch
+
+$> # The `Spring Boot` backend is started as usual
+```
 
 ## Contributing
 
 If you'd like to contribute to this project, please fork the repository and create a pull request.
+
+A very good example of a pull request is [this one](https://github.com/UnInsiderUPB/UnInsider/pull/80). The pull request is well documented, the changes are crystal clear and it also includes a form of humor. This is the kind of pull request we are looking for.
 
 ## Credits
 

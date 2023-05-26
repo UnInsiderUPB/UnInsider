@@ -1,0 +1,40 @@
+<mat-card *ngIf="admin">
+  <mat-card-content>
+    <div class="container text-center">
+      <h1>All Users</h1>
+    </div>
+    <form class="container">
+      <mat-form-field>
+        <span matPrefix> </span>
+        <input
+          type="search"
+          style="text-align: center;"
+          matInput
+          placeholder="Search User"
+          name="search"
+          [(ngModel)]="searchItem"
+          (ngModelChange)="searchUser(searchItem)"
+        />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </form>
+    <div class="bootstrap-wrapper">
+      <div class="container text-center" *ngFor="let user of filteredUsers">
+        <div *ngIf="user.id !== admin.id">
+          <mat-card class="container text-center">
+            <mat-card-title>{{ user.username }}</mat-card-title>
+            <mat-chip-listbox>
+              <mat-chip-option
+                *ngFor="let role of roles"
+                [selected]="role === getUserRole(user) ? true : null"
+                (click)="changeRole(user, role)"
+                >{{ role }}</mat-chip-option
+              >
+            </mat-chip-listbox>
+          </mat-card>
+          <br />
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
