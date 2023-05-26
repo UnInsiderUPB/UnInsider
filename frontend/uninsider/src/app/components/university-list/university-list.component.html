@@ -1,6 +1,6 @@
 <mat-card *ngIf="user">
   <mat-card-content>
-    <form class="container" style="width: 40%;">
+    <form class="container" style="width: 50%;">
       <mat-form-field>
         <span matPrefix> </span>
         <input type="search" style="text-align: center;" matInput placeholder="Search University" name="search"
@@ -8,6 +8,7 @@
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
     </form>
+
     <div class="bootstrap-wrapper">
       <div class="container" *ngFor="let university of filteredUniversities">
         <mat-card>
@@ -33,8 +34,11 @@
         <br />
       </div>
     </div>
+
+    <button mat-fab class="add-button" style="margin-left: 7%;" *ngIf="user && getUserRole() === 'ADMIN'"
+      (click)="goToAddUniversity()">
+      <mat-icon>add</mat-icon>
+    </button>
+
   </mat-card-content>
 </mat-card>
-<button mat-fab class="add-button" *ngIf="user && getUserRole() === 'ADMIN'" (click)="goToAddUniversity()">
-  <mat-icon>add</mat-icon>
-</button>
