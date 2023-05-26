@@ -256,7 +256,7 @@ export class ReviewListComponent implements OnInit {
         class="swal2-input"
         style="width: 90%; height: 300px; font-size: 16px;"
         placeholder="Text">
-        ${review.text}
+        ${review.text.replace(/^[ \t]+/gm, '').replace(/ +/g, ' ').replace(/\n{3,}/g, '\n').replace(/^\s*$/gm, '').trimEnd()}
       </textarea>
       <div id="checkboxes">
         ${this.getMappingKeys
@@ -282,7 +282,12 @@ export class ReviewListComponent implements OnInit {
           this.inputText = (
             document.getElementById('swal-input') as HTMLInputElement
           ).value;
-          // console.log(this.inputText);
+          this.inputText = this.inputText
+            .replace(/^[ \t]+/gm, '')
+            .replace(/ +/g, ' ')
+            .replace(/\n{3,}/g, '\n')
+            .replace(/^\s*$/gm, '')
+            .trimEnd();
           this.verifyText();
 
           // Update checkboxes in real time
@@ -297,8 +302,13 @@ export class ReviewListComponent implements OnInit {
         });
       },
       preConfirm: () => {
-        const text = (document.getElementById('swal-input') as HTMLInputElement)
-          .value;
+        let text = (document.getElementById('swal-input') as HTMLInputElement).value;
+        text = text
+          .replace(/^[ \t]+/gm, '')
+          .replace(/ +/g, ' ')
+          .replace(/\n{3,}/g, '\n')
+          .replace(/^\s*$/gm, '')
+          .trimEnd();
 
         this.inputText = text;
         this.verifyText();
