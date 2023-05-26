@@ -1,8 +1,12 @@
 .add-button {
     position: fixed;
     bottom: 10px;
-    left: 50%;
+    left: 47%;
     z-index: 100;
+}
+
+.add-button:hover {
+    transform: scale(1.1);
 }
 
 .liked {

@@ -119,10 +119,10 @@ export class ReviewListComponent implements OnInit {
 
     this.university = this.universityId
       ? this.universityService.getUniversityById(this.universityId).subscribe({
-          next: (data) => {
-            this.university = data;
-          },
-        })
+        next: (data) => {
+          this.university = data;
+        },
+      })
       : undefined;
 
     this.hydrateAllReviews();
@@ -163,14 +163,14 @@ export class ReviewListComponent implements OnInit {
           '/admin/university-reviews/add',
           { universityId: this.universityId },
         ])
-        .then((_) => {});
+        .then((_) => { });
     else if (user_role == 'NORMAL')
       this.router
         .navigate([
           '/user-dashboard/university-reviews/add',
           { universityId: this.universityId },
         ])
-        .then((_) => {});
+        .then((_) => { });
   }
 
   public isLiked(review: any) {
@@ -536,8 +536,11 @@ export class ReviewListComponent implements OnInit {
           }, i * 25);
         }
 
-        this.isSummarizationReady = true;
-        this.summarizationLoading = false;
+        // Wait `data.summary.length * 25` milliseconds before setting the `isSummarizationReady` variable to true
+        setTimeout(() => {
+          this.isSummarizationReady = true;
+          this.summarizationLoading = false;
+        }, data.summary.length * 25);
       },
       error: (_: any) => {
         alert('Error occurred while summarizing the text.');
