@@ -159,7 +159,37 @@ button:hover {
   0% {
     transform: translateY(3px);
   }
+
   100% {
     transform: translateY(5px);
   }
+}
+
+.gradient-bg {
+  background: radial-gradient(ellipse at center, rgb(232, 240, 254), rgb(210, 203, 203));
+  animation: pulse 2s linear infinite alternate;
+  background-position: 50% 50%;
+  background-attachment: fixed;
+}
+
+@keyframes pulse {
+  from {
+    background-size: 100% 150%;
+  }
+
+  to {
+    background-size: 150% 200%;
+  }
+}
+
+.zoom-effect {
+  transform: scale(0.975);
+  transition: 0.3s linear;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.zoom-effect:hover {
+  transform: scale(1.025);
+  transition: 0.3s linear;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
