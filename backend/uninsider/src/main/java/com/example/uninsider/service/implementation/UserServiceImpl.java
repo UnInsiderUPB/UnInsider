@@ -41,12 +41,13 @@ public class UserServiceImpl implements UserService {
         }
 
         // Create user
-        for (UserRole role: userRoleSet)
-            roleRepository.save(role.getRole());
-        user.getUserRoles().addAll(userRoleSet);
-        this.userRepository.save(user);
+        for (UserRole role: userRoleSet) {
+            this.roleRepository.save(role.getRole());
+        }
 
-        return user;
+        user.setUserRoles(userRoleSet);
+
+        return this.userRepository.save(user);
     }
 
     @Override
