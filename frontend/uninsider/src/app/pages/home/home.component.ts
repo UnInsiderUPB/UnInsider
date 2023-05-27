@@ -31,28 +31,22 @@ export class HomeComponent {
       this.windowScrolled = false;
   }
 
-  smoothScroll() {
-    return new Promise<void>((_) => {
+  scrollToTop() {
+    // Scroll to top
+    (function smoothscroll() {
       var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
       if (currentScroll > 0) {
-        window.requestAnimationFrame(() => {
-          this.smoothScroll().then(_);
-        });
+        window.requestAnimationFrame(smoothscroll);
         window.scrollTo(0, currentScroll - (currentScroll / 8));
       }
-    });
-  }
+    })();
 
-  navigateToBase() {
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => { });
-  }
-
-  async scrollToTop() {
-    // Wait for smooth scrolling to complete
-    await this.smoothScroll();
-
-    // Navigate to the `/` route
-    this.navigateToBase();
+    // [TODO]: This is a hacky way to change the route without reloading the page
+    //         Change this to a better solution if possible (wait for `smoothscroll` to finish and then change route)
+    // Set route to the base route '/' without reloading the page
+    setTimeout(() => {
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => { });
+    }, 800);
   }
 
   public toDashboard() {
