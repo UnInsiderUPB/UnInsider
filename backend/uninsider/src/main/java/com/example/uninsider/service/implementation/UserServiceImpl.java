@@ -11,6 +11,7 @@ import com.example.uninsider.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Set;
 
@@ -61,6 +62,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public User updateUserRole(User user, Set<UserRole> userRoleSet) throws UserNotFoundException {
         if (!this.userRepository.existsById(user.getId())) {
             System.out.println("User with id `" + user.getId() + "` not found");
