@@ -14,7 +14,7 @@
             <div class="field-set">
               <!-- Username -->
               <mat-form-field appearance="fill" class="full-width">
-                <mat-icon class="icon-login">person_pin</mat-icon>
+                <mat-icon class="icon-login" style="margin-bottom: -1.5%;">person_pin</mat-icon>
                 <input
                   [(ngModel)]="user.username"
                   class="form-input"
@@ -22,7 +22,7 @@
                   id="txt-input"
                   matInput
                   name="username"
-                  placeholder="@Username"
+                  placeholder="Username"
                 />
                 <button (click)="user.username=''" *ngIf="user.username" aria-label="Clear" class="btn-clear" mat-icon-button
                         matSuffix>
@@ -32,7 +32,7 @@
 
               <!-- Password -->
               <mat-form-field appearance="fill" class="full-width">
-                <mat-icon class="icon-login"> vpn_key</mat-icon>
+                <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> vpn_key</mat-icon>
 
                 <input
                   [(ngModel)]="user.password"
@@ -41,7 +41,7 @@
                   id="txt-input"
                   matInput
                   name="password"
-                  placeholder="@Password"
+                  placeholder="Password"
                   type="password"
                 />
 
@@ -56,7 +56,7 @@
 
               <!-- First name -->
               <mat-form-field appearance="fill" class="full-width">
-                <mat-icon class="icon-login"> first_page</mat-icon>
+                <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> first_page</mat-icon>
 
                 <input
                   [(ngModel)]="user.firstName"
@@ -65,7 +65,7 @@
                   id="txt-input"
                   matInput
                   name="firstname"
-                  placeholder="@FirstName"
+                  placeholder="First name"
                 />
                 <button (click)="user.firstName=''" *ngIf="user.firstName" aria-label="Clear" class="btn-clear" mat-icon-button
                         matSuffix>
@@ -76,7 +76,7 @@
 
               <!-- Last name -->
               <mat-form-field appearance="fill" class="full-width">
-                <mat-icon class="icon-login"> last_page</mat-icon>
+                <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> last_page</mat-icon>
 
                 <input
                   [(ngModel)]="user.lastName"
@@ -85,7 +85,7 @@
                   id="txt-input"
                   matInput
                   name="lastname"
-                  placeholder="@LastName"
+                  placeholder="Last name"
                 />
 
                 <button (click)="user.lastName=''" *ngIf="user.lastName" aria-label="Clear" class="btn-clear" mat-icon-button
@@ -96,7 +96,7 @@
 
               <!-- Email -->
               <mat-form-field appearance="fill" class="full-width">
-                <mat-icon class="icon-login"> email</mat-icon>
+                <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> email</mat-icon>
                 <input
                   [(ngModel)]="user.email"
                   class="form-input"
@@ -104,7 +104,7 @@
                   id="txt-input"
                   matInput
                   name="email"
-                  placeholder="@Email"
+                  placeholder="Email"
                 />
                 <button (click)="user.email=''" *ngIf="user.email" aria-label="Clear" class="btn-clear" mat-icon-button
                         matSuffix>
@@ -115,7 +115,7 @@
 
               <!-- Phone -->
               <mat-form-field appearance="fill" class="full-width">
-                <mat-icon class="icon-login"> call</mat-icon>
+                <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> call</mat-icon>
                 <input
                   [(ngModel)]="user.phone"
                   class="form-input"
@@ -123,7 +123,7 @@
                   id="txt-input"
                   matInput
                   name="phone"
-                  placeholder="@PhoneNumber"
+                  placeholder="Phone number"
 
                 />
                 <button (click)="user.phone=''" *ngIf="user.phone" aria-label="Clear" class="btn-clear" mat-icon-button
