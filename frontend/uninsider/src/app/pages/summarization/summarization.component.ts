@@ -3,9 +3,7 @@ import { SummarizationService } from 'src/app/services/summarization.service';
 
 const MIN_CHARS = 50;
 
-// [TODO]
-//
-// In this current version, the first request takes a long time to respond.
+// The first request takes a long time to respond.
 // This is because the server must download the `model` and the `tokenizer`.
 //
 // After the first request (cold-start), because we use global lazy-initialization,

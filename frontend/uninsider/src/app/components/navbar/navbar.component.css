@@ -24,6 +24,11 @@ a {
   outline: none;
 }
 
+.example-icon:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+}
+
 .example-icon.register {
   margin-right: 40px;
 }

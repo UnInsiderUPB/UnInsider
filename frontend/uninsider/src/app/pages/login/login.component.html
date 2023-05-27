@@ -1,57 +1,59 @@
-<div class="bootstrap-wrapper">
-  <div class="container">
-    <div class="row" style="margin-top: 20px;">
-      <div class="col-md-6 offset-md-3">
+<body class="gradient-bg">
+  <div class="bootstrap-wrapper gradient-bg">
+    <div class="container">
+      <div class="row" style="margin-top: 25px;">
+        <div class="col-md-6 offset-md-3">
 
-        <form (ngSubmit)="formSubmit()" class="form">
-          <div class="con">
-            <header class="head-form">
-              <h2>Log In</h2>
-              <p>login here using your username and password</p>
-            </header>
-            <br>
+          <form (ngSubmit)="formSubmit()" class="form" class="zoom-effect">
+            <div class="con">
+              <header class="head-form">
+                <h2>Log In</h2>
+                <p>login here using your username and password</p>
+              </header>
+              <br>
 
-            <div class="field-set">
-              <mat-form-field appearance="fill" class="full-width">
-                <!--   user name -->
-                <mat-icon class="icon-login" style="margin-bottom: -1.5%;">person_pin</mat-icon>
-                <input [(ngModel)]="loginData.username" class="form-input" id="txt-input" matInput name="username"
-                  placeholder="Username" required />
-                <button (click)="loginData.username=''" *ngIf="loginData.username" aria-label="Clear" class="btn-clear"
-                  mat-icon-button matSuffix>
-                  <mat-icon>close</mat-icon>
-                </button>
-              </mat-form-field>
+              <div class="field-set">
+                <mat-form-field appearance="fill" class="full-width">
+                  <!--   user name -->
+                  <mat-icon class="icon-login" style="margin-bottom: -1.5%;">person_pin</mat-icon>
+                  <input [(ngModel)]="loginData.username" class="form-input" id="txt-input" matInput name="username"
+                    placeholder="Username" required />
+                  <button (click)="loginData.username=''" *ngIf="loginData.username" aria-label="Clear"
+                    class="btn-clear" mat-icon-button matSuffix>
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </mat-form-field>
 
-              <!-- Password -->
-              <mat-form-field appearance="fill" class="full-width">
-                <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> vpn_key</mat-icon>
+                <!-- Password -->
+                <mat-form-field appearance="fill" class="full-width">
+                  <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> vpn_key</mat-icon>
 
-                <input [(ngModel)]="loginData.password" class="form-input" id="txt-input" matInput name="password"
-                  placeholder="Password" required type="password" />
-                <button (click)="loginData.password=''" *ngIf="loginData.password" aria-label="Clear" class="btn-clear"
-                  mat-icon-button matSuffix>
-                  <mat-icon>close</mat-icon>
-                </button>
-              </mat-form-field>
+                  <input [(ngModel)]="loginData.password" class="form-input" id="txt-input" matInput name="password"
+                    placeholder="Password" required type="password" />
+                  <button (click)="loginData.password=''" *ngIf="loginData.password" aria-label="Clear"
+                    class="btn-clear" mat-icon-button matSuffix>
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </mat-form-field>
 
-              <div class="text-center">
-                <button class="btn log-in" mat-raised-button type="submit" w3-light-grey>Login</button>
-              </div>
-              <div class="other">
-                <button class="btn submits" mat-raised-button type="reset" w3-light-grey>
-                  <mat-icon> clear_all</mat-icon>
-                  Clear
-                </button>
-                <button class="btn submits" mat-raised-button routerLink='/signup' w3-light-grey>Sign Up
-                  <mat-icon>person_add</mat-icon>
-                </button>
+                <div class="text-center">
+                  <button class="btn log-in" mat-raised-button type="submit" w3-light-grey>Login</button>
+                </div>
+                <div class="other">
+                  <button class="btn submits" mat-raised-button type="reset" w3-light-grey>
+                    <mat-icon> clear_all</mat-icon>
+                    Clear
+                  </button>
+                  <button class="btn submits" mat-raised-button routerLink='/signup' w3-light-grey>Sign Up
+                    <mat-icon>person_add</mat-icon>
+                  </button>
 
+                </div>
               </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</body>
