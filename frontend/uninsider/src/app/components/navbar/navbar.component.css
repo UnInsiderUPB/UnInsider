@@ -1,6 +1,17 @@
+/* Fonts Form Google Font ::- https://fonts.google.com/  -:: */
+@import url('https://fonts.googleapis.com/css?family=Abel|Abril+Fatface|Alegreya|Arima+Madurai|Dancing+Script|Dosis|Merriweather|Oleo+Script|Overlock|PT+Serif|Pacifico|Playball|Playfair+Display|Share|Unica+One|Vibur');
+
+
 .example-spacer {
   flex: 1 1 auto;
   background-color: rgb(200, 200, 200);
+}
+
+a {
+  font-size: 250%;
+  font-family: 'Playfair Display', serif;
+  color: #3e403f;
+  font-weight: bold;
 }
 
 .example-icon {

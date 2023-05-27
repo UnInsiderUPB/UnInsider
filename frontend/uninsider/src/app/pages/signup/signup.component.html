@@ -2,123 +2,156 @@
   <div class="container">
     <div class="row" style="margin-top: 20px;">
       <div class="col-md-6 offset-md-3">
-        <mat-card>
-          <div class="logo text-center">
-            <img src="../../../assets/logo.PNG" alt=""/>
-          </div>
 
-          <h1 class="text-center">Register Here</h1>
+        <form (ngSubmit)="formSubmit()" [formGroup]="registerForm">
+          <div class="con">
+            <header class="head-form">
+              <h2>Register</h2>
+              <p>register here to create your account</p>
+            </header>
+            <br>
 
+            <div class="field-set">
+              <!-- Username -->
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-icon class="icon-login" style="margin-bottom: -1.5%;">person_pin</mat-icon>
+                <input
+                  [(ngModel)]="user.username"
+                  class="form-input"
+                  formControlName="username"
+                  id="txt-input"
+                  matInput
+                  name="username"
+                  placeholder="Username"
+                />
+                <button (click)="user.username=''" *ngIf="user.username" aria-label="Clear" class="btn-clear" mat-icon-button
+                        matSuffix>
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-form-field>
 
-          <form (ngSubmit)="formSubmit()" [formGroup]="registerForm">
-            <!-- Username -->
-            <mat-form-field class="full-width" appearance="outline">
-              <mat-label>Username</mat-label>
-              <input
-                matInput
-                formControlName="username"
-                [(ngModel)]="user.username"
-                name="username"
-                placeholder="Enter here"
-              />
-              <button *ngIf="user.username" matSuffix mat-icon-button aria-label="Clear" (click)="user.username=''">
-                <mat-icon>close</mat-icon>
-              </button>
-            </mat-form-field>
+              <!-- Password -->
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> vpn_key</mat-icon>
 
-            <!-- Password -->
-            <mat-form-field class="full-width" appearance="outline">
-              <mat-label>Password</mat-label>
-              <input
-                matInput
-                [(ngModel)]="user.password"
-                formControlName="password"
-                name="password"
-                placeholder="Enter here"
-                type="password"
-              />
+                <input
+                  [(ngModel)]="user.password"
+                  class="form-input"
+                  formControlName="password"
+                  id="txt-input"
+                  matInput
+                  name="password"
+                  placeholder="Password"
+                  type="password"
+                />
 
-              <button *ngIf="user.password" matSuffix mat-icon-button aria-label="Clear" (click)="user.password=''">
-                <mat-icon>close</mat-icon>
-              </button>
+                <button (click)="user.password=''" *ngIf="user.password" aria-label="Clear" class="btn-clear" mat-icon-button
+                        matSuffix>
+                  <mat-icon>close</mat-icon>
+                </button>
 
-              <mat-error *ngIf="registerForm.value.password"> {{errorPassword}}
-              </mat-error>
-            </mat-form-field>
+                <mat-error *ngIf="registerForm.value.password"> {{errorPassword}}
+                </mat-error>
+              </mat-form-field>
 
-            <!-- First name -->
-            <mat-form-field class="full-width" appearance="outline">
-              <mat-label>First name</mat-label>
-              <input
-                matInput
-                formControlName="firstname"
-                name="firstname"
-                placeholder="Enter here"
-                [(ngModel)]="user.firstName"
+              <!-- First name -->
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> first_page</mat-icon>
 
-              />
-              <button *ngIf="user.firstName" matSuffix mat-icon-button aria-label="Clear" (click)="user.firstName=''">
-                <mat-icon>close</mat-icon>
-              </button>
+                <input
+                  [(ngModel)]="user.firstName"
+                  class="form-input"
+                  formControlName="firstname"
+                  id="txt-input"
+                  matInput
+                  name="firstname"
+                  placeholder="First name"
+                />
+                <button (click)="user.firstName=''" *ngIf="user.firstName" aria-label="Clear" class="btn-clear" mat-icon-button
+                        matSuffix>
+                  <mat-icon>close</mat-icon>
+                </button>
 
-            </mat-form-field>
+              </mat-form-field>
 
-            <!-- Last name -->
-            <mat-form-field class="full-width" appearance="outline">
-              <mat-label>Last name</mat-label>
-              <input
-                matInput
-                formControlName="lastname"
-                name="lastname"
-                placeholder="Enter here"
-                [(ngModel)]="user.lastName"
-              />
-              <button *ngIf="user.lastName" matSuffix mat-icon-button aria-label="Clear" (click)="user.lastName=''">
-                <mat-icon>close</mat-icon>
-              </button>
-            </mat-form-field>
+              <!-- Last name -->
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> last_page</mat-icon>
 
-            <!-- Email -->
-            <mat-form-field class="full-width" appearance="outline">
-              <mat-label>Email address</mat-label>
-              <input
-                matInput
-                formControlName="email"
-                name="email"
-                placeholder="Enter here"
-                [(ngModel)]="user.email"
-              />
-              <button *ngIf="user.email" matSuffix mat-icon-button aria-label="Clear" (click)="user.email=''">
-                <mat-icon>close</mat-icon>
-              </button>
-              <mat-error *ngIf="registerForm.value.email">{{emailError}}</mat-error>
-            </mat-form-field>
+                <input
+                  [(ngModel)]="user.lastName"
+                  class="form-input"
+                  formControlName="lastname"
+                  id="txt-input"
+                  matInput
+                  name="lastname"
+                  placeholder="Last name"
+                />
 
-            <!-- Phone -->
-            <mat-form-field class="full-width" appearance="outline">
-              <mat-label>Phone number</mat-label>
-              <input
-                matInput
-                formControlName="phone"
-                name="phone"
-                placeholder="Enter here"
-                [(ngModel)]="user.phone"
+                <button (click)="user.lastName=''" *ngIf="user.lastName" aria-label="Clear" class="btn-clear" mat-icon-button
+                        matSuffix>
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-form-field>
 
-              />
-              <button *ngIf="user.phone" matSuffix mat-icon-button aria-label="Clear" (click)="user.phone=''">
-                <mat-icon>close</mat-icon>
-              </button>
-              <mat-error *ngIf="registerForm.value.phone">{{phoneError}}</mat-error>
+              <!-- Email -->
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> email</mat-icon>
+                <input
+                  [(ngModel)]="user.email"
+                  class="form-input"
+                  formControlName="email"
+                  id="txt-input"
+                  matInput
+                  name="email"
+                  placeholder="Email"
+                />
+                <button (click)="user.email=''" *ngIf="user.email" aria-label="Clear" class="btn-clear" mat-icon-button
+                        matSuffix>
+                  <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="registerForm.value.email">{{emailError}}</mat-error>
+              </mat-form-field>
 
-            </mat-form-field>
+              <!-- Phone -->
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> call</mat-icon>
+                <input
+                  [(ngModel)]="user.phone"
+                  class="form-input"
+                  formControlName="phone"
+                  id="txt-input"
+                  matInput
+                  name="phone"
+                  placeholder="Phone number"
 
-            <div class="text-center">
-              <button type="submit" mat-raised-button color="primary">Register</button>
-              <button style="margin-left: 20px;" mat-raised-button color="accent" type="reset">Clear</button>
+                />
+                <button (click)="user.phone=''" *ngIf="user.phone" aria-label="Clear" class="btn-clear" mat-icon-button
+                        matSuffix>
+                  <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="registerForm.value.phone">{{phoneError}}</mat-error>
+
+              </mat-form-field>
+
+              <div class="text-center">
+                <button class="btn log-in" mat-raised-button type="submit" w3-light-grey>Register</button>
+              </div>
+              <div class="other">
+
+                <button class="btn submits" mat-raised-button type="reset" w3-light-grey>
+                  <mat-icon> clear_all</mat-icon>
+                  Clear
+                </button>
+                <button class="btn submits" mat-raised-button routerLink="/login" w3-light-grey>Login
+                  <mat-icon> person_pin</mat-icon>
+                </button>
+
+              </div>
+
             </div>
-
-          </form>
-        </mat-card>
+          </div>
+        </form>
       </div>
     </div>
   </div>

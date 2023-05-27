@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
 })
 export class SignupComponent {
 
-  errorPassword = "Password must contain lower-case, upper-case, numbers, and at least 9 characters!"
+  errorPassword = "Must contain lower-case, upper-case, numbers, and at least 9 chars!"
   emailError    = "This field must have an email format!"
   phoneError    = "Phone should only contain digits!"
   
