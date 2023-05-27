@@ -2,10 +2,10 @@
   <a class="example-icon" mat-button routerLink="/"><span class="title">UnInsider</span></a>
 
   <div style="margin-left: auto; margin-right: 0;">
-    <a class="example-icon login favorite-icon" routerLink="/" fragment="about" mat-button>ABOUT</a>
-    <a class="example-icon login favorite-icon" routerLink="/" fragment="team" mat-button>TEAM</a>
-    <a class="example-icon login favorite-icon" routerLink="/" fragment="work" mat-button>WORK</a>
-    <a class="example-icon login favorite-icon" routerLink="/" fragment="contact" mat-button>CONTACT</a>
+    <a class="example-icon login" routerLink="/" fragment="about" mat-button>ABOUT</a>
+    <a class="example-icon login" routerLink="/" fragment="team" mat-button>TEAM</a>
+    <a class="example-icon login" routerLink="/" fragment="work" mat-button>WORK</a>
+    <a class="example-icon login" routerLink="/" fragment="contact" mat-button>CONTACT</a>
 
     <a *ngIf="!isLoggedIn" [routerLink]="'/login'" aria-label="Example icon-button with a heart icon"
       class="example-icon login favorite-icon" mat-button>
