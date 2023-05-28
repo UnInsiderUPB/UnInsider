@@ -82,21 +82,7 @@ export class ReviewListComponent implements OnInit {
           next: (data) => {
             this.allReviews = data;
           },
-          error: (err) => {
-            if (err.status == 404) {
-              this.snack.open(
-                'No reviews found for this university and author',
-                'OK',
-                {
-                  duration: 5000,
-                }
-              );
-            } else {
-              this.snack.open('Error while fetching reviews', 'OK', {
-                duration: 5000,
-              });
-            }
-          },
+          error: (_) => { },
         });
     } else if (this.universityId) {
       // Get reviews by university id
@@ -104,17 +90,7 @@ export class ReviewListComponent implements OnInit {
         next: (data) => {
           this.allReviews = data;
         },
-        error: (err) => {
-          if (err.status == 404) {
-            this.snack.open('No reviews found for this university', 'OK', {
-              duration: 5000,
-            });
-          } else {
-            this.snack.open('Error while fetching reviews', 'OK', {
-              duration: 5000,
-            });
-          }
-        },
+        error: (_) => { },
       });
     } else if (this.userId) {
       // Get reviews by author id
@@ -122,17 +98,7 @@ export class ReviewListComponent implements OnInit {
         next: (data) => {
           this.allReviews = data;
         },
-        error: (err) => {
-          if (err.status == 404) {
-            this.snack.open('No reviews found for this author', 'OK', {
-              duration: 5000,
-            });
-          } else {
-            this.snack.open('Error while fetching reviews', 'OK', {
-              duration: 5000,
-            });
-          }
-        },
+        error: (_) => { },
       });
     } else {
       // Get all reviews
@@ -140,17 +106,7 @@ export class ReviewListComponent implements OnInit {
         next: (data) => {
           this.allReviews = data;
         },
-        error: (err) => {
-          if (err.status == 404) {
-            this.snack.open('No reviews found', 'OK', {
-              duration: 5000,
-            });
-          } else {
-            this.snack.open('Error while fetching reviews', 'OK', {
-              duration: 5000,
-            });
-          }
-        },
+        error: (_) => { },
       });
     }
   }
@@ -167,10 +123,10 @@ export class ReviewListComponent implements OnInit {
 
     this.university = this.universityId
       ? this.universityService.getUniversityById(this.universityId).subscribe({
-          next: (data) => {
-            this.university = data;
-          },
-        })
+        next: (data) => {
+          this.university = data;
+        },
+      })
       : undefined;
 
     this.hydrateAllReviews();
@@ -180,21 +136,7 @@ export class ReviewListComponent implements OnInit {
       next: (data) => {
         this.ownReviews = data;
       },
-      error: (err) => {
-        if (err.status == 404) {
-          this.snack.open(
-            'No reviews found. Add a review and next time you will see it here.',
-            'OK',
-            {
-              duration: 5000,
-            }
-          );
-        } else {
-          this.snack.open('Error while fetching reviews', 'OK', {
-            duration: 5000,
-          });
-        }
-      },
+      error: (_) => { },
     });
 
     this.reviewService.getReviewsLikedByUser(this.user.id).subscribe({
@@ -226,14 +168,14 @@ export class ReviewListComponent implements OnInit {
           '/admin/university-reviews/add',
           { universityId: this.universityId },
         ])
-        .then((_) => {});
+        .then((_) => { });
     else if (user_role == 'NORMAL')
       this.router
         .navigate([
           '/user-dashboard/university-reviews/add',
           { universityId: this.universityId },
         ])
-        .then((_) => {});
+        .then((_) => { });
   }
 
   public isLiked(review: any) {
