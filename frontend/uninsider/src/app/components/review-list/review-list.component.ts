@@ -82,6 +82,7 @@ export class ReviewListComponent implements OnInit {
           next: (data) => {
             this.allReviews = data;
           },
+          error: (_) => { },
         });
     } else if (this.universityId) {
       // Get reviews by university id
@@ -89,6 +90,7 @@ export class ReviewListComponent implements OnInit {
         next: (data) => {
           this.allReviews = data;
         },
+        error: (_) => { },
       });
     } else if (this.userId) {
       // Get reviews by author id
@@ -96,6 +98,7 @@ export class ReviewListComponent implements OnInit {
         next: (data) => {
           this.allReviews = data;
         },
+        error: (_) => { },
       });
     } else {
       // Get all reviews
@@ -103,6 +106,7 @@ export class ReviewListComponent implements OnInit {
         next: (data) => {
           this.allReviews = data;
         },
+        error: (_) => { },
       });
     }
   }
@@ -132,6 +136,7 @@ export class ReviewListComponent implements OnInit {
       next: (data) => {
         this.ownReviews = data;
       },
+      error: (_) => { },
     });
 
     this.reviewService.getReviewsLikedByUser(this.user.id).subscribe({
@@ -256,11 +261,18 @@ export class ReviewListComponent implements OnInit {
         class="swal2-input"
         style="width: 90%; height: 275px; font-size: 16px;"
         placeholder="Text">
-        ${review.text.replace(/^[ \t]+/gm, '').replace(/ +/g, ' ').replace(/\n{3,}/g, '\n').replace(/^\s*$/gm, '').trimEnd()}
+        ${review.text
+          .replace(/^[ \t]+/gm, '')
+          .replace(/ +/g, ' ')
+          .replace(/\n{3,}/g, '\n')
+          .replace(/^\s*$/gm, '')
+          .trimEnd()}
       </textarea>
       <div id="checkboxes" style="font-size: 15px;">
-        ${this.getMappingKeys.map((key, i) =>
-        `
+        ${this.getMappingKeys
+          .map(
+            (key, i) =>
+              `
           <div style="margin: 1%;">
             <image
               name="${key}"
@@ -273,7 +285,7 @@ export class ReviewListComponent implements OnInit {
             <label for="checkbox${i}">${key}</label>
           </div>
           `
-      )
+          )
           .join('')}
       </div>
       `,
@@ -307,7 +319,8 @@ export class ReviewListComponent implements OnInit {
         });
       },
       preConfirm: () => {
-        let text = (document.getElementById('swal-input') as HTMLInputElement).value;
+        let text = (document.getElementById('swal-input') as HTMLInputElement)
+          .value;
         text = text
           .replace(/^[ \t]+/gm, '')
           .replace(/ +/g, ' ')
@@ -367,10 +380,9 @@ export class ReviewListComponent implements OnInit {
               'Deleted!',
               'The review has been deleted.',
               'success'
-              ).then((_) => {
-                window.location.reload();
-              }
-            )
+            ).then((_) => {
+              window.location.reload();
+            });
           },
           error: (error) => {
             console.log(error);
