@@ -53,3 +53,7 @@ body {
   margin-bottom: 10px !important;
 }
 
+
+.fixed-top {
+  position: fixed;
+}

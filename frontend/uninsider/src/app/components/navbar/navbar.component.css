@@ -5,6 +5,11 @@
 .example-spacer {
   flex: 1 1 auto;
   background-color: rgb(200, 200, 200);
+  z-index: 999;
+}
+
+.example-spacer.fixed {
+  position: fixed;
 }
 
 a {
@@ -16,8 +21,8 @@ a {
 
 .example-icon {
   font-size: 18px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 10px;
+  margin-bottom: 20px;
   margin-left: 10px;
   margin-right: 20px;
   text-decoration: none;
