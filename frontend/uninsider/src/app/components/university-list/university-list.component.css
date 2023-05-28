@@ -1,6 +1,101 @@
+
+.text-center {
+  justify-content: center;
+  align-items: center;
+}
+
+
+.liked {
+  background-color: 'primary';
+}
+
+header {
+  margin: 0 auto -3px;
+  text-align: center;
+}
+
+.like_btn {
+
+}
+
+.btn-like-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+
 .add-button {
-    position: fixed;
-    bottom: 10px;
-    left: 50%;
-    z-index: 100;
+  background-color: black;
+  position: fixed;
+  bottom: 10px;
+  left: 60%;
+}
+
+.add-button:hover {
+  transform: scale(1.1);
+}
+
+.submits {
+  width: 48%;
+  display: inline-block;
+  float: left;
+  margin-left: 2%;
+}
+
+button:hover {
+  transform: translatey(3px);
+  box-shadow: none;
+}
+
+button:hover {
+  animation: ani9 0.4s ease-in-out infinite alternate;
+}
+
+header h1 {
+  font-size: 180%;
+  font-weight: bold;
+  font-family: 'Playfair Display', serif;
+  color: #3e403f;
+}
+
+header p {
+  letter-spacing: 0.05em;
+}
+
+.disliked {
+  background-color: 'primary';
+}
+
+
+/* Fonts Form Google Font ::- https://fonts.google.com/  -:: */
+@import url('https://fonts.googleapis.com/css?family=Abel|Abril+Fatface|Alegreya|Arima+Madurai|Dancing+Script|Dosis|Merriweather|Oleo+Script|Overlock|PT+Serif|Pacifico|Playball|Playfair+Display|Share|Unica+One|Vibur');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.all {
+  animation: pulse 2s linear infinite alternate;
+  background-attachment: fixed;
+  width: 1100px;
+  min-height: 400px;
+  height: auto;
+  border-radius: 5px;
+  margin: 2% auto;
+  box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);
+  padding: 2%;
+  background-image: linear-gradient(-225deg, lightgrey 60%, darkgrey 80%);
+}
+
+.con {
+  width: 500px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: -20px auto 0;
 }

@@ -1,38 +1,40 @@
-<mat-card *ngIf="admin">
+<mat-card *ngIf="admin" class="all">
   <mat-card-content>
     <div class="container text-center">
-      <h1>All Users</h1>
+      <header>
+        <h1>All Users</h1>
+      </header>
     </div>
     <form class="container">
       <mat-form-field>
         <span matPrefix> </span>
         <input
-          type="search"
-          style="text-align: center;"
-          matInput
-          placeholder="Search User"
-          name="search"
-          [(ngModel)]="searchItem"
           (ngModelChange)="searchUser(searchItem)"
+          [(ngModel)]="searchItem"
+          matInput
+          name="search"
+          placeholder="Search User"
+          style="text-align: center;"
+          type="search"
         />
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
     </form>
     <div class="bootstrap-wrapper">
-      <div class="container text-center" *ngFor="let user of filteredUsers">
+      <div *ngFor="let user of filteredUsers" class="container text-center">
         <div *ngIf="user.id !== admin.id">
-          <mat-card class="container text-center">
+          <mat-card class="container text-center" style="background-color: lightgrey">
             <mat-card-title>{{ user.username }}</mat-card-title>
             <mat-chip-listbox>
-              <mat-chip-option
-                *ngFor="let role of roles"
-                [selected]="role === getUserRole(user) ? true : null"
-                (click)="changeRole(user, role)"
-                >{{ role }}</mat-chip-option
+              <mat-chip-option (click)="changeRole(user, role)"
+                               *ngFor="let role of roles"
+                               [selected]="role === getUserRole(user) ? true : null"
+                               style="background-color: darkgrey;"
+              >{{ role }}</mat-chip-option
               >
             </mat-chip-listbox>
           </mat-card>
-          <br />
+          <br/>
         </div>
       </div>
     </div>

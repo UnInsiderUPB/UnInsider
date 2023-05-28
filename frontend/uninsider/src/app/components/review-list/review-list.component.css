@@ -1,21 +1,48 @@
 .add-button {
-    position: fixed;
-    bottom: 10px;
-    left: 47%;
-    z-index: 100;
+  position: fixed;
+  bottom: 10px;
+  left: 47%;
+  z-index: 100;
 }
 
 .add-button:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .liked {
-    background-color: 'primary';
+  background-color: 'primary';
 }
 
 header {
   margin: 0 auto -3px;
   text-align: center;
+}
+
+.like_btn {
+
+}
+
+.btn-like-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px;
+}
+
+
+.submits {
+  width: 48%;
+  display: inline-block;
+  float: left;
+  margin-left: 2%;
+}
+
+button:hover {
+  transform: translatey(3px);
+  box-shadow: none;
+}
+
+button:hover {
+  animation: ani9 0.4s ease-in-out infinite alternate;
 }
 
 header h1 {
@@ -28,8 +55,9 @@ header h1 {
 header p {
   letter-spacing: 0.05em;
 }
+
 .disliked {
-    background-color: 'primary';
+  background-color: 'primary';
 }
 
 
@@ -64,4 +92,18 @@ header p {
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
   margin: -20px auto 0;
+}
+
+.button_plus {
+  width: 35px;
+  height: 35px;
+  background: #fff;
+  border-radius: 50%;
+  /* Mittig */
+  top: 50%;
+  left: 50%;
+}
+
+.add-button {
+  background-color: black;
 }
