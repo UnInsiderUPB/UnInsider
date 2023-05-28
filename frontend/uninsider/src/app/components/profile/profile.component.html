@@ -1,94 +1,93 @@
-<mat-card *ngIf="user">
+<mat-card *ngIf="user" class="all">
   <mat-card-content>
-    <h1>Your profile details</h1>
-    <div class="bootstrap-wrapper">
-      <div class="container">
-        <div class="container text-center">
-          <img class="profile-image" alt="" src="../../../assets/profile.jpg">
+
+    <form (ngSubmit)="formSubmit()">
+      <div class="con">
+        <header>
+          <h1>Your profile details</h1>
+          <img alt="" class="profile-image" src="../../../assets/profile.jpg">
           <h1 class="mt20"> {{ user.firstName }} {{ user.lastName }} </h1>
-        </div>
-        <div class="row">
-          <div class="col-md-10 offset-md-1">
-            <form class="container text-center" (ngSubmit)="formSubmit()">
-              <div>
-                <!-- First name -->
-                <mat-form-field class="full-width" appearance="outline">
-                  <mat-label>First Name</mat-label>
-                  <input
-                    [(ngModel)]="formInput.firstName"
-                    name="firstName"
-                    matInput
-                  />
-                </mat-form-field>
-              </div>
+        </header>
 
-              <div>
-                <!-- Last name -->
-                <mat-form-field class="full-width" appearance="outline">
-                  <mat-label>Last Name</mat-label>
-                  <input
-                    [(ngModel)]="formInput.lastName"
-                    name="lastName"
-                    matInput
-                  />
-                </mat-form-field>
-              </div>
+        <div class="field-set">
 
-              <div>
-                <!-- Email -->
-                <mat-form-field class="full-width" appearance="outline">
-                  <mat-label>E-mail address</mat-label>
-                  <input [(ngModel)]="formInput.email" name="email" matInput />
-                </mat-form-field>
-              </div>
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> first_page</mat-icon>
 
-              <div>
-                <!-- Phone -->
-                <mat-form-field class="full-width" appearance="outline">
-                  <mat-label>Phone number</mat-label>
-                  <input [(ngModel)]="formInput.phone" name="phone" matInput />
-                </mat-form-field>
-              </div>
+            <input
+              [(ngModel)]="formInput.firstName" class="form-input"
+              id="txt-input"
+              matInput
+              name="firstName"
+              placeholder="First Name"
+            />
+          </mat-form-field>
 
-              <div>
-                <!-- Password -->
-                <mat-form-field class="full-width" appearance="outline">
-                  <mat-label>New password</mat-label>
-                  <input
-                    [(ngModel)]="formInput.password"
-                    name="password"
-                    type="password"
-                    matInput
-                  />
-                  <button
-                    *ngIf="formInput.password"
-                    matSuffix
-                    mat-icon-button
-                    aria-label="Clear"
-                    (click)="formInput.password = ''"
-                  >
-                    <mat-icon>close</mat-icon>
-                  </button>
-                </mat-form-field>
-              </div>
-              <mat-card-actions class="text-center">
-                <button mat-raised-button type="submit" color="primary">
-                  UPDATE
-                </button>
-                <button
-                  mat-raised-button
-                  style="margin-left: 20px"
-                  color="accent"
-                  type="button"
-                  (click)="resetForm()"
-                >
-                  RESET
-                </button>
-              </mat-card-actions>
-            </form>
+          <!-- Last name -->
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> last_page</mat-icon>
+
+            <input
+              [(ngModel)]="formInput.lastName" class="form-input"
+              id="txt-input"
+              matInput
+              name="lastName"
+              placeholder="Last Name"
+            />
+          </mat-form-field>
+
+
+          <!-- Email -->
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> email</mat-icon>
+            <input [(ngModel)]="formInput.email" class="form-input" id="txt-input" matInput name="email"
+                   placeholder="Email"/>
+          </mat-form-field>
+
+          <!-- Phone -->
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> call</mat-icon>
+
+            <input [(ngModel)]="formInput.phone" class="form-input" id="txt-input" matInput name="phone"
+                   placeholder="Phone"/>
+          </mat-form-field>
+
+          <!-- Password -->
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> vpn_key</mat-icon>
+
+            <input
+              [(ngModel)]="formInput.password" class="form-input"
+              id="txt-input"
+              matInput
+              name="password"
+              placeholder="Password"
+              type="password"
+            />
+            <button
+              (click)="formInput.password = ''"
+              *ngIf="formInput.password"
+              aria-label="Clear"
+              mat-icon-button
+              matSuffix
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <div class="other">
+            <button class="btn submits" mat-raised-button type="reset" w3-light-grey>
+              <mat-icon> clear_all</mat-icon>
+              Clear
+            </button>
+            <button class="btn submits" mat-raised-button
+                    w3-light-grey>Update
+              <mat-icon>update</mat-icon>
+            </button>
           </div>
         </div>
       </div>
-    </div>
+    </form>
+
   </mat-card-content>
 </mat-card>

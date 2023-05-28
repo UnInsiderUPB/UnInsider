@@ -1,4 +1,4 @@
-<mat-card *ngIf="user">
+<mat-card *ngIf="user" class="all">
   <mat-card-content>
     <div class="bootstrap-wrapper">
       <div class="container">
@@ -7,41 +7,43 @@
 
           <div class="col-md-8">
             <div class="container text-center">
-              <h1>Add Review</h1>
+              <header style="align-self: center">
+                <h1>Add Review</h1>
+
+              </header>
             </div>
 
-            <form class="container" (ngSubmit)="formSubmit()">
+            <form (ngSubmit)="formSubmit()" class="container">
               <div style="width: 100%;">
                 <!-- Review text -->
-                <mat-form-field class="full-width" appearance="outline" style="width: 100%;">
+                <mat-form-field appearance="outline" class="full-width" style="width: 100%;">
                   <mat-label>Review Text</mat-label>
-                  <textarea [(ngModel)]="inputText" (ngModelChange)="verifyText()" name="text" style="font-size: 16px;"
-                    rows="10" matInput></textarea>
+                  <textarea (ngModelChange)="verifyText()" [(ngModel)]="inputText" matInput name="text"
+                            rows="10" style="font-size: 16px;"></textarea>
                 </mat-form-field>
               </div>
 
               <div class="text-center">
-                <button type="submit" mat-raised-button color="primary" [disabled]="!isFormValid()">
+                <button [disabled]="!isFormValid()" color="primary" mat-raised-button type="submit">
                   Add
                 </button>
               </div>
             </form>
           </div>
 
-          <!-- [TODO]: Make this `div` scrollable -->
           <div class="col-md-4">
-            <div class="container" style="width: 100%; margin-top: 20%; font-size: 16px;">
+            <div class="container" style="width: 100%; margin-top: 20%; font-size: 15px;">
               <div *ngFor="let key of getMappingKeys; let i = index">
                 <img *ngIf="passed.includes(key); else emptyCheck" alt="checkbox{{i}}" src="assets/checkbox_filled.png"
-                style="width: 8%; margin-right: 2%;">
-                
+                     style="width: 8%; margin: 2%;">
+
                 <ng-template #emptyCheck>
                   <img
-                  alt="checkbox{{i}}"
-                  src="assets/checkbox_empty.png"
-                  style="width: 8%; margin-right: 2%;">
+                    alt="checkbox{{i}}"
+                    src="assets/checkbox_empty.png"
+                    style="width: 8%; margin: 2%;">
                 </ng-template>
-                
+
                 <label for="checkbox{{i}}">{{key}}</label>
               </div>
             </div>
