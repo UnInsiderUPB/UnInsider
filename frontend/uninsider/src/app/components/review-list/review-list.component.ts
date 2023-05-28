@@ -82,12 +82,38 @@ export class ReviewListComponent implements OnInit {
           next: (data) => {
             this.allReviews = data;
           },
+          error: (err) => {
+            if (err.status == 404) {
+              this.snack.open(
+                'No reviews found for this university and author',
+                'OK',
+                {
+                  duration: 5000,
+                }
+              );
+            } else {
+              this.snack.open('Error while fetching reviews', 'OK', {
+                duration: 5000,
+              });
+            }
+          },
         });
     } else if (this.universityId) {
       // Get reviews by university id
       this.reviewService.getReviewsByUniversityId(this.universityId).subscribe({
         next: (data) => {
           this.allReviews = data;
+        },
+        error: (err) => {
+          if (err.status == 404) {
+            this.snack.open('No reviews found for this university', 'OK', {
+              duration: 5000,
+            });
+          } else {
+            this.snack.open('Error while fetching reviews', 'OK', {
+              duration: 5000,
+            });
+          }
         },
       });
     } else if (this.userId) {
@@ -96,12 +122,34 @@ export class ReviewListComponent implements OnInit {
         next: (data) => {
           this.allReviews = data;
         },
+        error: (err) => {
+          if (err.status == 404) {
+            this.snack.open('No reviews found for this author', 'OK', {
+              duration: 5000,
+            });
+          } else {
+            this.snack.open('Error while fetching reviews', 'OK', {
+              duration: 5000,
+            });
+          }
+        },
       });
     } else {
       // Get all reviews
       this.reviewService.getAllReviews().subscribe({
         next: (data) => {
           this.allReviews = data;
+        },
+        error: (err) => {
+          if (err.status == 404) {
+            this.snack.open('No reviews found', 'OK', {
+              duration: 5000,
+            });
+          } else {
+            this.snack.open('Error while fetching reviews', 'OK', {
+              duration: 5000,
+            });
+          }
         },
       });
     }
@@ -119,10 +167,10 @@ export class ReviewListComponent implements OnInit {
 
     this.university = this.universityId
       ? this.universityService.getUniversityById(this.universityId).subscribe({
-        next: (data) => {
-          this.university = data;
-        },
-      })
+          next: (data) => {
+            this.university = data;
+          },
+        })
       : undefined;
 
     this.hydrateAllReviews();
@@ -131,6 +179,21 @@ export class ReviewListComponent implements OnInit {
     this.reviewService.getReviewsByAuthorId(this.user.id).subscribe({
       next: (data) => {
         this.ownReviews = data;
+      },
+      error: (err) => {
+        if (err.status == 404) {
+          this.snack.open(
+            'No reviews found. Add a review and next time you will see it here.',
+            'OK',
+            {
+              duration: 5000,
+            }
+          );
+        } else {
+          this.snack.open('Error while fetching reviews', 'OK', {
+            duration: 5000,
+          });
+        }
       },
     });
 
@@ -163,14 +226,14 @@ export class ReviewListComponent implements OnInit {
           '/admin/university-reviews/add',
           { universityId: this.universityId },
         ])
-        .then((_) => { });
+        .then((_) => {});
     else if (user_role == 'NORMAL')
       this.router
         .navigate([
           '/user-dashboard/university-reviews/add',
           { universityId: this.universityId },
         ])
-        .then((_) => { });
+        .then((_) => {});
   }
 
   public isLiked(review: any) {
@@ -256,11 +319,18 @@ export class ReviewListComponent implements OnInit {
         class="swal2-input"
         style="width: 90%; height: 275px; font-size: 16px;"
         placeholder="Text">
-        ${review.text.replace(/^[ \t]+/gm, '').replace(/ +/g, ' ').replace(/\n{3,}/g, '\n').replace(/^\s*$/gm, '').trimEnd()}
+        ${review.text
+          .replace(/^[ \t]+/gm, '')
+          .replace(/ +/g, ' ')
+          .replace(/\n{3,}/g, '\n')
+          .replace(/^\s*$/gm, '')
+          .trimEnd()}
       </textarea>
       <div id="checkboxes" style="font-size: 15px;">
-        ${this.getMappingKeys.map((key, i) =>
-        `
+        ${this.getMappingKeys
+          .map(
+            (key, i) =>
+              `
           <div style="margin: 1%;">
             <image
               name="${key}"
@@ -273,7 +343,7 @@ export class ReviewListComponent implements OnInit {
             <label for="checkbox${i}">${key}</label>
           </div>
           `
-      )
+          )
           .join('')}
       </div>
       `,
@@ -307,7 +377,8 @@ export class ReviewListComponent implements OnInit {
         });
       },
       preConfirm: () => {
-        let text = (document.getElementById('swal-input') as HTMLInputElement).value;
+        let text = (document.getElementById('swal-input') as HTMLInputElement)
+          .value;
         text = text
           .replace(/^[ \t]+/gm, '')
           .replace(/ +/g, ' ')
@@ -367,10 +438,9 @@ export class ReviewListComponent implements OnInit {
               'Deleted!',
               'The review has been deleted.',
               'success'
-              ).then((_) => {
-                window.location.reload();
-              }
-            )
+            ).then((_) => {
+              window.location.reload();
+            });
           },
           error: (error) => {
             console.log(error);
