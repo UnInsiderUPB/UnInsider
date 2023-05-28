@@ -52,6 +52,13 @@ header h1 {
   color: #3e403f;
 }
 
+header h2 {
+  font-size: 150%;
+  font-weight: bold;
+  font-family: 'Playfair Display', serif;
+  color: #3e403f;
+}
+
 header p {
   letter-spacing: 0.05em;
 }

@@ -250,6 +250,7 @@ export class ReviewListComponent implements OnInit {
     Swal.fire({
       width: '800px',
       title: 'Edit review',
+      background: 'rgb(230, 230, 230)',
       html: `
       <textarea
         id="swal-input"

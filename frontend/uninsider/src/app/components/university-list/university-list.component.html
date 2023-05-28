@@ -3,8 +3,8 @@
     <form class="container" style="width: 50%;">
       <mat-form-field>
         <span matPrefix> </span>
-        <input (ngModelChange)="searchUniversity(searchItem)" [(ngModel)]="searchItem" matInput name="search" placeholder="Search University"
-               style="text-align: center;" type="search"/>
+        <input (ngModelChange)="searchUniversity(searchItem)" [(ngModel)]="searchItem" matInput name="search"
+          placeholder="Search University" style="text-align: center;" type="search" />
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
     </form>
@@ -13,9 +13,9 @@
       <div class="row">
 
         <div *ngFor="let university of filteredUniversities" class="container">
-          <mat-card style="background-color: lightgrey" w3-light-grey>
+          <mat-card style="background-color: lightgrey;" w3-light-grey>
             <div>
-              <header (click)="goToReviews(university)">
+              <header (click)="goToReviews(university)" style="cursor: pointer">
                 <h1>{{ university.name }} -
                   {{ university.location }}</h1>
                 <p>{{
@@ -23,7 +23,7 @@
                   }}</p>
               </header>
             </div>
-            <br/>
+            <br />
             <mat-card-actions *ngIf="getUserRole() === 'ADMIN'" align="end">
               <button (click)="editUniversity(university)" mat-button>
                 EDIT
@@ -33,12 +33,11 @@
               </button>
             </mat-card-actions>
           </mat-card>
-          <br/>
+          <br />
         </div>
       </div>
 
-      <button (click)="goToAddUniversity()"
-              *ngIf="user && getUserRole() === 'ADMIN'" class="add-button" mat-fab>
+      <button (click)="goToAddUniversity()" *ngIf="user && getUserRole() === 'ADMIN'" class="add-button" mat-fab>
         <mat-icon>add</mat-icon>
       </button>
 

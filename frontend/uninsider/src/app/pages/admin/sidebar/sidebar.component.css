@@ -8,7 +8,7 @@ mat-icon {
   margin-top: 25px;
   animation: pulse 2s linear infinite alternate;
   background-attachment: fixed;
-  width: 300px;
+  width: 100%;
   min-height: 200px;
   height: auto;
   border-radius: 5px;
