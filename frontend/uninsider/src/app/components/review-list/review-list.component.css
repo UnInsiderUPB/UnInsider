@@ -115,3 +115,9 @@ header p {
 .add-button {
   background-color: black;
 }
+
+.sticky-column {
+  position: sticky;
+  top: 0;
+}
+
