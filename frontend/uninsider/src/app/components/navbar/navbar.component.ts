@@ -67,12 +67,20 @@ export class NavbarComponent implements OnInit {
   }
 
   public toDashboard() {
-    // Check if the user is not logged in
+    // If the user is on the `login` or `signup` page, then redirect to the `home` page
+    const currentUrl = this.router.url;
+    if (currentUrl == '/login' || currentUrl == '/signup') {
+      this.router.navigate(['/']).then((_) => { });
+      return;
+    }
+
+    // If the user is not logged in, then redirect to the `login` page
     if (!this.login.isLoggedIn()) {
       this.router.navigate(['/login']).then((_) => { });
       return;
     }
 
+    // If the user is logged in, then redirect to the `dashboard` page
     const user_role = this.login.getUserRole();
     if (user_role == 'ADMIN')
       this.router.navigate(['/admin']).then((_) => { });
