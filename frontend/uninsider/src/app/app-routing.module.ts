@@ -7,7 +7,7 @@ import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
 import { AdminGuard } from './services/admin.guard';
 import { NormalGuard } from './services/normal.guard';
-import {SummarizationComponent} from "./pages/summarization/summarization.component";
+import { SummarizationComponent } from "./pages/summarization/summarization.component";
 import { ProfileComponent } from './components/profile/profile.component';
 import { ReviewListComponent } from './components/review-list/review-list.component';
 import { UniversityAddComponent } from './pages/admin/university-add/university-add.component';
@@ -124,4 +124,4 @@ const routes: Routes = [
   })],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

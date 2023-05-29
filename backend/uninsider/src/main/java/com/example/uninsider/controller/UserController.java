@@ -68,7 +68,8 @@ public class UserController {
 
     @PutMapping("/{username}/role/{roleName}")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public User updateUserRole(@PathVariable("username") String username, @PathVariable("roleName") String roleName) throws Exception {
+    public User updateUserRole(@PathVariable("username") String username, @PathVariable("roleName") String roleName)
+            throws Exception {
         User user = getUserByUsername(username);
         if (user == null) {
             throw new UserNotFoundException("User with username `" + username + "` not found");

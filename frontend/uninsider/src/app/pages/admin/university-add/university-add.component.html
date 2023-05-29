@@ -14,39 +14,26 @@
               <div>
                 <!-- University name -->
                 <mat-form-field appearance="fill" class="full-width">
-                  <input [(ngModel)]="formInput.name" matInput name="name" placeholder="University Name"/>
+                  <input [(ngModel)]="formInput.name" matInput name="name" placeholder="University Name" />
                 </mat-form-field>
               </div>
 
               <div>
                 <!-- University location -->
                 <mat-form-field appearance="fill" class="full-width">
-                  <input
-                    [(ngModel)]="formInput.location"
-                    matInput
-                    name="location"
-                    placeholder="University Location"
-                  />
+                  <input [(ngModel)]="formInput.location" matInput name="location" placeholder="University Location" />
                 </mat-form-field>
               </div>
 
               <div>
                 <!-- University description -->
                 <mat-form-field appearance="fill" class="full-width">
-                  <textarea
-                    [(ngModel)]="formInput.description"
-                    matInput
-                    name="description"
-                    placeholder="University Description"
-                  ></textarea>
+                  <textarea [(ngModel)]="formInput.description" matInput name="description"
+                    placeholder="University Description"></textarea>
                 </mat-form-field>
               </div>
               <div class="text-center">
-                <button
-                  [disabled]="!isFormValid()"
-                  mat-raised-button
-                  type="submit"
-                >
+                <button [disabled]="!isFormValid()" mat-raised-button type="submit">
                   Add
                 </button>
               </div>

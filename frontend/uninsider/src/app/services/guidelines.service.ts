@@ -11,17 +11,17 @@ export class GuidelinesService {
   constructor(private http: HttpClient) { }
 
   getLanguage(text: any) {
-    const data = {'text': text}
+    const data = { 'text': text }
     return this.http.post(`${baseUrl}/language`, data);
   }
 
   getProfanityWords(text: any) {
-    const data = {'text': text}
+    const data = { 'text': text }
     return this.http.post(`${baseUrl}/profanity`, data);
   }
 
   getSpellCheck(text: any) {
-    const data = {'text': text}
+    const data = { 'text': text }
     return this.http.post(`${baseUrl}/spellcheck`, data);
   }
 }

@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {Router} from '@angular/router';
-import {UserService} from '../../services/user.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   FormControl,
   FormGroup,
@@ -17,31 +17,31 @@ import Swal from 'sweetalert2';
 export class SignupComponent {
 
   errorPassword = "Must contain lower-case, upper-case, numbers, and at least 9 chars!"
-  emailError    = "This field must have an email format!"
-  phoneError    = "Phone should only contain digits!"
-  
+  emailError = "This field must have an email format!"
+  phoneError = "Phone should only contain digits!"
+
   registerForm = new FormGroup({
-    username:       new FormControl('', [Validators.required]),
-    firstname:      new FormControl('', [Validators.required]),
-    lastname:       new FormControl('', [Validators.required]),
-    email:          new FormControl('', [Validators.required, Validators.email]),
-    password:       new FormControl('', [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$')]),
-    phone:          new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
+    username: new FormControl('', [Validators.required]),
+    firstname: new FormControl('', [Validators.required]),
+    lastname: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$')]),
+    phone: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
   });
 
   constructor(
     private userService: UserService,
     private snack: MatSnackBar,
     private router: Router
-  ) {}
+  ) { }
 
   public user = {
-    username:   this.registerForm.value.username,
-    password:   this.registerForm.value.password,
-    firstName:  this.registerForm.value.firstname,
-    lastName:   this.registerForm.value.lastname,
-    email:      this.registerForm.value.email,
-    phone:      this.registerForm.value.phone
+    username: this.registerForm.value.username,
+    password: this.registerForm.value.password,
+    firstName: this.registerForm.value.firstname,
+    lastName: this.registerForm.value.lastname,
+    email: this.registerForm.value.email,
+    phone: this.registerForm.value.phone
   };
 
   ngOnInit(): void {

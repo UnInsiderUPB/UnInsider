@@ -57,7 +57,7 @@ public class ReviewController {
 
     @GetMapping("/university/{universityId}/author/{authorId}")
     public List<Review> getReviewsByUniversityIdAndAuthorId(@PathVariable("universityId") Long universityId,
-                                                          @PathVariable("authorId") Long authorId) throws Exception {
+            @PathVariable("authorId") Long authorId) throws Exception {
         return this.reviewService.getReviewsByUniversityIdAndAuthorId(universityId, authorId);
     }
 
@@ -75,25 +75,29 @@ public class ReviewController {
 
     @PutMapping("/{reviewId}/like/{userId}")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Review likeReview(@PathVariable("reviewId") Long reviewId, @PathVariable("userId") Long userId) throws Exception {
+    public Review likeReview(@PathVariable("reviewId") Long reviewId, @PathVariable("userId") Long userId)
+            throws Exception {
         return this.reviewService.likeReview(reviewId, userId);
     }
 
     @PutMapping("/{reviewId}/dislike/{userId}")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Review dislikeReview(@PathVariable("reviewId") Long reviewId, @PathVariable("userId") Long userId) throws Exception {
+    public Review dislikeReview(@PathVariable("reviewId") Long reviewId, @PathVariable("userId") Long userId)
+            throws Exception {
         return this.reviewService.dislikeReview(reviewId, userId);
     }
 
     @GetMapping("/{reviewId}/like-status/{userId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public boolean getLikeStatus(@PathVariable("reviewId") Long reviewId, @PathVariable("userId") Long userId) throws Exception {
+    public boolean getLikeStatus(@PathVariable("reviewId") Long reviewId, @PathVariable("userId") Long userId)
+            throws Exception {
         return this.reviewService.getLikeStatus(reviewId, userId);
     }
 
     @GetMapping("/{reviewId}/dislike-status/{userId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public boolean getDislikeStatus(@PathVariable("reviewId") Long reviewId, @PathVariable("userId") Long userId) throws Exception {
+    public boolean getDislikeStatus(@PathVariable("reviewId") Long reviewId, @PathVariable("userId") Long userId)
+            throws Exception {
         return this.reviewService.getDislikeStatus(reviewId, userId);
     }
 

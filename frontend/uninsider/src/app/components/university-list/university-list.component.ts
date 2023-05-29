@@ -22,7 +22,7 @@ export class UniversityListComponent implements OnInit {
     private router: Router,
     private snack: MatSnackBar,
     private universityService: UniversityService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.user = this.login.getUser();
@@ -46,18 +46,18 @@ export class UniversityListComponent implements OnInit {
           '/admin/university-reviews',
           { universityId: university.id },
         ])
-        .then((_) => {});
+        .then((_) => { });
     else if (user_role == 'NORMAL')
       this.router
         .navigate([
           '/user-dashboard/university-reviews',
           { universityId: university.id },
         ])
-        .then((_) => {});
+        .then((_) => { });
   }
 
   public goToAddUniversity() {
-    this.router.navigate(['/admin/universities/add']).then((_) => {});
+    this.router.navigate(['/admin/universities/add']).then((_) => { });
   }
 
   public editUniversity(university: any) {

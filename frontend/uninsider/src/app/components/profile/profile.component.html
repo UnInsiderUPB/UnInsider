@@ -14,26 +14,16 @@
           <mat-form-field appearance="fill" class="full-width">
             <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> first_page</mat-icon>
 
-            <input
-              [(ngModel)]="formInput.firstName" class="form-input"
-              id="txt-input"
-              matInput
-              name="firstName"
-              placeholder="First Name"
-            />
+            <input [(ngModel)]="formInput.firstName" class="form-input" id="txt-input" matInput name="firstName"
+              placeholder="First Name" />
           </mat-form-field>
 
           <!-- Last name -->
           <mat-form-field appearance="fill" class="full-width">
             <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> last_page</mat-icon>
 
-            <input
-              [(ngModel)]="formInput.lastName" class="form-input"
-              id="txt-input"
-              matInput
-              name="lastName"
-              placeholder="Last Name"
-            />
+            <input [(ngModel)]="formInput.lastName" class="form-input" id="txt-input" matInput name="lastName"
+              placeholder="Last Name" />
           </mat-form-field>
 
 
@@ -41,7 +31,7 @@
           <mat-form-field appearance="fill" class="full-width">
             <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> email</mat-icon>
             <input [(ngModel)]="formInput.email" class="form-input" id="txt-input" matInput name="email"
-                   placeholder="Email"/>
+              placeholder="Email" />
           </mat-form-field>
 
           <!-- Phone -->
@@ -49,28 +39,17 @@
             <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> call</mat-icon>
 
             <input [(ngModel)]="formInput.phone" class="form-input" id="txt-input" matInput name="phone"
-                   placeholder="Phone"/>
+              placeholder="Phone" />
           </mat-form-field>
 
           <!-- Password -->
           <mat-form-field appearance="fill" class="full-width">
             <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> vpn_key</mat-icon>
 
-            <input
-              [(ngModel)]="formInput.password" class="form-input"
-              id="txt-input"
-              matInput
-              name="password"
-              placeholder="Password"
-              type="password"
-            />
-            <button
-              (click)="formInput.password = ''"
-              *ngIf="formInput.password"
-              aria-label="Clear"
-              mat-icon-button
-              matSuffix
-            >
+            <input [(ngModel)]="formInput.password" class="form-input" id="txt-input" matInput name="password"
+              placeholder="Password" type="password" />
+            <button (click)="formInput.password = ''" *ngIf="formInput.password" aria-label="Clear" mat-icon-button
+              matSuffix>
               <mat-icon>close</mat-icon>
             </button>
           </mat-form-field>
@@ -80,8 +59,7 @@
               <mat-icon> clear_all</mat-icon>
               Clear
             </button>
-            <button class="btn submits" mat-raised-button
-                    w3-light-grey>Update
+            <button class="btn submits" mat-raised-button w3-light-grey>Update
               <mat-icon>update</mat-icon>
             </button>
           </div>

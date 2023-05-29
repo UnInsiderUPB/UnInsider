@@ -8,15 +8,8 @@
     <form class="container">
       <mat-form-field>
         <span matPrefix> </span>
-        <input
-          (ngModelChange)="searchUser(searchItem)"
-          [(ngModel)]="searchItem"
-          matInput
-          name="search"
-          placeholder="Search User"
-          style="text-align: center;"
-          type="search"
-        />
+        <input (ngModelChange)="searchUser(searchItem)" [(ngModel)]="searchItem" matInput name="search"
+          placeholder="Search User" style="text-align: center;" type="search" />
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
     </form>
@@ -26,15 +19,12 @@
           <mat-card class="container text-center" style="background-color: lightgrey">
             <mat-card-title>{{ user.username }}</mat-card-title>
             <mat-chip-listbox>
-              <mat-chip-option (click)="changeRole(user, role)"
-                               *ngFor="let role of roles"
-                               [selected]="role === getUserRole(user) ? true : null"
-                               style="background-color: darkgrey;"
-              >{{ role }}</mat-chip-option
-              >
+              <mat-chip-option (click)="changeRole(user, role)" *ngFor="let role of roles"
+                [selected]="role === getUserRole(user) ? true : null" style="background-color: darkgrey;">{{ role
+                }}</mat-chip-option>
             </mat-chip-listbox>
           </mat-card>
-          <br/>
+          <br />
         </div>
       </div>
     </div>

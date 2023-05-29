@@ -15,7 +15,7 @@ export class SummarizationService {
   }
 
   getSummary(text: any) {
-    const data = {'article': text}
+    const data = { 'article': text }
     return this.http.post(`${baseUrl}/summarization`, data);
   }
 }

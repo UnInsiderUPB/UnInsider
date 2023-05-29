@@ -23,7 +23,7 @@ export class SummarizationComponent {
   isSummarizationReady: boolean = false;
   summarizationLoading: boolean = false;
 
-  constructor(private summarizationService: SummarizationService) {}
+  constructor(private summarizationService: SummarizationService) { }
 
   public initSummarization() {
     this.summarizationService.initSummarizationModule().subscribe({
@@ -42,12 +42,12 @@ export class SummarizationComponent {
     this.summarizationLoading = true;
     this.summarizedText = '';
 
-      // If the input text is too short, then return
-      if (this.inputText.length < MIN_CHARS) {
-        alert('Please enter a longer text to summarize.');
-        this.summarizationLoading = false;
-        return;
-      }
+    // If the input text is too short, then return
+    if (this.inputText.length < MIN_CHARS) {
+      alert('Please enter a longer text to summarize.');
+      this.summarizationLoading = false;
+      return;
+    }
 
     // [TODOs]: ...
 

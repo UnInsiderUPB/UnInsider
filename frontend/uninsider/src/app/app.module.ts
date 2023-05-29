@@ -85,4 +85,4 @@ import { UserManagementComponent } from './pages/admin/user-management/user-mana
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

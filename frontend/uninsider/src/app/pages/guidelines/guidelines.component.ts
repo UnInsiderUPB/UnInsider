@@ -68,7 +68,7 @@ export class GuidelinesComponent {
       if (!char.match(/^[a-zA-Z]+$/) && char !== ' ')
         nonAlphanumericCount++;
     }
-    
+
     return nonAlphanumericCount / this.inputText.length * 100 <= MAX_NONALPHA_PERCENTAGE;
   }
 

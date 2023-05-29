@@ -114,7 +114,7 @@ export class ReviewAddComponent implements OnInit {
       if (!char.match(/^[a-zA-Z]+$/) && char !== ' ')
         nonAlphanumericCount++;
     }
-    
+
     return nonAlphanumericCount / this.inputText.length * 100 <= MAX_NONALPHA_PERCENTAGE;
   }
 
@@ -215,14 +215,14 @@ export class ReviewAddComponent implements OnInit {
                   '/admin/university-reviews',
                   { universityId: this.universityId },
                 ])
-                .then((_) => {});
+                .then((_) => { });
             else if (user_role == 'NORMAL')
               this.router
                 .navigate([
                   '/user-dashboard/university-reviews',
                   { universityId: this.universityId },
                 ])
-                .then((_) => {});
+                .then((_) => { });
           }
         );
       },

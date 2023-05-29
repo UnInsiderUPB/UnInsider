@@ -29,7 +29,8 @@ public class UniversityController {
         University originalUniversity = this.universityService.getUniversity(requestBodyUniversity.getId());
         if (originalUniversity == null) {
             System.out.println("University with id `" + requestBodyUniversity.getId() + "` not found!");
-            throw new UniversityNotFoundException("University with id `" + requestBodyUniversity.getId() + "` not found");
+            throw new UniversityNotFoundException(
+                    "University with id `" + requestBodyUniversity.getId() + "` not found");
         }
 
         originalUniversity.setName(requestBodyUniversity.getName());

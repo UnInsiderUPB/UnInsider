@@ -8,10 +8,10 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class SidebarComponent {
 
-  constructor(public login: LoginService) {}
+  constructor(public login: LoginService) { }
 
   isLoggedIn = false;
-  user:any = null;
+  user: any = null;
 
   ngOnInit(): void {
     this.isLoggedIn = this.login.isLoggedIn();

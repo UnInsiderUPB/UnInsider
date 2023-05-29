@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     public login: LoginService,
     public router: Router,
-    private summarizationService: SummarizationService) {}
+    private summarizationService: SummarizationService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this.login.isLoggedIn();
@@ -35,7 +35,7 @@ export class NavbarComponent implements OnInit {
     if (summStorageItem == undefined || summStorageItem == '' || summStorageItem == null) {
       // Update the `sessionStorage` item
       sessionStorage.setItem('initSumm', JSON.stringify(itemJson));
-      
+
       console.log('Initializing the summarization module');
 
       // Initialize the summarization module
@@ -50,10 +50,10 @@ export class NavbarComponent implements OnInit {
       // console.log('Time difference in seconds: ' + timeDiffInSeconds);
       // console.log('Intialization timestamp: ' + summStorageItemJson.timestamp);
       // console.log('Current timestamp: ' + currentTime);
-      
+
       if (timeDiffInSeconds >= 300) {
         console.log('Reinitializing the summarization module');
-        
+
         // Update timestamp
         itemJson = {
           value: 'true',
@@ -79,16 +79,16 @@ export class NavbarComponent implements OnInit {
   public toDashboard() {
     const user_role = this.login.getUserRole();
     if (user_role == 'ADMIN')
-      this.router.navigate(['/admin']).then((_) => {});
+      this.router.navigate(['/admin']).then((_) => { });
     else if (user_role == 'NORMAL')
-      this.router.navigate(['/user-dashboard']).then((_) => {});
+      this.router.navigate(['/user-dashboard']).then((_) => { });
   }
 
   public toProfileSettings() {
     const user_role = this.login.getUserRole();
     if (user_role == 'ADMIN')
-      this.router.navigate(['/admin/profile']).then((_) => {});
+      this.router.navigate(['/admin/profile']).then((_) => { });
     else if (user_role == 'NORMAL')
-      this.router.navigate(['/user-dashboard/profile']).then((_) => {});
+      this.router.navigate(['/user-dashboard/profile']).then((_) => { });
   }
 }

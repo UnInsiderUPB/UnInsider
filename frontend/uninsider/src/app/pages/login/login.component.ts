@@ -17,20 +17,20 @@ export class LoginComponent implements OnInit {
 
   constructor(private snack: MatSnackBar, private login: LoginService, private router: Router) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   formSubmit() {
     console.log("Login button clicked");
 
     // Check if `username` is empty
     if (this.loginData.username.trim() == '' || this.loginData.username == null) {
-      this.snack.open("Username is required!", "", {duration: 3000});
+      this.snack.open("Username is required!", "", { duration: 3000 });
       return;
     }
 
     // Check if `password` is empty
     if (this.loginData.password.trim() == '' || this.loginData.password == null) {
-      this.snack.open("Password is required!", "", {duration: 3000});
+      this.snack.open("Password is required!", "", { duration: 3000 });
       return;
     }
 
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
       error: (error) => {
         console.log('Error!');
         console.log(error);
-        this.snack.open("Invalid credentials!", "", {duration: 3000});
+        this.snack.open("Invalid credentials!", "", { duration: 3000 });
       }
     });
   }

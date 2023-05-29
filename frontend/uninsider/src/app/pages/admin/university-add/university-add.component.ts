@@ -32,7 +32,7 @@ export class UniversityAddComponent implements OnInit {
     private snack: MatSnackBar,
     private router: Router,
     private universityService: UniversityService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.user = this.login.getUser();
@@ -70,7 +70,7 @@ export class UniversityAddComponent implements OnInit {
           'University added successfully',
           'success'
         ).then((_) => {
-          this.router.navigate(['/admin/universities']).then((_) => {});
+          this.router.navigate(['/admin/universities']).then((_) => { });
         });
       },
       error: (error) => {
