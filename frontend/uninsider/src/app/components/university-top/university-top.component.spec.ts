@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WelcomeComponent } from './welcome.component';
+import { UniversityTopComponent } from './university-top.component';
 
-describe('WelcomeComponent', () => {
-  let component: WelcomeComponent;
-  let fixture: ComponentFixture<WelcomeComponent>;
+describe('UniversityTopComponent', () => {
+  let component: UniversityTopComponent;
+  let fixture: ComponentFixture<UniversityTopComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WelcomeComponent ]
+      declarations: [ UniversityTopComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(WelcomeComponent);
+    fixture = TestBed.createComponent(UniversityTopComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
