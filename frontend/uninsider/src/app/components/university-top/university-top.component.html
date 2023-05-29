@@ -1,0 +1,48 @@
+<mat-card *ngIf="user" class="all">
+  <mat-card-content>
+    <header>
+      <div class="container text-center">
+        <h1>Most Reviewed Universities</h1>
+      </div>
+    </header>
+
+    <div class="bootstrap-wrapper">
+      <div class="row">
+        <div *ngFor="let university of sortedUniversities" class="container">
+          <mat-card style="background-color: lightgrey" w3-light-grey>
+            <div>
+              <header (click)="goToReviews(university)" style="cursor: pointer">
+                <h1>{{ university.name }} - {{ university.location }}</h1>
+                <p>{{ university.description }}</p>
+              </header>
+              <mat-divider></mat-divider>
+              <mat-card-footer>
+                <div class="row text-center">
+                  <div class="col-md-4">
+                    <em>
+                      Number of Reviews:
+                      {{ university.reviews.length }}
+                    </em>
+                  </div>
+                  <div class="col-md-4">
+                    <em>
+                      Total Review Likes:
+                      {{ university.totalReviewLikes }}
+                    </em>
+                  </div>
+                  <div class="col-md-4">
+                    <em>
+                      Total Review Dislikes:
+                      {{ university.totalReviewDislikes }}
+                    </em>
+                  </div>
+                </div>
+              </mat-card-footer>
+            </div>
+          </mat-card>
+          <br />
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
