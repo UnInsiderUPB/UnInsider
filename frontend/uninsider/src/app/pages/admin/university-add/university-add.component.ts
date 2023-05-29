@@ -69,7 +69,7 @@ export class UniversityAddComponent implements OnInit {
           icon: 'success',
           background: 'rgb(230, 230, 230)',
         }).then((_) => {
-          this.router.navigate(['/admin/universities']).then((_) => {});
+          this.router.navigate(['/admin/universities']).then((_) => { });
         });
       },
       error: (error) => {
