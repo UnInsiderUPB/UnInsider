@@ -69,7 +69,7 @@ export class NavbarComponent implements OnInit {
   public toDashboard() {
     // Check if the user is not logged in
     if (!this.login.isLoggedIn()) {
-      this.router.navigate(['/']).then((_) => { });
+      this.router.navigate(['/login']).then((_) => { });
       return;
     }
 
