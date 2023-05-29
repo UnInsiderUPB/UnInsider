@@ -201,7 +201,12 @@ export class ReviewAddComponent implements OnInit {
         this.user.authorities = backedUpUserAuthorities;
         this.university.admin.authorities = backedUpAdminAuthorities;
 
-        Swal.fire('Success!', 'Review added successfully', 'success').then(
+        Swal.fire({
+          title: 'Success!',
+          text: 'Review added successfully',
+          icon: 'success',
+          background: 'rgb(230, 230, 230)',
+        }).then(
           (_) => {
             const user_role = this.login.getUserRole();
             if (user_role == 'ADMIN')

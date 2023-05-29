@@ -63,12 +63,13 @@ export class UniversityAddComponent implements OnInit {
         // Restore authorities, maybe it will be needed later
         this.user.authorities = backedUpAuthorities;
 
-        Swal.fire(
-          'Success!',
-          'University added successfully',
-          'success'
-        ).then((_) => {
-          this.router.navigate(['/admin/universities']).then((_) => { });
+        Swal.fire({
+          title: 'Success!',
+          text: 'University added successfully',
+          icon: 'success',
+          background: 'rgb(230, 230, 230)',
+        }).then((_) => {
+          this.router.navigate(['/admin/universities']).then((_) => {});
         });
       },
       error: (error) => {

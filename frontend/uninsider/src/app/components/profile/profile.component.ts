@@ -53,11 +53,12 @@ export class ProfileComponent implements OnInit {
         this.user.authorities = backedUpAuthorities;
         this.login.setUser(this.user);
 
-        Swal.fire(
-          'Success!',
-          'User profile modified successfully',
-          'success'
-        ).then((_) => {
+        Swal.fire({
+          title: 'Success!',
+          text: 'User profile modified successfully',
+          icon: 'success',
+          background: 'rgb(230, 230, 230)',
+        }).then((_) => {
           const user_role = this.login.getUserRole();
           if (user_role == 'ADMIN')
             this.router.navigate(['/admin/profile']).then((_) => { });

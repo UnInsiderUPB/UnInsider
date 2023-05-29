@@ -28,17 +28,17 @@ import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboa
 import { ProfileComponent } from './components/profile/profile.component';
 import { MatListModule } from '@angular/material/list';
 import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
-import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
 import { SummarizationComponent } from './pages/summarization/summarization.component';
 import { GuidelinesComponent } from './pages/guidelines/guidelines.component';
 import { MatTableModule } from '@angular/material/table';
 import { UniversityAddComponent } from './pages/admin/university-add/university-add.component';
 import { UniversityListComponent } from './components/university-list/university-list.component';
-import { WelcomeUserComponent } from './pages/user/welcome-user/welcome-user.component';
 import { SidebarUserComponent } from './pages/user/sidebar-user/sidebar-user.component';
 import { ReviewListComponent } from './components/review-list/review-list.component';
 import { ReviewAddComponent } from './components/review-add/review-add.component';
 import { UserManagementComponent } from './pages/admin/user-management/user-management.component';
+import { UniversityTopComponent } from './components/university-top/university-top.component';
+import { RouterOutlet } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -56,10 +56,9 @@ import { UserManagementComponent } from './pages/admin/user-management/user-mana
     SidebarComponent,
     UniversityAddComponent,
     UniversityListComponent,
-    WelcomeComponent,
+    UniversityTopComponent,
     SummarizationComponent,
     GuidelinesComponent,
-    WelcomeUserComponent,
     SidebarUserComponent,
     UserManagementComponent
   ],
@@ -81,6 +80,7 @@ import { UserManagementComponent } from './pages/admin/user-management/user-mana
     MatListModule,
     MatTableModule,
     ReactiveFormsModule,
+    RouterOutlet
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent],

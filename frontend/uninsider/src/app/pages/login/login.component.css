@@ -100,7 +100,7 @@ input[class="form-input"] {
   outline: none
 }
 
-input[id="txt-input"] {
+input[id^="txt-input"] {
   width: 325px;
   border: none;
   outline: none;

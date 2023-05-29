@@ -3,9 +3,8 @@
   align-items: center;
 }
 
-
 .liked {
-  background-color: 'primary';
+  background-color: "primary";
 }
 
 header {
@@ -13,13 +12,13 @@ header {
   text-align: center;
 }
 
-.like_btn {}
+.like_btn {
+}
 
 .btn-like-container {
   display: flex;
   justify-content: flex-start;
 }
-
 
 .add-button {
   background-color: black;
@@ -51,7 +50,7 @@ button:hover {
 header h1 {
   font-size: 180%;
   font-weight: bold;
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   color: #3e403f;
 }
 
@@ -60,12 +59,11 @@ header p {
 }
 
 .disliked {
-  background-color: 'primary';
+  background-color: "primary";
 }
 
-
 /* Fonts Form Google Font ::- https://fonts.google.com/  -:: */
-@import url('https://fonts.googleapis.com/css?family=Abel|Abril+Fatface|Alegreya|Arima+Madurai|Dancing+Script|Dosis|Merriweather|Oleo+Script|Overlock|PT+Serif|Pacifico|Playball|Playfair+Display|Share|Unica+One|Vibur');
+@import url("https://fonts.googleapis.com/css?family=Abel|Abril+Fatface|Alegreya|Arima+Madurai|Dancing+Script|Dosis|Merriweather|Oleo+Script|Overlock|PT+Serif|Pacifico|Playball|Playfair+Display|Share|Unica+One|Vibur");
 
 * {
   padding: 0;
@@ -95,5 +93,5 @@ header p {
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
   margin: -20px auto 0;
-    background-color: rgb(75, 75, 75);
+  background-color: rgb(75, 75, 75);
 }

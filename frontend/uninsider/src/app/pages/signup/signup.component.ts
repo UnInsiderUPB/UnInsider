@@ -83,7 +83,13 @@ export class SignupComponent {
     // Register the user
     this.userService.addUser(this.user).subscribe({
       next: (data) => {
-        Swal.fire('Success!', 'User created successfully', 'success').then(
+        console.log(data);
+        Swal.fire({
+          title: 'Success!',
+          text: 'User created successfully',
+          icon: 'success',
+          background: 'rgb(230, 230, 230)',
+        }).then(
           (_) => {
             this.router.navigate(['/login']).then(_ => {
             });
