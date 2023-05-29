@@ -55,6 +55,8 @@ export class ProfileComponent implements OnInit {
         this.user.authorities = backedUpAuthorities;
         this.login.setUser(this.user);
 
+        // [TODO]: Change the `swal` background image to `lightgrey` everywhere in the app
+
         Swal.fire(
           'Success!',
           'User profile modified successfully',
