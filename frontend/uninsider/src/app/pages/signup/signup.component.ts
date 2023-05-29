@@ -83,7 +83,6 @@ export class SignupComponent {
     // Register the user
     this.userService.addUser(this.user).subscribe({
       next: (data) => {
-        console.log(data);
         Swal.fire({
           title: 'Success!',
           text: 'User created successfully',
