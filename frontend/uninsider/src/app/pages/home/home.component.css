@@ -80,3 +80,13 @@ td:first-child:before {
   transform: scale(1.05);
   transition: transform 0.3s ease-in-out;
 }
+
+#wrap-blur-others .w3-card {
+  -webkit-transition: 250ms ease 100ms;
+  -moz-transition: 250ms ease 100ms;
+  transition: 250ms ease 100ms;
+}
+
+#wrap-blur-others:hover .w3-card:not(:hover) {
+  filter: blur(3px);
+}

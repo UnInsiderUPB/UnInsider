@@ -349,7 +349,12 @@ export class ReviewListComponent implements OnInit {
               }
               return r;
             });
-            Swal.fire('Edited!', 'The review has been edited.', 'success');
+            Swal.fire({
+              title: 'Edited!',
+              text: 'The review has been edited',
+              icon: 'success',
+              background: 'rgb(230, 230, 230)',
+            });
           },
           error: (error) => {
             console.log(error);
@@ -367,6 +372,7 @@ export class ReviewListComponent implements OnInit {
       title: 'Are you sure?',
       text: 'You will not be able to recover this review!',
       icon: 'warning',
+      background: 'rgb(230, 230, 230)',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'No, keep it.',
@@ -377,11 +383,12 @@ export class ReviewListComponent implements OnInit {
             this.allReviews = this.allReviews.filter(
               (r: any) => r.id !== review.id
             );
-            Swal.fire(
-              'Deleted!',
-              'The review has been deleted.',
-              'success'
-            ).then((_) => {
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'The review has been deleted.',
+              icon: 'success',
+              background: 'rgb(230, 230, 230)',
+            }).then((_) => {
               window.location.reload();
             });
           },

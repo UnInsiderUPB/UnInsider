@@ -22,7 +22,7 @@ export class UniversityListComponent implements OnInit {
     private router: Router,
     private snack: MatSnackBar,
     private universityService: UniversityService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.user = this.login.getUser();
@@ -46,26 +46,27 @@ export class UniversityListComponent implements OnInit {
           '/admin/university-reviews',
           { universityId: university.id },
         ])
-        .then((_) => {});
+        .then((_) => { });
     else if (user_role == 'NORMAL')
       this.router
         .navigate([
           '/user-dashboard/university-reviews',
           { universityId: university.id },
         ])
-        .then((_) => {});
+        .then((_) => { });
   }
 
   public goToAddUniversity() {
-    this.router.navigate(['/admin/universities/add']).then((_) => {});
+    this.router.navigate(['/admin/universities/add']).then((_) => { });
   }
 
   public editUniversity(university: any) {
     Swal.fire({
       title: 'Edit university',
+      background: 'rgb(230, 230, 230)',
       html: `<input id="swal-input1" class="swal2-input" placeholder="Name" value="${university.name}">
       <input id="swal-input2" class="swal2-input" placeholder="Location" value="${university.location}">
-      <textarea id="swal-input3" class="swal2-input" placeholder="Description">${university.description}`,
+      <textarea id="swal-input3" class="swal2-input" style="min-height: 200px" placeholder="Description">${university.description}`,
       focusConfirm: false,
       preConfirm: () => {
         const name = (
@@ -105,7 +106,12 @@ export class UniversityListComponent implements OnInit {
               }
               return u;
             });
-            Swal.fire('Edited!', 'Your university has been edited.', 'success');
+            Swal.fire({
+              title: 'Edited!',
+              text: 'Your university has been edited.',
+              icon: 'success',
+              background: 'rgb(230, 230, 230)',
+            });
           },
           error: (error) => {
             console.log(error);
@@ -123,6 +129,7 @@ export class UniversityListComponent implements OnInit {
       title: 'Are you sure?',
       text: 'You will not be able to recover this university!',
       icon: 'warning',
+      background: 'rgb(230, 230, 230)',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'No, keep it.',
@@ -133,11 +140,12 @@ export class UniversityListComponent implements OnInit {
             this.universities = this.universities.filter(
               (u: any) => u.id !== university.id
             );
-            Swal.fire(
-              'Deleted!',
-              'Your university has been deleted.',
-              'success'
-            ).then((_) => {
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'Your university has been deleted.',
+              icon: 'success',
+              background: 'rgb(230, 230, 230)',
+            }).then((_) => {
               window.location.reload();
             });
           },

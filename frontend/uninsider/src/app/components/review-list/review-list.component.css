@@ -3,6 +3,7 @@
   bottom: 10px;
   left: 47%;
   z-index: 100;
+    background-color: rgb(75, 75, 75);
 }
 
 .add-button:hover {
@@ -114,3 +115,9 @@ header p {
 .add-button {
   background-color: black;
 }
+
+.sticky-column {
+  position: sticky;
+  top: 0;
+}
+

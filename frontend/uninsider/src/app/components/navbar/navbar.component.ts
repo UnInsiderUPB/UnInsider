@@ -77,6 +77,12 @@ export class NavbarComponent implements OnInit {
   }
 
   public toDashboard() {
+    // Check if the user is not logged in
+    if (!this.login.isLoggedIn()) {
+      this.router.navigate(['/']).then((_) => {});
+      return;
+    }
+
     const user_role = this.login.getUserRole();
     if (user_role == 'ADMIN')
       this.router.navigate(['/admin']).then((_) => {});
@@ -90,5 +96,12 @@ export class NavbarComponent implements OnInit {
       this.router.navigate(['/admin/profile']).then((_) => {});
     else if (user_role == 'NORMAL')
       this.router.navigate(['/user-dashboard/profile']).then((_) => {});
+  }
+
+  public removeFixedNavbar() {
+    const navbar = document.getElementById('navbar');
+    if (navbar != null) {
+      navbar.classList.remove('fixed-top');
+    }
   }
 }

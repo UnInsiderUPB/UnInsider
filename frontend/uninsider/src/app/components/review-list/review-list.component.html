@@ -11,8 +11,8 @@
               <h1 *ngIf="!university">Reviews</h1>
               <h1 *ngIf="university">Reviews of {{ university.name }}</h1>
             </div>
-
           </header>
+          
           <div *ngFor="let review of allReviews" class="container">
             <mat-card style="background-color: lightgrey" w3-light-grey>
               <mat-card-content style="white-space: pre-line;">
@@ -54,7 +54,7 @@
 
         <div *ngIf="allReviews.length > 0 && enableSummOnlyOnUniver()" class="col-md-3">
 
-          <div class="container text-center" style="padding-top: 17.5%;">
+          <div class="container text-center sticky-column" style="padding-top: 17.5%;">
             <mat-card style="background-color: lightgrey">
               <mat-card-content>
                 <header>
@@ -62,7 +62,7 @@
                 </header>
 
                 <button (click)="summarize()" *ngIf="!summarizationLoading" mat-raised-button
-                  style="background-color: rgb(150, 150, 150); color: white;">
+                  style="background-color: rgb(130, 130, 130); color: white;">
                   Start
                 </button>
 

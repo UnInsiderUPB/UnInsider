@@ -1,7 +1,10 @@
-<mat-toolbar class="example-spacer">
-  <a class="example-icon" mat-button routerLink="/"><span class="title">UnInsider</span></a>
+<!-- <mat-toolbar class="example-spacer fixed-top" id="navbar"> -->
+<mat-toolbar class="example-spacer" id="navbar">
+  <a class="example-icon" mat-button (click)="toDashboard()" routerLink="/admin/profile"><span
+      class="title">UnInsider</span></a>
 
   <div style="margin-left: auto; margin-right: 0;">
+    <a class="example-icon login" routerLink="/" fragment="home" mat-button>HOME</a>
     <a class="example-icon login" routerLink="/" fragment="about" mat-button>ABOUT</a>
     <a class="example-icon login" routerLink="/" fragment="team" mat-button>TEAM</a>
     <a class="example-icon login" routerLink="/" fragment="work" mat-button>WORK</a>
@@ -21,11 +24,6 @@
       class="example-icon favorite-icon" mat-button>
       LOGOUT
     </a>
-
-    <button (click)="toDashboard()" *ngIf="isLoggedIn && user" aria-label="Example icon-button with a heart icon"
-      class="example-icon favorite-icon" mat-button routerLink="/admin/profile">
-      {{ user.username }}
-    </button>
 
     <button (click)="toProfileSettings()" *ngIf="isLoggedIn && user" class="example-icon favorite-icon" mat-icon-button>
       <mat-icon>settings</mat-icon>

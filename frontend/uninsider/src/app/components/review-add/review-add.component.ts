@@ -114,7 +114,7 @@ export class ReviewAddComponent implements OnInit {
       if (!char.match(/^[a-zA-Z]+$/) && char !== ' ')
         nonAlphanumericCount++;
     }
-    
+
     return nonAlphanumericCount / this.inputText.length * 100 <= MAX_NONALPHA_PERCENTAGE;
   }
 
@@ -206,7 +206,12 @@ export class ReviewAddComponent implements OnInit {
         this.user.authorities = backedUpUserAuthorities;
         this.university.admin.authorities = backedUpAdminAuthorities;
 
-        Swal.fire('Success!', 'Review added successfully', 'success').then(
+        Swal.fire({
+          title: 'Success!',
+          text: 'Review added successfully',
+          icon: 'success',
+          background: 'rgb(230, 230, 230)',
+        }).then(
           (_) => {
             const user_role = this.login.getUserRole();
             if (user_role == 'ADMIN')
@@ -215,14 +220,14 @@ export class ReviewAddComponent implements OnInit {
                   '/admin/university-reviews',
                   { universityId: this.universityId },
                 ])
-                .then((_) => {});
+                .then((_) => { });
             else if (user_role == 'NORMAL')
               this.router
                 .navigate([
                   '/user-dashboard/university-reviews',
                   { universityId: this.universityId },
                 ])
-                .then((_) => {});
+                .then((_) => { });
           }
         );
       },

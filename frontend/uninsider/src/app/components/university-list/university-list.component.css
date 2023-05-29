@@ -98,4 +98,5 @@ header p {
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
   margin: -20px auto 0;
+    background-color: rgb(75, 75, 75);
 }
