@@ -20,8 +20,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void { }
 
   formSubmit() {
-    console.log("Login button clicked");
-
     // Check if `username` is empty
     if (this.loginData.username.trim() == '' || this.loginData.username == null) {
       this.snack.open("Username is required!", "", { duration: 3000 });
@@ -37,15 +35,11 @@ export class LoginComponent implements OnInit {
     // Request to server to generate a JWT token
     this.login.generateToken(this.loginData).subscribe({
       next: (data: any) => {
-        console.log("Succes!");
-        console.log(data);
-
         // Login
         this.login.loginUser(data.token);
         this.login.getCurrentUser().subscribe({
           next: (user: any) => {
             this.login.setUser(user);
-            console.log(user);
             if (this.login.getUserRole() == 'ADMIN') {
               // window.location.href = "/admin";
               this.router.navigate(['admin']);
@@ -62,8 +56,6 @@ export class LoginComponent implements OnInit {
         });
       },
       error: (error) => {
-        console.log('Error!');
-        console.log(error);
         this.snack.open("Invalid credentials!", "", { duration: 3000 });
       }
     });

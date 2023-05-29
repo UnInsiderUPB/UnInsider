@@ -36,8 +36,6 @@ export class NavbarComponent implements OnInit {
       // Update the `sessionStorage` item
       sessionStorage.setItem('initSumm', JSON.stringify(itemJson));
 
-      console.log('Initializing the summarization module');
-
       // Initialize the summarization module
       this.summarizationService.initSummarizationModule().subscribe((_) => { });
     } else {
@@ -47,13 +45,7 @@ export class NavbarComponent implements OnInit {
       const timeDiff = currentTime - summStorageItemJson.timestamp;
       const timeDiffInSeconds = Math.floor(timeDiff / 1000);
 
-      // console.log('Time difference in seconds: ' + timeDiffInSeconds);
-      // console.log('Intialization timestamp: ' + summStorageItemJson.timestamp);
-      // console.log('Current timestamp: ' + currentTime);
-
       if (timeDiffInSeconds >= 300) {
-        console.log('Reinitializing the summarization module');
-
         // Update timestamp
         itemJson = {
           value: 'true',
@@ -65,8 +57,6 @@ export class NavbarComponent implements OnInit {
 
         // Reinitialize the summarization module
         this.summarizationService.initSummarizationModule().subscribe((_) => { });
-      } else {
-        console.log('Summarization module is already initialized and fresh');
       }
     }
   }

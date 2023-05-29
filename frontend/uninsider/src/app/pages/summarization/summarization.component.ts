@@ -28,7 +28,6 @@ export class SummarizationComponent {
   public initSummarization() {
     this.summarizationService.initSummarizationModule().subscribe({
       next: (data: any) => {
-        console.log(data);
       },
       error: (_: any) => {
         alert('Could not initialize the summarization model');
@@ -49,12 +48,9 @@ export class SummarizationComponent {
       return;
     }
 
-    // [TODOs]: ...
-
     // Make the `summarization` request
     this.summarizationService.getSummary(this.inputText).subscribe({
       next: (data: any) => {
-        // console.log(data);
         this.summarizedText = data.summary;
         this.isSummarizationReady = true;
         this.summarizationLoading = false;

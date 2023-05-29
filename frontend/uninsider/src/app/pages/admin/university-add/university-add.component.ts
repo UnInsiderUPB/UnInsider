@@ -60,8 +60,6 @@ export class UniversityAddComponent implements OnInit {
 
     this.universityService.addUniversity(this.university).subscribe({
       next: (data) => {
-        console.log(data);
-
         // Restore authorities, maybe it will be needed later
         this.user.authorities = backedUpAuthorities;
 
@@ -74,7 +72,6 @@ export class UniversityAddComponent implements OnInit {
         });
       },
       error: (error) => {
-        console.log(error);
         this.snack.open(error.error.message, 'OK', {
           duration: 3000,
         });

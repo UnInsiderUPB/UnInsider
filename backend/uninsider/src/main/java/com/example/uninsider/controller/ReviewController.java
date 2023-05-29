@@ -28,7 +28,6 @@ public class ReviewController {
     public Review updateReview(@RequestBody Review requestBodyReview) throws Exception {
         Review originalReview = this.reviewService.getReview(requestBodyReview.getId());
         if (originalReview == null) {
-            System.out.println("Review with id `" + requestBodyReview.getId() + "` not found!");
             throw new ReviewNotFoundException("Review with id `" + requestBodyReview.getId() + "` not found");
         }
 

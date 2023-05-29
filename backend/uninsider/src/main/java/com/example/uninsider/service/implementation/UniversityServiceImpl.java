@@ -20,7 +20,6 @@ public class UniversityServiceImpl implements UniversityService {
     public University createUniversity(University university) throws UniversityAlreadyExists {
         // University with the same `name` already exists
         if (this.universityRepository.existsByName(university.getName())) {
-            System.out.println("University with name `" + university.getName() + "` already exists");
             throw new UniversityAlreadyExists("University with name `" + university.getName() + "` already exists");
         }
 
@@ -33,7 +32,6 @@ public class UniversityServiceImpl implements UniversityService {
     @Override
     public University updateUniversity(University university) throws UniversityNotFoundException {
         if (!this.universityRepository.existsById(university.getId())) {
-            System.out.println("University with id `" + university.getId() + "` not found");
             throw new UniversityNotFoundException("University with id `" + university.getId() + "` not found");
         }
 
@@ -43,7 +41,6 @@ public class UniversityServiceImpl implements UniversityService {
     @Override
     public University getUniversity(Long id) throws UniversityNotFoundException {
         if (!this.universityRepository.existsById(id)) {
-            System.out.println("University with id `" + id + "` not found");
             throw new UniversityNotFoundException("University with id `" + id + "` not found");
         }
 

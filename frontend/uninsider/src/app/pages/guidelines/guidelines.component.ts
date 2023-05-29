@@ -76,7 +76,6 @@ export class GuidelinesComponent {
   languageDetection(): boolean {
     this.guidelinesService.getLanguage(this.inputText).subscribe({
       next: (data: any) => {
-        // console.log(data);
         if (data.language === 'english')
           this.detectedLanguage = 'english';
         else
@@ -111,7 +110,6 @@ export class GuidelinesComponent {
   spellCheck(): boolean {
     this.guidelinesService.getSpellCheck(this.inputText).subscribe({
       next: (data: any) => {
-        console.log(data);
         if (data.misspelledWordsPerc <= MAX_MISSPELLED_WORDS_PERCENTAGE)
           this.detectedMisspelling = false;
         else

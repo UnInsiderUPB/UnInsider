@@ -31,13 +31,11 @@ public class UserServiceImpl implements UserService {
     public User createUser(User user, Set<UserRole> userRoleSet) throws UserAlreadyExists {
         // User with the same `username` already exists
         if (this.userRepository.existsByUsername(user.getUsername())) {
-            System.out.println("User with username `" + user.getUsername() + "` already exists");
             throw new UserAlreadyExists("User with username `" + user.getUsername() + "` already exists");
         }
 
         // User with the same `email` already exists
         if (this.userRepository.existsByEmail(user.getEmail())) {
-            System.out.println("User with email `" + user.getEmail() + "` already exists");
             throw new UserAlreadyExists("User with email `" + user.getEmail() + "` already exists");
         }
 
@@ -54,7 +52,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(User user) throws UserNotFoundException {
         if (!this.userRepository.existsById(user.getId())) {
-            System.out.println("User with id `" + user.getId() + "` not found");
             throw new UserNotFoundException("User with id `" + user.getId() + "` not found");
         }
 
@@ -65,7 +62,6 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User updateUserRole(User user, Set<UserRole> userRoleSet) throws UserNotFoundException {
         if (!this.userRepository.existsById(user.getId())) {
-            System.out.println("User with id `" + user.getId() + "` not found");
             throw new UserNotFoundException("User with id `" + user.getId() + "` not found");
         }
 

@@ -83,7 +83,6 @@ export class SignupComponent {
     // Register the user
     this.userService.addUser(this.user).subscribe({
       next: (data) => {
-        console.log(data);
         Swal.fire('Success!', 'User created successfully', 'success').then(
           (_) => {
             this.router.navigate(['/login']).then(_ => {
@@ -92,7 +91,6 @@ export class SignupComponent {
         );
       },
       error: (error) => {
-        console.log(error);
         this.snack.open(error.error.message, 'OK', {
           duration: 3000,
         });
