@@ -119,8 +119,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, {
       useHash: true,
-      anchorScrolling: 'enabled',
-      scrollPositionRestoration: 'enabled',
+      onSameUrlNavigation: 'reload',
     }),
   ],
   exports: [RouterModule],
