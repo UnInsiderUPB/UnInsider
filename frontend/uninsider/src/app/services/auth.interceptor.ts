@@ -5,7 +5,7 @@ import { LoginService } from "./login.service";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-    constructor(private login: LoginService) {}
+    constructor(private login: LoginService) { }
 
     intercept(
         req: HttpRequest<any>,
@@ -14,10 +14,9 @@ export class AuthInterceptor implements HttpInterceptor {
         // Add the JWT token (localStorage) to the request header
         let authReq = req;
         const token = this.login.getToken();
-        // console.log('Inside interceptor');
         if (token != null) {
             authReq = req.clone({
-                setHeaders: {Authorization: `Bearer ${token}`},
+                setHeaders: { Authorization: `Bearer ${token}` },
             });
         }
         return next.handle(authReq);

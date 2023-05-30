@@ -3,7 +3,7 @@
   bottom: 10px;
   left: 47%;
   z-index: 100;
-    background-color: rgb(75, 75, 75);
+  background-color: rgb(75, 75, 75);
 }
 
 .add-button:hover {
@@ -19,9 +19,7 @@ header {
   text-align: center;
 }
 
-.like_btn {
-
-}
+.like_btn {}
 
 .btn-like-container {
   display: flex;
@@ -120,4 +118,3 @@ header p {
   position: sticky;
   top: 0;
 }
-

@@ -1,8 +1,8 @@
 module.exports = app => {
     const guidelines = require('../controllers/guidelines.controller');
-  
+
     var router = require('express').Router();
-  
+
     app.use('/guidelines', router);
 
     // Language detection
@@ -14,4 +14,3 @@ module.exports = app => {
     // Spell check
     router.post('/spellcheck', guidelines.spellCheck);
 };
-  

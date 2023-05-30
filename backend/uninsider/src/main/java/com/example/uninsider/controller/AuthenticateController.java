@@ -47,8 +47,7 @@ public class AuthenticateController {
     public void authenticate(String username, String password) {
         try {
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(username, password)
-            );
+                    new UsernamePasswordAuthenticationToken(username, password));
         } catch (DisabledException e) {
             throw new RuntimeException("User disabled " + e.getMessage());
         } catch (BadCredentialsException e) {

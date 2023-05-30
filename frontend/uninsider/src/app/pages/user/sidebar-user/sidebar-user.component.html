@@ -10,20 +10,12 @@
       Universities
     </button>
 
-    <button
-      [routerLink]="['/user-dashboard/my-reviews', { userId: this.user.id }]"
-      mat-list-item
-    >
+    <button [routerLink]="['/user-dashboard/my-reviews', { userId: this.user.id }]" mat-list-item>
       <mat-icon>rate_review</mat-icon>
       My Reviews
     </button>
 
-    <button
-      (click)="logout()"
-      *ngIf="isLoggedIn"
-      mat-list-item
-      routerLink="/login"
-    >
+    <button (click)="logout()" *ngIf="isLoggedIn" mat-list-item routerLink="/login">
       <mat-icon>logout</mat-icon>
       Logout
     </button>

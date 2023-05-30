@@ -20,7 +20,7 @@ export class UniversityTopComponent implements OnInit {
     private router: Router,
     private reviewService: ReviewService,
     private universityService: UniversityService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.user = this.login.getUser();
@@ -51,7 +51,7 @@ export class UniversityTopComponent implements OnInit {
                 initialValue
               );
             },
-            error: (_) => {},
+            error: (_) => { },
           });
 
           observables.push(observable);
@@ -70,7 +70,7 @@ export class UniversityTopComponent implements OnInit {
             // Time to display the sorted universities
             this.sortedUniversities = this.universities;
           },
-          error: (_) => {},
+          error: (_) => { },
         });
       },
     });
@@ -84,13 +84,13 @@ export class UniversityTopComponent implements OnInit {
           '/admin/university-reviews',
           { universityId: university.id },
         ])
-        .then((_) => {});
+        .then((_) => { });
     else if (user_role == 'NORMAL')
       this.router
         .navigate([
           '/user-dashboard/university-reviews',
           { universityId: university.id },
         ])
-        .then((_) => {});
+        .then((_) => { });
   }
 }

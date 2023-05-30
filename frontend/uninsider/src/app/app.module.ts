@@ -28,8 +28,6 @@ import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboa
 import { ProfileComponent } from './components/profile/profile.component';
 import { MatListModule } from '@angular/material/list';
 import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
-import { SummarizationComponent } from './pages/summarization/summarization.component';
-import { GuidelinesComponent } from './pages/guidelines/guidelines.component';
 import { MatTableModule } from '@angular/material/table';
 import { UniversityAddComponent } from './pages/admin/university-add/university-add.component';
 import { UniversityListComponent } from './components/university-list/university-list.component';
@@ -57,8 +55,6 @@ import { RouterOutlet } from '@angular/router';
     UniversityAddComponent,
     UniversityListComponent,
     UniversityTopComponent,
-    SummarizationComponent,
-    GuidelinesComponent,
     SidebarUserComponent,
     UserManagementComponent
   ],
@@ -85,4 +81,4 @@ import { RouterOutlet } from '@angular/router';
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

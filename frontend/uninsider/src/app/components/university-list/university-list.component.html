@@ -15,7 +15,7 @@
         <div *ngFor="let university of filteredUniversities" class="container">
           <mat-card style="background-color: lightgrey;" w3-light-grey>
             <div>
-              <header (click)="goToReviews(university)" style="cursor: pointer">
+              <header (click)="goToReviews(university)" class="zoom-on-hover">
                 <h1>{{ university.name }} -
                   {{ university.location }}</h1>
                 <p>{{

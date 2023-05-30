@@ -6,7 +6,7 @@ import baseUrl from "./helper";
   providedIn: 'root'
 })
 export class UniversityService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // Add university
   public addUniversity(university: any) {

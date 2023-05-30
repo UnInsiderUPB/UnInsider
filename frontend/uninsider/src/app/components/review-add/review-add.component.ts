@@ -122,7 +122,6 @@ export class ReviewAddComponent implements OnInit {
   languageDetection(): boolean {
     this.guidelinesService.getLanguage(this.inputText).subscribe({
       next: (data: any) => {
-        // console.log(data);
         if (data.language === 'english')
           this.detectedLanguage = 'english';
         else
@@ -157,7 +156,6 @@ export class ReviewAddComponent implements OnInit {
   spellCheck(): boolean {
     this.guidelinesService.getSpellCheck(this.inputText).subscribe({
       next: (data: any) => {
-        console.log(data);
         if (data.misspelledWordsPerc <= MAX_MISSPELLED_WORDS_PERCENTAGE)
           this.detectedMisspelling = false;
         else
@@ -185,7 +183,6 @@ export class ReviewAddComponent implements OnInit {
 
   formSubmit() {
     this.review['text'] = this.inputText;
-    console.log(this.review);
 
     // Remove authorities from user object before sending to server, as the server cannot deserialize it (for now)
     const backedUpUserAuthorities = this.user.authorities;
@@ -200,8 +197,6 @@ export class ReviewAddComponent implements OnInit {
 
     this.reviewService.addReview(this.review).subscribe({
       next: (data) => {
-        console.log(data);
-
         // Restore authorities, maybe it will be needed later
         this.user.authorities = backedUpUserAuthorities;
         this.university.admin.authorities = backedUpAdminAuthorities;
@@ -232,7 +227,6 @@ export class ReviewAddComponent implements OnInit {
         );
       },
       error: (error) => {
-        console.log(error);
         this.snack.open(error.error.message, 'OK', {
           duration: 3000,
         });

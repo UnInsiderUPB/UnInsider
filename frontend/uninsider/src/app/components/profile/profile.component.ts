@@ -94,8 +94,6 @@ export class ProfileComponent implements OnInit {
 
     this.userService.updateUser(this.user).subscribe({
       next: (data) => {
-        console.log(data);
-
         // Restore authorities just before updating the user object in the login service
         this.user.authorities = backedUpAuthorities;
         this.login.setUser(this.user);
@@ -114,7 +112,6 @@ export class ProfileComponent implements OnInit {
         });
       },
       error: (error) => {
-        console.log(error);
         this.snack.open(error.error.message, 'OK', {
           duration: 3000,
         });

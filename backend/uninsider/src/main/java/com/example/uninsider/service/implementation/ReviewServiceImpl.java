@@ -26,7 +26,6 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public Review updateReview(Review review) throws ReviewNotFoundException {
         if (!this.reviewRepository.existsById(review.getId())) {
-            System.out.println("Review with id `" + review.getId() + "` not found");
             throw new ReviewNotFoundException("Review with id `" + review.getId() + "` not found");
         }
 
@@ -36,7 +35,6 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public Review getReview(Long id) throws ReviewNotFoundException {
         if (!this.reviewRepository.existsById(id)) {
-            System.out.println("Review with id `" + id + "` not found");
             throw new ReviewNotFoundException("Review with id `" + id + "` not found");
         }
 
@@ -47,7 +45,6 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public List<Review> getReviewsByUniversityId(Long universityId) throws ReviewNotFoundException {
         if (!this.reviewRepository.existsByUniversityId(universityId)) {
-            System.out.println("Reviews with university id `" + universityId + "` not found");
             throw new ReviewNotFoundException("Reviews with university id `" + universityId + "` not found");
         }
 
@@ -57,7 +54,6 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public List<Review> getReviewsByAuthorId(Long authorId) throws ReviewNotFoundException {
         if (!this.reviewRepository.existsByAuthorId(authorId)) {
-            System.out.println("Reviews with author id `" + authorId + "` not found");
             throw new ReviewNotFoundException("Reviews with author id `" + authorId + "` not found");
         }
 
@@ -67,7 +63,6 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public List<Review> getReviewsByUniversityIdAndAuthorId(Long universityId, Long authorId) throws ReviewNotFoundException {
         if (!this.reviewRepository.existsByUniversityIdAndAuthorId(universityId, authorId)) {
-            System.out.println("Reviews with university id `" + universityId + "` and author id `" + authorId + "` not found");
             throw new ReviewNotFoundException("Reviews with university id `" + universityId + "` and author id `" + authorId + "` not found");
         }
 
@@ -88,7 +83,6 @@ public class ReviewServiceImpl implements ReviewService {
     public Review likeReview(Long reviewId, Long userId) throws ReviewNotFoundException {
         Review review = this.getReview(reviewId);
         if (review == null) {
-            System.out.println("Review with id `" + reviewId + "` not found");
             throw new ReviewNotFoundException("Review with id `" + reviewId + "` not found");
         }
 
@@ -108,7 +102,6 @@ public class ReviewServiceImpl implements ReviewService {
     public Review dislikeReview(Long reviewId, Long userId) throws ReviewNotFoundException {
         Review review = this.getReview(reviewId);
         if (review == null) {
-            System.out.println("Review with id `" + reviewId + "` not found");
             throw new ReviewNotFoundException("Review with id `" + reviewId + "` not found");
         }
 
@@ -128,7 +121,6 @@ public class ReviewServiceImpl implements ReviewService {
     public boolean getLikeStatus(Long reviewId, Long userId) throws ReviewNotFoundException {
         Review review = this.getReview(reviewId);
         if (review == null) {
-            System.out.println("Review with id `" + reviewId + "` not found");
             throw new ReviewNotFoundException("Review with id `" + reviewId + "` not found");
         }
 
@@ -139,7 +131,6 @@ public class ReviewServiceImpl implements ReviewService {
     public boolean getDislikeStatus(Long reviewId, Long userId) throws ReviewNotFoundException {
         Review review = this.getReview(reviewId);
         if (review == null) {
-            System.out.println("Review with id `" + reviewId + "` not found");
             throw new ReviewNotFoundException("Review with id `" + reviewId + "` not found");
         }
 

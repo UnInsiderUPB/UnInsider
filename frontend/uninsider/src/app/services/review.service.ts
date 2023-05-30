@@ -6,7 +6,7 @@ import baseUrl from "./helper";
   providedIn: 'root'
 })
 export class ReviewService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // Add review
   public addReview(review: any) {

@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
           }, 100);
         }
       });
-    }
+  }
 
   private scroll(query: string) {
     const targetElement = document.querySelector(query);
@@ -62,8 +62,6 @@ export class NavbarComponent implements OnInit {
     if (summStorageItem == undefined || summStorageItem == '' || summStorageItem == null) {
       // Update the `sessionStorage` item
       sessionStorage.setItem('initSumm', JSON.stringify(itemJson));
-      
-      console.log('Initializing the summarization module');
 
       // Initialize the summarization module
       this.summarizationService.initSummarizationModule().subscribe((_) => { });
@@ -74,13 +72,7 @@ export class NavbarComponent implements OnInit {
       const timeDiff = currentTime - summStorageItemJson.timestamp;
       const timeDiffInSeconds = Math.floor(timeDiff / 1000);
 
-      // console.log('Time difference in seconds: ' + timeDiffInSeconds);
-      // console.log('Intialization timestamp: ' + summStorageItemJson.timestamp);
-      // console.log('Current timestamp: ' + currentTime);
-      
       if (timeDiffInSeconds >= 300) {
-        console.log('Reinitializing the summarization module');
-        
         // Update timestamp
         itemJson = {
           value: 'true',
@@ -92,8 +84,6 @@ export class NavbarComponent implements OnInit {
 
         // Reinitialize the summarization module
         this.summarizationService.initSummarizationModule().subscribe((_) => { });
-      } else {
-        console.log('Summarization module is already initialized and fresh');
       }
     }
   }
@@ -104,25 +94,33 @@ export class NavbarComponent implements OnInit {
   }
 
   public toDashboard() {
-    // Check if the user is not logged in
-    if (!this.login.isLoggedIn()) {
-      this.router.navigate(['/']).then((_) => {});
+    // If the user is on the `login` or `signup` page, then redirect to the `home` page
+    const currentUrl = this.router.url;
+    if (currentUrl == '/login' || currentUrl == '/signup') {
+      this.router.navigate(['/']).then((_) => { });
       return;
     }
 
+    // If the user is not logged in, then redirect to the `login` page
+    if (!this.login.isLoggedIn()) {
+      this.router.navigate(['/login']).then((_) => { });
+      return;
+    }
+
+    // If the user is logged in, then redirect to the `dashboard` page
     const user_role = this.login.getUserRole();
     if (user_role == 'ADMIN')
-      this.router.navigate(['/admin']).then((_) => {});
+      this.router.navigate(['/admin']).then((_) => { });
     else if (user_role == 'NORMAL')
-      this.router.navigate(['/user-dashboard']).then((_) => {});
+      this.router.navigate(['/user-dashboard']).then((_) => { });
   }
 
   public toProfileSettings() {
     const user_role = this.login.getUserRole();
     if (user_role == 'ADMIN')
-      this.router.navigate(['/admin/profile']).then((_) => {});
+      this.router.navigate(['/admin/profile']).then((_) => { });
     else if (user_role == 'NORMAL')
-      this.router.navigate(['/user-dashboard/profile']).then((_) => {});
+      this.router.navigate(['/user-dashboard/profile']).then((_) => { });
   }
 
   public removeFixedNavbar() {

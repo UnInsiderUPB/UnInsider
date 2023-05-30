@@ -114,7 +114,6 @@ export class UniversityListComponent implements OnInit {
             });
           },
           error: (error) => {
-            console.log(error);
             this.snack.open(error.error.message, 'OK', {
               duration: 3000,
             });
@@ -150,7 +149,6 @@ export class UniversityListComponent implements OnInit {
             });
           },
           error: (error) => {
-            console.log(error);
             this.snack.open(error.error.message, 'OK', {
               duration: 3000,
             });

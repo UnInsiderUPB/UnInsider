@@ -8,9 +8,9 @@ describe('SidebarUserComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SidebarUserComponent ]
+      declarations: [SidebarUserComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SidebarUserComponent);
     component = fixture.componentInstance;

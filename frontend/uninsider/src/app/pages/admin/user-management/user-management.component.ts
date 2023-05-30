@@ -21,7 +21,7 @@ export class UserManagementComponent implements OnInit {
     private login: LoginService,
     private snack: MatSnackBar,
     private userService: UserService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.userService.getAllUsers().subscribe({

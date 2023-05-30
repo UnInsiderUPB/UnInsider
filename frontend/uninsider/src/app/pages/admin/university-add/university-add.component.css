@@ -19,9 +19,7 @@ header {
   text-align: center;
 }
 
-.like_btn {
-
-}
+.like_btn {}
 
 .btn-like-container {
   display: flex;

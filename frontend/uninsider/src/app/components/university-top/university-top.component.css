@@ -12,8 +12,7 @@ header {
   text-align: center;
 }
 
-.like_btn {
-}
+.like_btn {}
 
 .btn-like-container {
   display: flex;
@@ -94,4 +93,13 @@ header p {
   flex-wrap: wrap;
   margin: -20px auto 0;
   background-color: rgb(75, 75, 75);
+}
+
+.zoom-on-hover {
+  cursor: pointer;
+  transform: scale(1.0);
+}
+
+.zoom-on-hover:hover {
+  transform: scale(1.05);
 }

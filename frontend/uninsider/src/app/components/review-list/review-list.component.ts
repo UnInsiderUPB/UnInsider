@@ -207,7 +207,6 @@ export class ReviewListComponent implements OnInit {
         review.dislikes = updatedReview.dislikes;
       },
       error: (error) => {
-        console.log(error);
         this.snack.open(error.error.message, 'OK', {
           duration: 3000,
         });
@@ -236,7 +235,6 @@ export class ReviewListComponent implements OnInit {
         review.dislikes = updatedReview.dislikes;
       },
       error: (error) => {
-        console.log(error);
         this.snack.open(error.error.message, 'OK', {
           duration: 3000,
         });
@@ -357,7 +355,6 @@ export class ReviewListComponent implements OnInit {
             });
           },
           error: (error) => {
-            console.log(error);
             this.snack.open(error.error.message, 'OK', {
               duration: 3000,
             });
@@ -393,7 +390,6 @@ export class ReviewListComponent implements OnInit {
             });
           },
           error: (error) => {
-            console.log(error);
             this.snack.open(error.error.message, 'OK', {
               duration: 3000,
             });
@@ -459,7 +455,6 @@ export class ReviewListComponent implements OnInit {
   languageDetection(): boolean {
     this.guidelinesService.getLanguage(this.inputText).subscribe({
       next: (data: any) => {
-        // console.log(data);
         if (data.language === 'english') this.detectedLanguage = 'english';
         else this.detectedLanguage = 'none';
       },
@@ -490,7 +485,6 @@ export class ReviewListComponent implements OnInit {
   spellCheck(): boolean {
     this.guidelinesService.getSpellCheck(this.inputText).subscribe({
       next: (data: any) => {
-        // console.log(data);
         if (data.misspelledWordsPerc <= MAX_MISSPELLED_WORDS_PERCENTAGE)
           this.detectedMisspelling = false;
         else this.detectedMisspelling = true;
@@ -521,8 +515,7 @@ export class ReviewListComponent implements OnInit {
 
   public initSummarization() {
     this.summarizationService.initSummarizationModule().subscribe({
-      next: (data: any) => {
-        console.log(data);
+      next: (_: any) => {
       },
       error: (_: any) => {
         alert('Could not initialize the summarization model');
@@ -554,7 +547,6 @@ export class ReviewListComponent implements OnInit {
 
     // Concate all the reviews into a single string, separated by `=====`
     this.articleText = reviews.map((r: any) => r.text).join('\n\n=====\n\n');
-    // console.log(this.articleText);
 
     // If the input text is too short, then return
     if (this.articleText.length < MIN_CHARS) {
@@ -563,13 +555,9 @@ export class ReviewListComponent implements OnInit {
       return;
     }
 
-    // [TODOs]: ...
-
     // Make the `summarization` request
     this.summarizationService.getSummary(this.articleText).subscribe({
       next: (data: any) => {
-        // console.log(data);
-
         // Append the `data.summary` character by character to the `this.summarizedText` variable
         // this will make the text appear as if it is being typed
         for (let i = 0; i < data.summary.length; i++) {

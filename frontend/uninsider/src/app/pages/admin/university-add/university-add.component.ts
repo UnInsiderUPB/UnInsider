@@ -32,7 +32,7 @@ export class UniversityAddComponent implements OnInit {
     private snack: MatSnackBar,
     private router: Router,
     private universityService: UniversityService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.user = this.login.getUser();
@@ -60,8 +60,6 @@ export class UniversityAddComponent implements OnInit {
 
     this.universityService.addUniversity(this.university).subscribe({
       next: (data) => {
-        console.log(data);
-
         // Restore authorities, maybe it will be needed later
         this.user.authorities = backedUpAuthorities;
 
@@ -71,11 +69,10 @@ export class UniversityAddComponent implements OnInit {
           icon: 'success',
           background: 'rgb(230, 230, 230)',
         }).then((_) => {
-          this.router.navigate(['/admin/universities']).then((_) => {});
+          this.router.navigate(['/admin/universities']).then((_) => { });
         });
       },
       error: (error) => {
-        console.log(error);
         this.snack.open(error.error.message, 'OK', {
           duration: 3000,
         });
