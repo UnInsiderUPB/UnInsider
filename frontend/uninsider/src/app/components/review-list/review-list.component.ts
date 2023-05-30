@@ -279,8 +279,8 @@ export class ReviewListComponent implements OnInit {
               name="${key}"
               alt="checkbox${i}"
               id="checkbox${i}"
-              src="assets/checkbox_filled.png"
-              style="width: 3%; margin-bottom: -1%;"
+              src="assets/checkbox_empty.png"
+              style="width: 3%;"
             >
 
             <label for="checkbox${i}">${key}</label>

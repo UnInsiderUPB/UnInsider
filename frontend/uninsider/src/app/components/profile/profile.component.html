@@ -1,7 +1,7 @@
 <mat-card *ngIf="user" class="all">
   <mat-card-content>
 
-    <form (ngSubmit)="formSubmit()">
+    <form (ngSubmit)="formSubmit()" [formGroup]="editForm">
       <div class="con">
         <header>
           <h1>Your profile details</h1>
@@ -15,7 +15,8 @@
             <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> first_page</mat-icon>
 
             <input
-              [(ngModel)]="formInput.firstName" class="form-input"
+              [(ngModel)]="userInput.firstName" class="form-input"
+              formControlName="firstname"
               id="txt-input"
               matInput
               name="firstName"
@@ -28,8 +29,9 @@
             <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> last_page</mat-icon>
 
             <input
-              [(ngModel)]="formInput.lastName" class="form-input"
+              [(ngModel)]="userInput.lastName" class="form-input"
               id="txt-input"
+              formControlName="lastname"
               matInput
               name="lastName"
               placeholder="Last Name"
@@ -40,39 +42,57 @@
           <!-- Email -->
           <mat-form-field appearance="fill" class="full-width">
             <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> email</mat-icon>
-            <input [(ngModel)]="formInput.email" class="form-input" id="txt-input" matInput name="email"
-                   placeholder="Email"/>
+            <input
+              [(ngModel)]="userInput.email"
+              class="form-input"
+              formControlName="email"
+              id="txt-input"
+              matInput
+              name="email"
+              placeholder="Email"
+            />
+            <mat-error *ngIf="editForm.value.email">{{emailError}}</mat-error>
           </mat-form-field>
 
           <!-- Phone -->
           <mat-form-field appearance="fill" class="full-width">
             <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> call</mat-icon>
 
-            <input [(ngModel)]="formInput.phone" class="form-input" id="txt-input" matInput name="phone"
-                   placeholder="Phone"/>
+            <input
+              [(ngModel)]="userInput.phone"
+              class="form-input"
+              formControlName="phone"
+              id="txt-input"
+              matInput name="phone"
+              placeholder="Phone"
+              />
+              <mat-error *ngIf="editForm.value.phone">{{phoneError}}</mat-error>
           </mat-form-field>
 
-          <!-- Password -->
+          <!-- New Password -->
           <mat-form-field appearance="fill" class="full-width">
             <mat-icon class="icon-login" style="margin-bottom: -1.5%;"> vpn_key</mat-icon>
 
             <input
-              [(ngModel)]="formInput.password" class="form-input"
+              [(ngModel)]="userInput.password"
+              class="form-input"
+              formControlName="password"
               id="txt-input"
               matInput
               name="password"
-              placeholder="Password"
+              placeholder="New Password"
               type="password"
             />
             <button
-              (click)="formInput.password = ''"
-              *ngIf="formInput.password"
+              (click)="userInput.password = ''"
+              *ngIf="userInput.password"
               aria-label="Clear"
               mat-icon-button
               matSuffix
             >
               <mat-icon>close</mat-icon>
             </button>
+            <mat-error *ngIf="editForm.value.password"> {{errorPassword}}</mat-error>
           </mat-form-field>
 
           <div class="other">
