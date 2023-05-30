@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
-import { Router } from '@angular/router';
+import { Router, Scroll } from '@angular/router';
 import { SummarizationService } from 'src/app/services/summarization.service';
 
 @Component({
@@ -15,7 +15,34 @@ export class NavbarComponent implements OnInit {
   constructor(
     public login: LoginService,
     public router: Router,
-    private summarizationService: SummarizationService) { }
+    private summarizationService: SummarizationService) {
+      this.router.events.subscribe((event: any) => {
+        if (event instanceof Scroll && event.anchor) {
+          setTimeout(() => {
+            this.scroll('#' + event.anchor);
+          }, 100);
+        }
+      });
+  }
+
+  private scroll(query: string) {
+    const targetElement = document.querySelector(query);
+    if (!targetElement) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (!this.isInViewport(targetElement)) {
+      targetElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+  
+  private isInViewport = (elem: any) => {
+    const bounding = elem.getBoundingClientRect();
+    return (
+      bounding.top >= 0 &&
+      bounding.left >= 0 &&
+      bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  };
 
   ngOnInit(): void {
     this.isLoggedIn = this.login.isLoggedIn();

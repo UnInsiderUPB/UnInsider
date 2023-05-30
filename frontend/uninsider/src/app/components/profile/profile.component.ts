@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { UserService } from '../../services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -11,9 +12,21 @@ import Swal from 'sweetalert2';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
+  errorPassword = "Must contain lower-case, upper-case, numbers, and at least 8 chars!"
+  emailError = "This field must have an email format!"
+  phoneError = "Phone should only contain digits!"
+
   user = this.login.getUser();
 
-  public formInput: any = {
+  editForm = new FormGroup({
+    firstname: new FormControl('', [Validators.required]),
+    lastname: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    phone: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
+    password: new FormControl('', [Validators.pattern('^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$')]),
+  });
+
+  public userInput: any = {
     firstName: '',
     lastName: '',
     email: '',
@@ -30,16 +43,48 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.login.getUser();
-    this.formInput.firstName = this.user.firstName;
-    this.formInput.lastName = this.user.lastName;
-    this.formInput.email = this.user.email;
-    this.formInput.phone = this.user.phone;
+    this.userInput.firstName = this.user.firstName;
+    this.userInput.lastName = this.user.lastName;
+    this.userInput.email = this.user.email;
+    this.userInput.phone = this.user.phone;
   }
 
   formSubmit() {
-    for (const key in this.formInput) {
-      if (this.formInput[key] !== this.user[key]) {
-        this.user[key] = this.formInput[key];
+    // Check if `firstName` is empty
+    if (this.userInput.firstName == '' || this.userInput.firstName == null) {
+      this.snack.open('First name cannot be empty!', 'OK', {
+        duration: 3000,
+      });
+      return;
+    }
+    // Check if `lastName` is empty
+    if (this.userInput.lastName == '' || this.userInput.lastName == null) {
+      this.snack.open('Last name cannot be empty!', 'OK', {
+        duration: 3000,
+      });
+      return;
+    }
+
+    // Check if `email` is empty
+    if (this.userInput.email == '' || this.userInput.email == null) {
+      this.snack.open('Email cannot be empty!', 'OK', {
+        duration: 3000,
+      });
+      return;
+    }
+
+    // Validate the profile editing form
+    if (!this.editForm.valid) {
+      this.snack.open('Please complete the fields correctly!', 'OK', {
+        duration: 3000,
+      });
+      return;
+    }
+
+    // Infer the user object from the form
+    for (const key in this.userInput) {
+      if (this.userInput[key] !== this.user[key]) {
+        this.user[key] = this.userInput[key];
       }
     }
 
@@ -75,10 +120,10 @@ export class ProfileComponent implements OnInit {
   }
 
   resetForm() {
-    this.formInput.firstName = this.user.firstName;
-    this.formInput.lastName = this.user.lastName;
-    this.formInput.email = this.user.email;
-    this.formInput.phone = this.user.phone;
-    this.formInput.password = '';
+    this.userInput.firstName = this.user.firstName;
+    this.userInput.lastName = this.user.lastName;
+    this.userInput.email = this.user.email;
+    this.userInput.phone = this.user.phone;
+    this.userInput.password = '';
   }
 }
