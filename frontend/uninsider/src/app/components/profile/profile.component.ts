@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  errorPassword = "Must contain lower-case, upper-case, numbers, and at least 9 chars!"
+  errorPassword = "Must contain lower-case, upper-case, numbers, and at least 8 chars!"
   emailError = "This field must have an email format!"
   phoneError = "Phone should only contain digits!"
 
@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
     lastname: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     phone: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
-    password: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$')]),
+    password: new FormControl('', [Validators.pattern('^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$')]),
   });
 
   public userInput: any = {
@@ -73,15 +73,7 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
-    // Check if `password` is empty
-    if (this.user.password == '' || this.user.password == null) {
-      this.snack.open('Password cannot be empty!', 'OK', {
-        duration: 3000,
-      });
-      return;
-    }
-
-    // Validate the register form
+    // Validate the profile editing form
     if (!this.editForm.valid) {
       this.snack.open('Please complete the fields correctly!', 'OK', {
         duration: 3000,
