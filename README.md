@@ -43,7 +43,7 @@ A very good example of a pull request is [this one](https://github.com/UnInsider
 
 ## Credits
 
-This project was created by [@sabidea23](https://github.com/sabidea23), [@cioabnu](https://github.com/cioabnu), [@Iulian277](https://github.com/Iulian277), and [@albertsamoila](https://github.com/albertsamoila). We would also like to extend our thanks to all the contributors who helped make this project possible.
+This project was created by [@sabidea23](https://github.com/sabidea23), [@abciobanu](https://github.com/abciobanu), [@Iulian277](https://github.com/Iulian277), and [@albertsamoila](https://github.com/albertsamoila). We would also like to extend our thanks to all the contributors who helped make this project possible.
 
 The issue and PR templates exist thanks to [@JoshuaKGoldberg](https://github.com/JoshuaKGoldberg)'s work on the [template-typescript-node-package](https://github.com/JoshuaKGoldberg/template-typescript-node-package) repository.
 
